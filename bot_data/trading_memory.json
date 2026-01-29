@@ -1,0 +1,3877 @@
+{
+  "trades": [
+    {
+      "id": "trade_1769696876.200131",
+      "timestamp_open": "2026-01-29T09:27:56.200131",
+      "features": {
+        "ema_21": 5516.683145930395,
+        "ema_50": 5451.255608039026,
+        "atr": 31.662579175362797,
+        "adx": 20.123516657909082,
+        "rsi": 59.63036820734316,
+        "macd": 18.065525695455108,
+        "macd_signal": 24.474871438870743,
+        "momentum": 0.005739291851873496,
+        "price_to_ema21": 0.005680379539782429,
+        "price_to_ema50": 0.017750844744516298,
+        "ema_diff": 0.012002287655504955,
+        "bb_position": 0.6608988294946571,
+        "volume_change": -0.01674985195837919
+      },
+      "signal": 1,
+      "confidence": 0.85,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 59.63036820734316,
+        "adx": 20.123516657909082,
+        "atr": 31.662579175362797
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16192703902011163,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3466535895586463,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:28:37.398660",
+      "result": "loss",
+      "profit": -4.7,
+      "duration_minutes": 0.6866275000000001,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769696906.956563",
+      "timestamp_open": "2026-01-29T09:28:26.956563",
+      "features": {
+        "ema_21": 5516.606782294031,
+        "ema_50": 5451.222666862555,
+        "atr": 31.662579175362797,
+        "adx": 20.123516657909082,
+        "rsi": 59.48706343682296,
+        "macd": 17.99851714844681,
+        "macd_signal": 24.461469729469083,
+        "momentum": 0.005587017526049953,
+        "price_to_ema21": 0.005542033157791138,
+        "price_to_ema50": 0.017602901037369122,
+        "ema_diff": 0.011994394547289278,
+        "bb_position": 0.6525865011598508,
+        "volume_change": 0.0016919042382201877
+      },
+      "signal": 1,
+      "confidence": 0.85,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 59.48706343682296,
+        "adx": 20.123516657909082,
+        "atr": 31.662579175362797
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16068273968228497,
+              "indicators": {
+                "ema_21": 5516.631999253805,
+                "ema_50": 5451.613414747094,
+                "ema_100": 5355.3019362395635,
+                "adx": 20.08534246028562,
+                "rsi": 59.53463717101281,
+                "macd": 18.014928523222807,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.16068273968228497
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.34735573745512505,
+              "indicators": {
+                "ema_21": 5475.242448960675,
+                "ema_50": 5355.3316604616075,
+                "ema_100": 5233.49250304192,
+                "adx": 43.41946718189063,
+                "rsi": 67.71520440700247,
+                "macd": 61.89554364320793,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.34735573745512505
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:28:37.428099",
+      "result": "loss",
+      "profit": -3.36,
+      "duration_minutes": 0.17450896666666665,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769696937.053354",
+      "timestamp_open": "2026-01-29T09:28:57.053354",
+      "features": {
+        "ema_21": 5516.649509566759,
+        "ema_50": 5451.241098235104,
+        "atr": 31.711150603934247,
+        "adx": 20.099103703711112,
+        "rsi": 59.56737099343243,
+        "macd": 18.036010025939504,
+        "macd_signal": 24.46896830496762,
+        "momentum": 0.005672218636927351,
+        "price_to_ema21": 0.005619441724452685,
+        "price_to_ema50": 0.017685679284320983,
+        "ema_diff": 0.011998810941022498,
+        "bb_position": 0.6572408929469218,
+        "volume_change": 0.02233313594450559
+      },
+      "signal": 1,
+      "confidence": 0.85,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 59.56737099343243,
+        "adx": 20.099103703711112,
+        "atr": 31.711150603934247
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16068273968228497,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.34735573745512505,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:29:08.361184",
+      "result": "loss",
+      "profit": -3.34,
+      "duration_minutes": 0.18826863333333332,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769696968.096734",
+      "timestamp_open": "2026-01-29T09:29:28.096734",
+      "features": {
+        "ema_21": 5516.603145930395,
+        "ema_50": 5451.221098235104,
+        "atr": 31.711150603934247,
+        "adx": 20.099103703711112,
+        "rsi": 59.480214018238,
+        "macd": 17.995326265255244,
+        "macd_signal": 24.46083155283077,
+        "momentum": 0.005579766367677319,
+        "price_to_ema21": 0.005535445139303245,
+        "price_to_ema50": 0.01759585605433447,
+        "ema_diff": 0.011994018682613837,
+        "bb_position": 0.6521899853058089,
+        "volume_change": 0.04593520006767626
+      },
+      "signal": 1,
+      "confidence": 0.85,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 59.480214018238,
+        "adx": 20.099103703711112,
+        "atr": 31.711150603934247
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1604874150202436,
+              "indicators": {
+                "ema_21": 5516.601090162895,
+                "ema_50": 5451.600081413761,
+                "ema_100": 5355.295203566296,
+                "adx": 20.06092687753045,
+                "rsi": 59.47645976383045,
+                "macd": 17.987806016100876,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1604874150202436
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5475.211539869765,
+                "ema_50": 5355.318327128274,
+                "ema_100": 5233.485770368652,
+                "adx": 43.43332841982886,
+                "rsi": 67.67913094044786,
+                "macd": 61.868421136086,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:29:39.390181",
+      "result": "loss",
+      "profit": -2.74,
+      "duration_minutes": 0.18822411666666666,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769696998.312765",
+      "timestamp_open": "2026-01-29T09:29:58.312765",
+      "features": {
+        "ema_21": 5516.274055021304,
+        "ema_50": 5451.07913745079,
+        "atr": 31.711150603934247,
+        "adx": 20.099103703711112,
+        "rsi": 58.85060341379639,
+        "macd": 17.706551336481425,
+        "macd_signal": 24.403076567076006,
+        "momentum": 0.004923536534961581,
+        "price_to_ema21": 0.004939193503973099,
+        "price_to_ema50": 0.01695826830216242,
+        "ema_diff": 0.011960002033836289,
+        "bb_position": 0.6160685905980327,
+        "volume_change": 0.06962185940275778
+      },
+      "signal": 1,
+      "confidence": 0.85,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 58.85060341379639,
+        "adx": 20.099103703711112,
+        "atr": 31.711150603934247
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1604874150202436,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:30:10.633520",
+      "result": "loss",
+      "profit": -1.88,
+      "duration_minutes": 0.2052956,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697272.385709",
+      "timestamp_open": "2026-01-29T09:34:32.385709",
+      "features": {
+        "ema_21": 5517.033686399382,
+        "ema_50": 5453.96497316031,
+        "atr": 30.95749775783708,
+        "adx": 18.991032530225276,
+        "rsi": 54.06781369680033,
+        "macd": 16.365371417713504,
+        "macd_signal": 22.7983426978038,
+        "momentum": 0.0018697453084082216,
+        "price_to_ema21": 0.0013406323073306761,
+        "price_to_ema50": 0.012919963216936253,
+        "ema_diff": 0.011563828068101063,
+        "bb_position": 0.4278421136015714,
+        "volume_change": -0.8070909665192672
+      },
+      "signal": 1,
+      "confidence": 0.7009681748571545,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 54.06781369680033,
+        "adx": 18.991032530225276,
+        "atr": 30.95749775783708
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.15147822262735122,
+              "indicators": {
+                "ema_21": 5516.964331673844,
+                "ema_50": 5454.307773151317,
+                "ema_100": 5358.628705302234,
+                "adx": 18.934777828418902,
+                "rsi": 53.891454655978976,
+                "macd": 16.29898206056714,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.15147822262735122
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5473.079721687947,
+                "ema_50": 5354.398719285137,
+                "ema_100": 5233.021413933008,
+                "adx": 43.43332841982886,
+                "rsi": 64.98036390662955,
+                "macd": 59.997765865430665,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:34:45.692235",
+      "result": "loss",
+      "profit": -4.2,
+      "duration_minutes": 0.22158899999999998,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697303.387571",
+      "timestamp_open": "2026-01-29T09:35:03.387571",
+      "features": {
+        "ema_21": 5516.462777308472,
+        "ema_50": 5453.718698650507,
+        "atr": 31.406069186408555,
+        "adx": 18.991032530225276,
+        "rsi": 52.66545828196602,
+        "macd": 15.864402756744312,
+        "macd_signal": 22.69814896560996,
+        "momentum": 0.000730850978941211,
+        "price_to_ema21": 0.0003058522752057261,
+        "price_to_ema50": 0.01181419594770008,
+        "ema_diff": 0.011504824895624184,
+        "bb_position": 0.36294181042750007,
+        "volume_change": -0.7855337965887556
+      },
+      "signal": 1,
+      "confidence": 0.9061599999999963,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.66545828196602,
+        "adx": 18.991032530225276,
+        "atr": 31.406069186408555
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 55,
+        "tp_pips": 115
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.15147822262735122,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:35:16.687084",
+      "result": "loss",
+      "profit": -4.84,
+      "duration_minutes": 0.22163760000000002,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697548.046024",
+      "timestamp_open": "2026-01-29T09:39:08.046024",
+      "features": {
+        "ema_21": 5517.541868217563,
+        "ema_50": 5454.184188846585,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 55.3804390449159,
+        "macd": 16.811297343639126,
+        "macd_signal": 22.887527882988923,
+        "momentum": 0.0028835063437140374,
+        "price_to_ema21": 0.0022615382140214334,
+        "price_to_ema50": 0.013904152945273482,
+        "ema_diff": 0.011616343925557186,
+        "bb_position": 0.4862892926336814,
+        "volume_change": -0.613076437144662
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 55.3804390449159,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:39:21.352966",
+      "result": "loss",
+      "profit": -4.02,
+      "duration_minutes": 0.22174891666666668,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697579.00946",
+      "timestamp_open": "2026-01-29T09:39:39.009460",
+      "features": {
+        "ema_21": 5518.106413672109,
+        "ema_50": 5454.42771825835,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 56.91545168882272,
+        "macd": 17.30668195902399,
+        "macd_signal": 22.9866048060659,
+        "momentum": 0.004009705991164347,
+        "price_to_ema21": 0.0032843850714778288,
+        "price_to_ema50": 0.014997408704825542,
+        "ema_diff": 0.011674679490315433,
+        "bb_position": 0.5513359539039439,
+        "volume_change": -0.5945198989260897
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 56.91545168882272,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "indicators": {
+                "ema_21": 5518.081604401116,
+                "ema_50": 5454.7897339356305,
+                "ema_100": 5358.872071638868,
+                "adx": 19.226156747324485,
+                "rsi": 56.84489383135046,
+                "macd": 17.279380920966105,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1538092539785959
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5474.19699441522,
+                "ema_50": 5354.880680069451,
+                "ema_100": 5233.264780269642,
+                "adx": 43.43332841982886,
+                "rsi": 66.44861993030283,
+                "macd": 60.97816472582963,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:40:43.790337",
+      "result": "loss",
+      "profit": -14.32,
+      "duration_minutes": 1.0794760666666667,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697609.776631",
+      "timestamp_open": "2026-01-29T09:40:09.776631",
+      "features": {
+        "ema_21": 5517.933686399381,
+        "ema_50": 5454.353208454429,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 56.43684333142369,
+        "macd": 17.155115007456516,
+        "macd_signal": 22.956291415752403,
+        "momentum": 0.0036651360507207187,
+        "price_to_ema21": 0.002971458979478559,
+        "price_to_ema50": 0.01466292857998354,
+        "ema_diff": 0.011656831802971768,
+        "bb_position": 0.5314605490727891,
+        "volume_change": -0.5758054327226785
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 56.43684333142369,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:40:33.203223",
+      "result": "loss",
+      "profit": -4.0,
+      "duration_minutes": 0.39014988333333334,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697639.7435",
+      "timestamp_open": "2026-01-29T09:40:39.743500",
+      "features": {
+        "ema_21": 5517.739140944836,
+        "ema_50": 5454.2692868858,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 55.90732744341921,
+        "macd": 16.984402756744203,
+        "macd_signal": 22.92214896560994,
+        "momentum": 0.0032770414862208774,
+        "price_to_ema21": 0.002618981921042511,
+        "price_to_ema50": 0.014286187391141694,
+        "ema_diff": 0.01163672908700026,
+        "bb_position": 0.5090378849025806,
+        "volume_change": -0.5568540745420089
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 55.90732744341921,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "indicators": {
+                "ema_21": 5517.739786219298,
+                "ema_50": 5454.6422829552375,
+                "ema_100": 5358.797616193324,
+                "adx": 19.226156747324485,
+                "rsi": 55.90751683801342,
+                "macd": 16.97943790102272,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1538092539785959
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5473.855176233402,
+                "ema_50": 5354.733229089058,
+                "ema_100": 5233.190324824098,
+                "adx": 43.43332841982886,
+                "rsi": 66.01266332912479,
+                "macd": 60.678221705886244,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:41:04.180517",
+      "result": "loss",
+      "profit": -13.78,
+      "duration_minutes": 0.4071162166666667,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697670.493617",
+      "timestamp_open": "2026-01-29T09:41:10.493617",
+      "features": {
+        "ema_21": 5517.309140944836,
+        "ema_50": 5454.0837966897225,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 54.77148481720393,
+        "macd": 16.607080819422663,
+        "macd_signal": 22.84668457814563,
+        "momentum": 0.0024192436871159906,
+        "price_to_ema21": 0.0018398206074466154,
+        "price_to_ema50": 0.013453442602919337,
+        "ema_diff": 0.011592294253617332,
+        "bb_position": 0.45947755740843305,
+        "volume_change": -0.5364024005053696
+      },
+      "signal": 1,
+      "confidence": 0.9578483658565912,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 54.77148481720393,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:41:24.841559",
+      "result": "loss",
+      "profit": -3.96,
+      "duration_minutes": 0.23913236666666665,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697701.272128",
+      "timestamp_open": "2026-01-29T09:41:41.272128",
+      "features": {
+        "ema_21": 5517.120959126654,
+        "ema_50": 5454.002620219134,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 54.288794228064155,
+        "macd": 16.441952614294678,
+        "macd_signal": 22.813658937120035,
+        "momentum": 0.002043843804632628,
+        "price_to_ema21": 0.0014987963712608224,
+        "price_to_ema50": 0.013088988904445783,
+        "ema_diff": 0.01157284719180872,
+        "bb_position": 0.43784923902831346,
+        "volume_change": -0.5135818066961466
+      },
+      "signal": 1,
+      "confidence": 0.9531637452317254,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 54.288794228064155,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "indicators": {
+                "ema_21": 5517.121604401116,
+                "ema_50": 5454.375616288571,
+                "ema_100": 5358.662962727977,
+                "adx": 19.226156747324485,
+                "rsi": 54.28849864281638,
+                "macd": 16.436987758573196,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1538092539785959
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5473.23699441522,
+                "ema_50": 5354.466562422392,
+                "ema_100": 5233.055671358751,
+                "adx": 43.43332841982886,
+                "rsi": 65.19476656882739,
+                "macd": 60.13577156343672,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:42:16.054623",
+      "result": "loss",
+      "profit": -19.82,
+      "duration_minutes": 0.5794239,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697731.828253",
+      "timestamp_open": "2026-01-29T09:42:11.828253",
+      "features": {
+        "ema_21": 5516.1655045811995,
+        "ema_50": 5453.590463356389,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 51.963668246571565,
+        "macd": 15.603548055889405,
+        "macd_signal": 22.64597802543898,
+        "momentum": 0.00013782797617745146,
+        "price_to_ema21": -0.0002330431492912478,
+        "price_to_ema50": 0.011238382686677035,
+        "ema_diff": 0.0114740997963201,
+        "bb_position": 0.32968166130868515,
+        "volume_change": -0.49328806064434616
+      },
+      "signal": 1,
+      "confidence": 0.977996853894765,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 51.963668246571565,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:42:26.227667",
+      "result": "loss",
+      "profit": -3.82,
+      "duration_minutes": 0.23999023333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697762.673444",
+      "timestamp_open": "2026-01-29T09:42:42.673444",
+      "features": {
+        "ema_21": 5516.226413672109,
+        "ema_50": 5453.616737866193,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 52.10593242222864,
+        "macd": 15.656995349337194,
+        "macd_signal": 22.656667484128537,
+        "momentum": 0.0002593342183341285,
+        "price_to_ema21": -0.00012262253602064434,
+        "price_to_ema50": 0.011356364979552898,
+        "ema_diff": 0.011480395270756161,
+        "bb_position": 0.33646003008000164,
+        "volume_change": -0.4711781427668983
+      },
+      "signal": 1,
+      "confidence": 0.9731949791824357,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.10593242222864,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "indicators": {
+                "ema_21": 5516.227058946571,
+                "ema_50": 5453.98973393563,
+                "ema_100": 5358.468111242829,
+                "adx": 19.226156747324485,
+                "rsi": 52.10502805545171,
+                "macd": 15.652030493615712,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1538092539785959
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5472.342448960674,
+                "ema_50": 5354.080680069451,
+                "ema_100": 5232.860819873603,
+                "adx": 43.43332841982886,
+                "rsi": 63.9390108180339,
+                "macd": 59.350814298479236,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:42:56.990735",
+      "result": "loss",
+      "profit": -4.82,
+      "duration_minutes": 0.23851493333333332,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697793.395243",
+      "timestamp_open": "2026-01-29T09:43:13.395243",
+      "features": {
+        "ema_21": 5516.4655045812,
+        "ema_50": 5453.719875121094,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 52.67198448497806,
+        "macd": 15.866795919137985,
+        "macd_signal": 22.698627598088695,
+        "momentum": 0.0007362915569484318,
+        "price_to_ema21": 0.0003107960010584375,
+        "price_to_ema50": 0.011819478512814993,
+        "ema_diff": 0.011505106770580508,
+        "bb_position": 0.3632489096194402,
+        "volume_change": -0.4500947567909034
+      },
+      "signal": 1,
+      "confidence": 0.9654729112701471,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.67198448497806,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:43:28.421109",
+      "result": "loss",
+      "profit": -3.24,
+      "duration_minutes": 0.25008543333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697793.598598",
+      "timestamp_open": "2026-01-29T09:43:13.598598",
+      "features": {
+        "ema_21": 5516.4655045812,
+        "ema_50": 5453.719875121094,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 52.67198448497806,
+        "macd": 15.866795919137985,
+        "macd_signal": 22.698627598088695,
+        "momentum": 0.0007362915569484318,
+        "price_to_ema21": 0.0003107960010584375,
+        "price_to_ema50": 0.011819478512814993,
+        "ema_diff": 0.011505106770580508,
+        "bb_position": 0.3632489096194402,
+        "volume_change": -0.4500947567909034
+      },
+      "signal": 1,
+      "confidence": 0.9061599999999963,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.67198448497806,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 55,
+        "tp_pips": 115
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:43:28.468510",
+      "result": "loss",
+      "profit": -3.18,
+      "duration_minutes": 0.24772175000000002,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769697823.897806",
+      "timestamp_open": "2026-01-29T09:43:43.897806",
+      "features": {
+        "ema_21": 5516.492777308473,
+        "ema_50": 5453.731639826977,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 52.73733558407704,
+        "macd": 15.89072754306926,
+        "macd_signal": 22.70341392287495,
+        "momentum": 0.00079069733701842,
+        "price_to_ema21": 0.00036023299073298967,
+        "price_to_ema50": 0.011872304038611801,
+        "ema_diff": 0.011507925513453967,
+        "bb_position": 0.3663217109101931,
+        "volume_change": -0.4303537586860392
+      },
+      "signal": 1,
+      "confidence": 0.9622520562214226,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.73733558407704,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "indicators": {
+                "ema_21": 5516.497058946571,
+                "ema_50": 5454.106204523865,
+                "ema_100": 5358.526923124017,
+                "adx": 19.226156747324485,
+                "rsi": 52.74533008764382,
+                "macd": 15.888953570538433,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1538092539785959
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "indicators": {
+                "ema_21": 5472.612448960675,
+                "ema_50": 5354.197150657686,
+                "ema_100": 5232.919631754791,
+                "adx": 43.43332841982886,
+                "rsi": 64.32747928754813,
+                "macd": 59.58773737540196,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3474666273586309
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:45:03.523252",
+      "result": "win",
+      "profit": 0.42,
+      "duration_minutes": 1.3268793333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769697854.502158",
+      "timestamp_open": "2026-01-29T09:44:14.502158",
+      "features": {
+        "ema_21": 5516.434595490291,
+        "ema_50": 5453.706541787761,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 52.598115427486206,
+        "macd": 15.839673412015145,
+        "macd_signal": 22.693203096664128,
+        "momentum": 0.0006746316728689639,
+        "price_to_ema21": 0.0002547668218269168,
+        "price_to_ema50": 0.011759609308060725,
+        "ema_diff": 0.011501912180622619,
+        "bb_position": 0.3597704074200285,
+        "volume_change": -0.409744156664561
+      },
+      "signal": 1,
+      "confidence": 0.9648583239867918,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.598115427486206,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:45:03.580986",
+      "result": "win",
+      "profit": 2.04,
+      "duration_minutes": 0.81783345,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769697854.700226",
+      "timestamp_open": "2026-01-29T09:44:14.700226",
+      "features": {
+        "ema_21": 5516.434595490291,
+        "ema_50": 5453.706541787761,
+        "atr": 32.56821204355138,
+        "adx": 19.28247233828664,
+        "rsi": 52.598115427486206,
+        "macd": 15.839673412015145,
+        "macd_signal": 22.693203096664128,
+        "momentum": 0.0006746316728689639,
+        "price_to_ema21": 0.0002547668218269168,
+        "price_to_ema50": 0.011759609308060725,
+        "ema_diff": 0.011501912180622619,
+        "bb_position": 0.3597704074200285,
+        "volume_change": -0.409744156664561
+      },
+      "signal": 1,
+      "confidence": 0.9061599999999963,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.598115427486206,
+        "adx": 19.28247233828664,
+        "atr": 32.56821204355138
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 55,
+        "tp_pips": 115
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1538092539785959,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3474666273586309,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T09:45:03.639159",
+      "result": "win",
+      "profit": 2.88,
+      "duration_minutes": 0.8154316,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769698795.034218",
+      "timestamp_open": "2026-01-29T09:59:55.034218",
+      "features": {
+        "ema_21": 5514.3527773084725,
+        "ema_50": 5452.808502572075,
+        "atr": 33.33464061497998,
+        "adx": 19.610740038195523,
+        "rsi": 48.05858987036423,
+        "macd": 14.012892785234726,
+        "macd_signal": 22.327846971308045,
+        "momentum": -0.003478342872480167,
+        "price_to_ema21": -0.003520409029388966,
+        "price_to_ema50": 0.007726568319436035,
+        "ema_diff": 0.01128671118880618,
+        "bb_position": 0.13993990344152674,
+        "volume_change": 0.20933354390397985
+      },
+      "signal": 1,
+      "confidence": 0.8399117085160397,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 48.05858987036423,
+        "adx": 19.610740038195523,
+        "atr": 33.33464061497998
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.15643486100763077,
+              "indicators": {
+                "ema_21": 5514.353422582934,
+                "ema_50": 5453.181498641512,
+                "ema_100": 5358.059992430947,
+                "adx": 19.554357625953845,
+                "rsi": 48.056694369970735,
+                "macd": 14.007927929513244,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.15643486100763077
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3438296940105312,
+              "indicators": {
+                "ema_21": 5470.468812597038,
+                "ema_50": 5353.272444775333,
+                "ema_100": 5232.452701061721,
+                "adx": 42.9787117513164,
+                "rsi": 59.77939899129751,
+                "macd": 57.70671173437677,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3438296940105312
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:00:04.330063",
+      "result": "loss",
+      "profit": -3.7199999999999998,
+      "duration_minutes": 0.15462038333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769698916.853879",
+      "timestamp_open": "2026-01-29T10:01:56.853879",
+      "features": {
+        "ema_21": 5509.731946248402,
+        "ema_50": 5453.228494753735,
+        "atr": 33.50288125802129,
+        "adx": 19.97153860100331,
+        "rsi": 42.33375941966106,
+        "macd": 8.418210668684878,
+        "macd_signal": 19.57068420977381,
+        "momentum": -0.008870113090312604,
+        "price_to_ema21": -0.008706765903750736,
+        "price_to_ema50": 0.0015644870290092076,
+        "ema_diff": 0.010361467807378033,
+        "bb_position": -0.07284312738350852,
+        "volume_change": -0.9433839338067627
+      },
+      "signal": 1,
+      "confidence": 0.8500000000000001,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 42.33375941966106,
+        "adx": 19.97153860100331,
+        "atr": 33.50288125802129
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16022398815145433,
+              "indicators": {
+                "ema_21": 5509.7354545179705,
+                "ema_50": 5453.412261222956,
+                "ema_100": 5358.818941471081,
+                "adx": 20.027998518931792,
+                "rsi": 42.33779385859755,
+                "macd": 8.421279103589768,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.16022398815145433
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32261433494823344,
+              "indicators": {
+                "ema_21": 5469.838848792187,
+                "ema_50": 5357.0413626498985,
+                "ema_100": 5232.890903289913,
+                "adx": 40.32679186852918,
+                "rsi": 53.07117045942517,
+                "macd": 50.06676729777246,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.32261433494823344
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:02:16.231048",
+      "result": "loss",
+      "profit": -3.46,
+      "duration_minutes": 0.3227338166666666,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769698947.621454",
+      "timestamp_open": "2026-01-29T10:02:27.621454",
+      "features": {
+        "ema_21": 5509.169218975674,
+        "ema_50": 5452.985749655695,
+        "atr": 34.327166972307005,
+        "adx": 20.23081907955203,
+        "rsi": 41.417166848486794,
+        "macd": 7.924421494895796,
+        "macd_signal": 19.471926375015993,
+        "momentum": -0.009993394596634952,
+        "price_to_ema21": -0.009729092871400334,
+        "price_to_ema50": 0.0004739147437654198,
+        "ema_diff": 0.01030324888040032,
+        "bb_position": -0.10958269148296168,
+        "volume_change": -0.9271613785914392
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 41.417166848486794,
+        "adx": 20.23081907955203,
+        "atr": 34.327166972307005
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16022398815145433,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32261433494823344,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:02:47.762574",
+      "result": "win",
+      "profit": 4.14,
+      "duration_minutes": 0.33532985,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769698947.812622",
+      "timestamp_open": "2026-01-29T10:02:27.812622",
+      "features": {
+        "ema_21": 5509.169218975674,
+        "ema_50": 5452.985749655695,
+        "atr": 34.327166972307005,
+        "adx": 20.23081907955203,
+        "rsi": 41.417166848486794,
+        "macd": 7.924421494895796,
+        "macd_signal": 19.471926375015993,
+        "momentum": -0.009993394596634952,
+        "price_to_ema21": -0.009729092871400334,
+        "price_to_ema50": 0.0004739147437654198,
+        "ema_diff": 0.01030324888040032,
+        "bb_position": -0.10958269148296168,
+        "volume_change": -0.9271613785914392
+      },
+      "signal": 1,
+      "confidence": 0.777012453092463,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 41.417166848486794,
+        "adx": 20.23081907955203,
+        "atr": 34.327166972307005
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16022398815145433,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32261433494823344,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:02:47.809232",
+      "result": "win",
+      "profit": 3.6,
+      "duration_minutes": 0.33301536666666665,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769698978.210602",
+      "timestamp_open": "2026-01-29T10:02:58.210602",
+      "features": {
+        "ema_21": 5509.435582612038,
+        "ema_50": 5453.10065161648,
+        "atr": 34.327166972307005,
+        "adx": 20.23081907955203,
+        "rsi": 41.84603199180519,
+        "macd": 8.158153688627863,
+        "macd_signal": 19.518672813762407,
+        "momentum": -0.009461695919167346,
+        "price_to_ema21": -0.009245154398899327,
+        "price_to_ema50": 0.0009901428065369829,
+        "ema_diff": 0.010330807112254349,
+        "bb_position": -0.09254842924106814,
+        "volume_change": -0.9134145546941169
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 41.84603199180519,
+        "adx": 20.23081907955203,
+        "atr": 34.327166972307005
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16229829467931065,
+              "indicators": {
+                "ema_21": 5509.43545451797,
+                "ema_50": 5453.28284945825,
+                "ema_100": 5358.753594936427,
+                "adx": 20.28728683491383,
+                "rsi": 41.84391106064808,
+                "macd": 8.158031240342098,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.16229829467931065
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32214532367768817,
+              "indicators": {
+                "ema_21": 5469.538848792186,
+                "ema_50": 5356.911950885193,
+                "ema_100": 5232.825556755259,
+                "adx": 40.26816545971102,
+                "rsi": 52.48676334976288,
+                "macd": 49.80351943452388,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.32214532367768817
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:03:18.581265",
+      "result": "win",
+      "profit": 0.8,
+      "duration_minutes": 0.3393386333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769699008.925261",
+      "timestamp_open": "2026-01-29T10:03:28.925261",
+      "features": {
+        "ema_21": 5508.686491702947,
+        "ema_50": 5452.777514361578,
+        "atr": 34.327166972307005,
+        "adx": 20.23081907955203,
+        "rsi": 40.66193309911195,
+        "macd": 7.500831751306578,
+        "macd_signal": 19.38720842629815,
+        "momentum": -0.01095698503259146,
+        "price_to_ema21": -0.010606247386005248,
+        "price_to_ema50": -0.0004616939449569086,
+        "ema_diff": 0.010253302503928554,
+        "bb_position": -0.1388675080766038,
+        "volume_change": -0.8971268486546354
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.66193309911195,
+        "adx": 20.23081907955203,
+        "atr": 34.327166972307005
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16229829467931065,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32214532367768817,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:03:49.667055",
+      "result": "win",
+      "profit": 2.24,
+      "duration_minutes": 0.34543745000000003,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769699009.113955",
+      "timestamp_open": "2026-01-29T10:03:29.113955",
+      "features": {
+        "ema_21": 5508.686491702947,
+        "ema_50": 5452.777514361578,
+        "atr": 34.327166972307005,
+        "adx": 20.23081907955203,
+        "rsi": 40.66193309911195,
+        "macd": 7.500831751306578,
+        "macd_signal": 19.38720842629815,
+        "momentum": -0.01095698503259146,
+        "price_to_ema21": -0.010606247386005248,
+        "price_to_ema50": -0.0004616939449569086,
+        "ema_diff": 0.010253302503928554,
+        "bb_position": -0.1388675080766038,
+        "volume_change": -0.8971268486546354
+      },
+      "signal": 1,
+      "confidence": 0.9208494952149828,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.66193309911195,
+        "adx": 20.23081907955203,
+        "atr": 34.327166972307005
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16229829467931065,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32214532367768817,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:03:49.714512",
+      "result": "win",
+      "profit": 2.7,
+      "duration_minutes": 0.34310231666666663,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769699039.068757",
+      "timestamp_open": "2026-01-29T10:03:59.068757",
+      "features": {
+        "ema_21": 5508.66376443022,
+        "ema_50": 5452.767710440009,
+        "atr": 34.47645268659266,
+        "adx": 20.275127989768894,
+        "rsi": 40.62705427591394,
+        "macd": 7.480888731362938,
+        "macd_signal": 19.38321982230942,
+        "momentum": -0.011002351813945377,
+        "price_to_ema21": -0.010647548468823008,
+        "price_to_ema50": -0.0005057450796462257,
+        "ema_diff": 0.010250950885582548,
+        "bb_position": -0.14019704060399324,
+        "volume_change": -0.8816209525050491
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.62705427591394,
+        "adx": 20.275127989768894,
+        "atr": 34.47645268659266
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1626527760251511,
+              "indicators": {
+                "ema_21": 5508.66545451797,
+                "ema_50": 5452.950692595505,
+                "ema_100": 5358.585872164151,
+                "adx": 20.331597003143887,
+                "rsi": 40.627486715886384,
+                "macd": 7.4823617246729555,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1626527760251511
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3225330308273069,
+              "indicators": {
+                "ema_21": 5468.768848792186,
+                "ema_50": 5356.5797940224475,
+                "ema_100": 5232.657833982982,
+                "adx": 40.31662885341336,
+                "rsi": 51.04407787943387,
+                "macd": 49.127849918854736,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3225330308273069
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:04:10.379585",
+      "result": "loss",
+      "profit": -18.62,
+      "duration_minutes": 0.18824538333333332,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769699039.267145",
+      "timestamp_open": "2026-01-29T10:03:59.267145",
+      "features": {
+        "ema_21": 5508.66376443022,
+        "ema_50": 5452.767710440009,
+        "atr": 34.47645268659266,
+        "adx": 20.275127989768894,
+        "rsi": 40.62705427591394,
+        "macd": 7.480888731362938,
+        "macd_signal": 19.38321982230942,
+        "momentum": -0.011002351813945377,
+        "price_to_ema21": -0.010647548468823008,
+        "price_to_ema50": -0.0005057450796462257,
+        "ema_diff": 0.010250950885582548,
+        "bb_position": -0.14019704060399324,
+        "volume_change": -0.8816209525050491
+      },
+      "signal": 1,
+      "confidence": 0.9274666705078232,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.62705427591394,
+        "adx": 20.275127989768894,
+        "atr": 34.47645268659266
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1626527760251511,
+              "indicators": {
+                "ema_21": 5508.66545451797,
+                "ema_50": 5452.950692595505,
+                "ema_100": 5358.585872164151,
+                "adx": 20.331597003143887,
+                "rsi": 40.627486715886384,
+                "macd": 7.4823617246729555,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.1626527760251511
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3225330308273069,
+              "indicators": {
+                "ema_21": 5468.768848792186,
+                "ema_50": 5356.5797940224475,
+                "ema_100": 5232.657833982982,
+                "adx": 40.31662885341336,
+                "rsi": 51.04407787943387,
+                "macd": 49.127849918854736,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.3225330308273069
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:04:20.537758",
+      "result": "loss",
+      "profit": -20.74,
+      "duration_minutes": 0.35426603333333334,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769699070.02864",
+      "timestamp_open": "2026-01-29T10:04:30.028640",
+      "features": {
+        "ema_21": 5508.884673521129,
+        "ema_50": 5452.8630045576565,
+        "atr": 34.99716697230694,
+        "adx": 20.42385454377805,
+        "rsi": 40.96863357748461,
+        "macd": 7.674734885209546,
+        "macd_signal": 19.421989053078743,
+        "momentum": -0.010561386699185715,
+        "price_to_ema21": -0.010246116385851226,
+        "price_to_ema50": -7.757476344139517e-05,
+        "ema_diff": 0.01027380825754253,
+        "bb_position": -0.12708807975388353,
+        "volume_change": -0.8656590005863574
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.96863357748461,
+        "adx": 20.42385454377805,
+        "atr": 34.99716697230694
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1626527760251511,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3225330308273069,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:04:41.620385",
+      "result": "loss",
+      "profit": -8.76,
+      "duration_minutes": 0.19292089999999998,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769699070.500526",
+      "timestamp_open": "2026-01-29T10:04:30.500526",
+      "features": {
+        "ema_21": 5508.884673521129,
+        "ema_50": 5452.8630045576565,
+        "atr": 34.99716697230694,
+        "adx": 20.42385454377805,
+        "rsi": 40.96863357748461,
+        "macd": 7.674734885209546,
+        "macd_signal": 19.421989053078743,
+        "momentum": -0.010561386699185715,
+        "price_to_ema21": -0.010246116385851226,
+        "price_to_ema50": -7.757476344139517e-05,
+        "ema_diff": 0.01027380825754253,
+        "bb_position": -0.12708807975388353,
+        "volume_change": -0.8656590005863574
+      },
+      "signal": 1,
+      "confidence": 0.8401556713796198,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.96863357748461,
+        "adx": 20.42385454377805,
+        "atr": 34.99716697230694
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.1626527760251511,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.3225330308273069,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:05:35.936688",
+      "result": "win",
+      "profit": 30.8,
+      "duration_minutes": 1.0903166000000002,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769699101.198278",
+      "timestamp_open": "2026-01-29T10:05:01.198278",
+      "features": {
+        "ema_21": 5509.427400793857,
+        "ema_50": 5453.097122204716,
+        "atr": 34.99716697230694,
+        "adx": 20.42385454377805,
+        "rsi": 41.83272648497397,
+        "macd": 8.150974201448662,
+        "macd_signal": 19.517236916326567,
+        "momentum": -0.009478027960454716,
+        "price_to_ema21": -0.009260018706572955,
+        "price_to_ema50": 0.0009742862956998407,
+        "ema_diff": 0.010329960630953587,
+        "bb_position": -0.09308112553013279,
+        "volume_change": -0.848524333832823
+      },
+      "signal": 1,
+      "confidence": 0.8500000000000001,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 41.83272648497397,
+        "adx": 20.42385454377805,
+        "atr": 34.99716697230694
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16384262084943121,
+              "indicators": {
+                "ema_21": 5509.454545427061,
+                "ema_50": 5453.291084752368,
+                "ema_100": 5358.757753352269,
+                "adx": 20.4803276061789,
+                "rsi": 41.874996414366514,
+                "macd": 8.174783377094172,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.16384262084943121
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32384452165592004,
+              "indicators": {
+                "ema_21": 5469.557939701277,
+                "ema_50": 5356.920186179311,
+                "ema_100": 5232.8297151711,
+                "adx": 40.48056520699,
+                "rsi": 52.52356916231491,
+                "macd": 49.82027157127595,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.32384452165592004
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:05:35.981565",
+      "result": "win",
+      "profit": 16.68,
+      "duration_minutes": 0.5792548833333334,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769699131.710204",
+      "timestamp_open": "2026-01-29T10:05:31.710204",
+      "features": {
+        "ema_21": 5510.2064917029475,
+        "ema_50": 5453.433200636087,
+        "atr": 34.99716697230694,
+        "adx": 20.42385454377805,
+        "rsi": 43.13884927753773,
+        "macd": 8.834620925094896,
+        "macd_signal": 19.653966261055814,
+        "momentum": -0.007922854695643466,
+        "price_to_ema21": -0.007844804322312902,
+        "price_to_ema50": 0.002484086421436705,
+        "ema_diff": 0.010410559546275929,
+        "bb_position": -0.03960145137250543,
+        "volume_change": -0.8313245162551306
+      },
+      "signal": 1,
+      "confidence": 0.8500000000000001,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 43.13884927753773,
+        "adx": 20.42385454377805,
+        "atr": 34.99716697230694
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16384262084943121,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32384452165592004,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:05:56.607343",
+      "result": "win",
+      "profit": 2.4,
+      "duration_minutes": 0.41463276666666665,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1769699162.090501",
+      "timestamp_open": "2026-01-29T10:06:02.090501",
+      "features": {
+        "ema_21": 5509.7292189756745,
+        "ema_50": 5453.227318283147,
+        "atr": 34.99716697230694,
+        "adx": 20.42385454377805,
+        "rsi": 42.32921930511782,
+        "macd": 8.415817506291205,
+        "macd_signal": 19.570205577295077,
+        "momentum": -0.008875557104075171,
+        "price_to_ema21": -0.008711720135059298,
+        "price_to_ema50": 0.0015592017754964356,
+        "ema_diff": 0.010361185660295619,
+        "bb_position": -0.07302812637154903,
+        "volume_change": -0.8165352791712815
+      },
+      "signal": 1,
+      "confidence": 0.8500000000000001,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 42.32921930511782,
+        "adx": 20.42385454377805,
+        "atr": 34.99716697230694
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16384262084943121,
+              "indicators": {
+                "ema_21": 5509.698181790697,
+                "ema_50": 5453.396182791584,
+                "ema_100": 5358.810822659199,
+                "adx": 20.4803276061789,
+                "rsi": 42.275799328270764,
+                "macd": 8.38857255088351,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.16384262084943121
+              }
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32384452165592004,
+              "indicators": {
+                "ema_21": 5469.801576064913,
+                "ema_50": 5357.025284218526,
+                "ema_100": 5232.882784478031,
+                "adx": 40.48056520699,
+                "rsi": 52.99785527859218,
+                "macd": 50.03406074506529,
+                "ema_score": 0.4,
+                "macd_score": 0,
+                "total_score": 0.32384452165592004
+              }
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:06:17.648049",
+      "result": "breakeven",
+      "profit": 0.0,
+      "duration_minutes": 0.2589950166666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1769699192.215666",
+      "timestamp_open": "2026-01-29T10:06:32.215666",
+      "features": {
+        "ema_21": 5508.505582612038,
+        "ema_50": 5452.6994751458915,
+        "atr": 34.99716697230694,
+        "adx": 20.42385454377805,
+        "rsi": 40.385945346386336,
+        "macd": 7.342085312559902,
+        "macd_signal": 19.355459138548817,
+        "momentum": -0.011318104612168423,
+        "price_to_ema21": -0.01093501344578374,
+        "price_to_ema50": -0.0008123453650950628,
+        "ema_diff": 0.010234583387644566,
+        "bb_position": -0.14933060487035718,
+        "volume_change": -0.8015505896149586
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.385945346386336,
+        "adx": 20.42385454377805,
+        "atr": 34.99716697230694
+      },
+      "strategy": "liquidity",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 60,
+        "tp_pips": 120
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "higher_tf_votes": {
+            "bullish": 3,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "lower_tf_votes": {
+            "bullish": 2,
+            "bearish": 0,
+            "neutral": 0
+          },
+          "timeframes_detail": {
+            "M30": {
+              "bias": "bullish",
+              "strength": 0.16384262084943121,
+              "cached": true
+            },
+            "H1": {
+              "bias": "bullish",
+              "strength": 0.32384452165592004,
+              "cached": true
+            },
+            "H4": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            },
+            "W1": {
+              "bias": "bullish",
+              "strength": 0.7,
+              "cached": true
+            }
+          },
+          "required_higher": 2,
+          "required_lower": 1
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-01-29T10:06:48.790760",
+      "result": "win",
+      "profit": 8.3,
+      "duration_minutes": 0.27594015,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    }
+  ],
+  "metadata": {
+    "created": "2026-01-29T09:27:07.307081"
+  }
+}

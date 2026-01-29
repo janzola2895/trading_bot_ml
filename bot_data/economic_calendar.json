@@ -1,0 +1,29 @@
+{
+  "events": [
+    {
+      "name": "US Non-Farm Payrolls (NFP)",
+      "time": "2026-02-01T13:30:55.737137",
+      "impact": "high",
+      "currency": "USD"
+    },
+    {
+      "name": "US CPI (Inflation)",
+      "time": "2026-02-05T13:30:55.737137",
+      "impact": "high",
+      "currency": "USD"
+    },
+    {
+      "name": "Fed Interest Rate Decision",
+      "time": "2026-02-12T19:00:55.737137",
+      "impact": "high",
+      "currency": "USD"
+    },
+    {
+      "name": "ECB Interest Rate Decision",
+      "time": "2026-02-08T12:45:55.737137",
+      "impact": "high",
+      "currency": "EUR"
+    }
+  ],
+  "last_update": "2026-01-29T09:27:55.737137"
+}

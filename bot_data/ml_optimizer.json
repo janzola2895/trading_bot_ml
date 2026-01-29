@@ -1,0 +1,51 @@
+{
+  "initial_params": {
+    "trailing_stop": {
+      "enabled": true,
+      "activation_pips": 30,
+      "distance_pips": 20,
+      "mode": "manual"
+    },
+    "breakeven": {
+      "enabled": true,
+      "activation_pips": 40,
+      "safety_pips": 5,
+      "mode": "manual"
+    },
+    "lot_management": {
+      "mode": "fixed",
+      "fixed_lot": 0.03,
+      "risk_percentage": 1.0,
+      "mode_status": "manual"
+    }
+  },
+  "learned_params": {
+    "trailing_stop": {
+      "enabled": true,
+      "activation_pips": 30,
+      "distance_pips": 20,
+      "mode": "manual"
+    },
+    "breakeven": {
+      "enabled": true,
+      "activation_pips": 40,
+      "safety_pips": 5,
+      "mode": "manual"
+    },
+    "lot_management": {
+      "mode": "fixed",
+      "fixed_lot": 0.03,
+      "risk_percentage": 1.0,
+      "mode_status": "manual"
+    }
+  },
+  "learning_stats": {
+    "total_operations": 3,
+    "autonomy_threshold": 100,
+    "autonomy_active": false,
+    "confidence_level": 3.0,
+    "decisions_made": [],
+    "min_profit_threshold": 5.0
+  },
+  "last_update": "2026-01-29T10:06:48.808990"
+}

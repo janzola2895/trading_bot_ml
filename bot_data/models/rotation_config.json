@@ -1,0 +1,48 @@
+{
+  "rotation_config": {
+    "enabled": true,
+    "rotate_every_n_ops": 10,
+    "global_operations_count": 5,
+    "last_rotation_time": "2026-01-29T10:04:41.633611",
+    "rotation_history": [
+      {
+        "timestamp": "2026-01-29T09:40:43.790337",
+        "from_model": "random_forest",
+        "to_model": "gradient_boost",
+        "old_accuracy": 0.0,
+        "old_trades": 1,
+        "new_accuracy": 0,
+        "new_trades": 0,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      },
+      {
+        "timestamp": "2026-01-29T09:45:03.653965",
+        "from_model": "gradient_boost",
+        "to_model": "neural_net",
+        "old_accuracy": 28.571428571428573,
+        "old_trades": 7,
+        "new_accuracy": 0,
+        "new_trades": 0,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      },
+      {
+        "timestamp": "2026-01-29T10:04:41.633611",
+        "from_model": "neural_net",
+        "to_model": "random_forest",
+        "old_accuracy": 50.0,
+        "old_trades": 4,
+        "new_accuracy": 0.0,
+        "new_trades": 1,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      }
+    ]
+  },
+  "current_model_index": 0,
+  "active_model": "random_forest"
+}
