@@ -255,17 +255,7 @@ class MLTradingBot:
             self.logger.success(f"✅ Conectado - Cuenta: {self.account}")
             self.send_to_gui('status', connected=True)
             self.is_connected = True
-            self.logger.info("🎖️ SISTEMA v6.0.1: COOLDOWN GLOBAL CORREGIDO")
-            self.logger.info(f"   ✅ Registro correcto de operaciones ejecutadas")
-            self.logger.info(f"   ✅ Cooldown independiente por estrategia (15-60 min)")
-            self.logger.info(f"   ✅ Visualización de tiempo restante en GUI")
-            self.logger.info(f"   ✅ SL/TP Dinámico por estrategia")
-            self.logger.info(f"   ✅ Validación ML de señales")
-            self.logger.info(f"   ✅ Gestión de correlación")
-            self.logger.info(f"   ✅ Monitoreo de equity")
-            self.logger.info(f"   ✅ Filtro de noticias")
-            self.logger.info(f"   ✅ Trailing stop dinámico ATR")
-            self.logger.info(f"📊 Multi-Timeframe: Prioritario | Req: {MTF_REQUIRED_HIGHER_TF}/{3} superiores + {MTF_REQUIRED_LOWER_TF}/{2} inferiores")
+            self.logger.info("🎖️ SISTEMA v1.0.0")
             self.logger.info(f"💰 Símbolo: {self.symbol} - Spread: {symbol_info.spread} pips")
             
             self.send_ml_status()

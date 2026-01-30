@@ -29,9 +29,14 @@ from config import (
 
 class LiquiditySystem:
     """
-    Sistema Balanceado de Liquidez con Smart Money Concepts
+    Sistema Balanceado de Liquidez - v5.4 OPTIMIZADO
     
-    🆕 v5.3 BALANCED: Genera más señales manteniendo calidad
+    🔧 CAMBIOS:
+    - Cache más inteligente (respeta edad de zonas)
+    - Accepta posiciones estratégicas en zonas (no TODO)
+    - Confianza más realista según contexto
+    - Cooldown interno entre señales
+    - Prioriza confluencia (máxima calidad)
     """
     
     def __init__(self):
@@ -41,25 +46,27 @@ class LiquiditySystem:
         self.lookback_bars = LIQ_LOOKBACK_BARS
         self.sweep_tolerance_pips = LIQ_SWEEP_TOLERANCE_PIPS
         
-        # 🆕 PARÁMETROS BALANCEADOS (menos restrictivos)
-        self.min_wick_size_pips = 700  # Reducido de 1000
-        self.min_distance_from_sweep_pips = 80  # Reducido de 100
+        # 🔧 PARÁMETROS OPTIMIZADOS (BALANCED)
+        self.min_wick_size_pips = 800  # Aumentado de 700 (más selectivo)
+        self.min_distance_from_sweep_pips = 100  # Aumentado de 80
         
-        # 🆕 Parámetros para Fair Value Gaps (BALANCEADOS)
-        self.fvg_min_gap_pips = 30  # Reducido de 50
-        self.fvg_max_age_bars = 25  # Aumentado de 20
+        # FVG más restrictivo
+        self.fvg_min_gap_pips = 40  # Aumentado de 30
+        self.fvg_max_age_bars = 20  # Reducido de 25
         
-        # 🆕 Parámetros para Order Blocks (BALANCEADOS)
-        self.ob_min_impulse_pips = 600  # Reducido de 800
-        self.ob_min_reaction_touches = 1  # Reducido de 2
+        # Order Blocks más selectivo
+        self.ob_min_impulse_pips = 700  # Aumentado de 600
+        self.ob_min_reaction_touches = 2  # Aumentado de 1 (necesita confirmación)
         
-        # Cache
+        # 🔧 NUEVO: Cooldown interno
+        self.last_signal_time = None
+        self.min_signal_interval_minutes = 15  # Mínimo 15 min entre señales
+        
         self.cached_order_blocks = []
         self.cached_fvgs = []
         self.last_ob_calculation = None
         self.last_fvg_calculation = None
         
-        # Estadísticas de sesiones
         self.session_stats = {
             'london_ny_overlap': {'signals': 0, 'executed': 0},
             'london_only': {'signals': 0, 'executed': 0},
@@ -447,31 +454,37 @@ class LiquiditySystem:
     
     def get_signal(self, df, current_price):
         """
-        🆕 v5.3 BALANCED: Genera señales sin restricciones de sesión
+        🔧 v5.4: Genera señales SELECTIVAS y BALANCEADAS
         
-        DIFERENCIA CLAVE: NO bloquea señales en ninguna sesión
+        PRIORIDAD:
+        1. Máxima confluencia (mejor relación riesgo/recompensa)
+        2. Sweep + OB confirmado
+        3. FVG + OB confluencia
+        4. FVG solo (solo si es grande y reciente)
         """
         if not self.enabled or len(df) < 50:
             return None
         
+        # 🔧 NUEVO: Cooldown interno (máximo 1 señal cada 15 min)
+        if self.last_signal_time:
+            minutes_since_last = (datetime.now() - self.last_signal_time).total_seconds() / 60
+            if minutes_since_last < self.min_signal_interval_minutes:
+                return None  # Esperar mínimo intervalo
+        
         session, session_priority = self.get_trading_session()
         
-        # 🆕 CAMBIO: Ya NO bloquea FVG/OB en Asia, solo ajusta confianza
-        
-        # 1. DETECTAR FAIR VALUE GAPS
+        # 1. DETECTAR FAIR VALUE GAPS (cache más inteligente)
         now = datetime.now()
         if (self.last_fvg_calculation is None or 
-            (now - self.last_fvg_calculation).total_seconds() > 300):
-            
+            (now - self.last_fvg_calculation).total_seconds() > 120):  # Cada 2 min
             self.cached_fvgs = self.detect_fair_value_gap(df)
             self.last_fvg_calculation = now
         
         fvg_signal = self.check_fvg_interaction(self.cached_fvgs, current_price)
         
-        # 2. DETECTAR ORDER BLOCKS
+        # 2. DETECTAR ORDER BLOCKS (cache más inteligente)
         if (self.last_ob_calculation is None or 
-            (now - self.last_ob_calculation).total_seconds() > 600):
-            
+            (now - self.last_ob_calculation).total_seconds() > 120):  # Cada 2 min
             self.cached_order_blocks = self.find_order_blocks_enhanced(df)
             self.last_ob_calculation = now
         
@@ -483,131 +496,144 @@ class LiquiditySystem:
         # ═══════════════════════════════════════════════════════════
         # PRIORIDAD 1: MÁXIMA CONFLUENCIA (FVG + OB + Sweep)
         # ═══════════════════════════════════════════════════════════
-        
         if fvg_signal and ob_signal and sweep:
-            if fvg_signal['signal'] == ob_signal['signal']:
+            if fvg_signal['signal'] == ob_signal['signal'] == (1 if sweep['type'] == 'bullish_sweep' else -1):
                 signal_data = fvg_signal.copy()
                 confluence = self.calculate_confluence_score(signal_data, fvg_signal, ob_signal, sweep)
                 
+                # 🔧 MEJORA: Confianza más realista
+                final_confidence = min(0.78, confluence['final_confidence'])  # Cap en 78%
+                
                 direction = "BUY" if signal_data['signal'] == 1 else "SELL"
-                fvg = fvg_signal['fvg']
-                ob = ob_signal['ob']
+                
+                self.last_signal_time = now
                 
                 return {
                     'signal': signal_data['signal'],
-                    'confidence': confluence['final_confidence'],
-                    'reason': f"Liquidez: ⭐ MAX CONFLUENCIA {direction} - FVG+OB+Sweep @ {confluence['session'].upper()}",
+                    'confidence': final_confidence,
+                    'reason': f"Liquidez: ⭐ CONFLUENCIA MÁXIMA {direction} - FVG+OB+Sweep",
                     'sl_pips': 45,
-                    'tp_pips': 140,
+                    'tp_pips': 130,
                     'liquidity_type': 'max_confluence',
                     'confluence_factors': confluence['confluence_factors'],
-                    'confluence_count': confluence['confluence_count'],
-                    'session': confluence['session'],
-                    'fvg_size': fvg['gap_size_pips'],
-                    'ob_strength': ob['strength']
+                    'confluence_count': 3,
+                    'session': confluence['session']
                 }
         
-        # PRIORIDAD 2: ALTA CONFLUENCIA (FVG + OB)
-        if fvg_signal and ob_signal:
-            if fvg_signal['signal'] == ob_signal['signal']:
-                signal_data = fvg_signal.copy()
-                confluence = self.calculate_confluence_score(signal_data, fvg_signal, ob_signal, None)
-                
-                direction = "BUY" if signal_data['signal'] == 1 else "SELL"
-                fvg = fvg_signal['fvg']
-                ob = ob_signal['ob']
-                
-                return {
-                    'signal': signal_data['signal'],
-                    'confidence': confluence['final_confidence'],
-                    'reason': f"Liquidez: ✅ ALTA CONFLUENCIA {direction} - FVG+OB @ {confluence['session'].upper()}",
-                    'sl_pips': 50,
-                    'tp_pips': 125,
-                    'liquidity_type': 'high_confluence',
-                    'confluence_factors': confluence['confluence_factors'],
-                    'confluence_count': confluence['confluence_count'],
-                    'session': confluence['session'],
-                    'fvg_size': fvg['gap_size_pips'],
-                    'ob_strength': ob['strength']
-                }
-        
-        # PRIORIDAD 3: SWEEP + ORDER BLOCK
+        # ═══════════════════════════════════════════════════════════
+        # PRIORIDAD 2: SWEEP + ORDER BLOCK (muy confiable)
+        # ═══════════════════════════════════════════════════════════
         if sweep and ob_signal:
-            sweep_signal = 1 if sweep['type'] == 'bearish_sweep' else -1
+            sweep_signal = 1 if sweep['type'] == 'bullish_sweep' else -1
             
             if sweep_signal == ob_signal['signal']:
                 signal_data = ob_signal.copy()
                 confluence = self.calculate_confluence_score(signal_data, None, ob_signal, sweep)
                 
+                # 🔧 MEJORA: Confianza más conservadora
+                final_confidence = min(0.75, confluence['final_confidence'])
+                
                 direction = "BUY" if signal_data['signal'] == 1 else "SELL"
+                
+                self.last_signal_time = now
                 
                 return {
                     'signal': signal_data['signal'],
-                    'confidence': confluence['final_confidence'],
-                    'reason': f"Liquidez: Sweep+OB {direction} - Mecha {sweep['wick_size']:.0f}p @ {confluence['session'].upper()}",
+                    'confidence': final_confidence,
+                    'reason': f"Liquidez: ✅ Sweep+OB {direction} - Mecha {sweep['wick_size']:.0f}p",
                     'sl_pips': 50,
                     'tp_pips': 120,
                     'liquidity_type': 'sweep_ob',
                     'confluence_factors': confluence['confluence_factors'],
-                    'confluence_count': confluence['confluence_count'],
+                    'confluence_count': 2,
                     'session': confluence['session']
                 }
         
-        # PRIORIDAD 4: FVG SOLO (🆕 EN CUALQUIER SESIÓN)
+        # ═══════════════════════════════════════════════════════════
+        # PRIORIDAD 3: FVG + ORDER BLOCK (confluencia media)
+        # ═══════════════════════════════════════════════════════════
+        if fvg_signal and ob_signal:
+            if fvg_signal['signal'] == ob_signal['signal']:
+                signal_data = fvg_signal.copy()
+                confluence = self.calculate_confluence_score(signal_data, fvg_signal, ob_signal, None)
+                
+                final_confidence = min(0.72, confluence['final_confidence'])
+                direction = "BUY" if signal_data['signal'] == 1 else "SELL"
+                fvg = fvg_signal['fvg']
+                ob = ob_signal['ob']
+                
+                self.last_signal_time = now
+                
+                return {
+                    'signal': signal_data['signal'],
+                    'confidence': final_confidence,
+                    'reason': f"Liquidez: FVG+OB {direction} @ {confluence['session'].upper()}",
+                    'sl_pips': 50,
+                    'tp_pips': 125,
+                    'liquidity_type': 'high_confluence',
+                    'confluence_factors': confluence['confluence_factors'],
+                    'confluence_count': 2,
+                    'session': confluence['session'],
+                    'fvg_size': fvg['gap_size_pips'],
+                    'ob_strength': ob['strength']
+                }
+        
+        # ═══════════════════════════════════════════════════════════
+        # PRIORIDAD 4: FVG SOLO (muy selectivo)
+        # ═══════════════════════════════════════════════════════════
         if fvg_signal:
-            signal_data = fvg_signal.copy()
-            confluence = self.calculate_confluence_score(signal_data, fvg_signal, None, None)
-            
-            direction = "BUY" if signal_data['signal'] == 1 else "SELL"
             fvg = fvg_signal['fvg']
             
-            return {
-                'signal': signal_data['signal'],
-                'confidence': confluence['final_confidence'],
-                'reason': f"Liquidez: FVG {direction} {fvg['gap_size_pips']:.0f}p @ {confluence['session'].upper()}",
-                'sl_pips': 55,
-                'tp_pips': 115,
-                'liquidity_type': 'fvg_only',
-                'confluence_factors': confluence['confluence_factors'],
-                'session': confluence['session'],
-                'fvg_size': fvg['gap_size_pips']
-            }
+            # 🔧 MEJORA: Solo si es RECIENTE y GRANDE
+            age = len(self.cached_fvgs[0]['formation_index']) if self.cached_fvgs else 50
+            
+            # Solo FVG de hace menos de 15 velas y gap > 50 pips
+            if age < 15 and fvg['gap_size_pips'] > 50:
+                
+                direction = "BUY" if fvg_signal['signal'] == 1 else "SELL"
+                final_confidence = min(0.68, 0.65 + (fvg['gap_size_pips'] / 1000) * 0.08)
+                
+                self.last_signal_time = now
+                
+                return {
+                    'signal': fvg_signal['signal'],
+                    'confidence': final_confidence,
+                    'reason': f"Liquidez: FVG {direction} - Gap {fvg['gap_size_pips']:.0f}p (RECIENTE)",
+                    'sl_pips': 55,
+                    'tp_pips': 120,
+                    'liquidity_type': 'fvg_only',
+                    'confluence_factors': ['gap_size', 'recency'],
+                    'confluence_count': 1,
+                    'session': session,
+                    'fvg_size': fvg['gap_size_pips']
+                }
         
-        # PRIORIDAD 5: ORDER BLOCK SOLO
+        # ═══════════════════════════════════════════════════════════
+        # PRIORIDAD 5: ORDER BLOCK SOLO (menos confiable, muy selectivo)
+        # ═══════════════════════════════════════════════════════════
         if ob_signal:
-            signal_data = ob_signal.copy()
-            confluence = self.calculate_confluence_score(signal_data, None, ob_signal, None)
-            
             ob = ob_signal['ob']
-            ob_type = "Alcista" if ob['type'] == 'bullish_ob' else "Bajista"
             
-            return {
-                'signal': signal_data['signal'],
-                'confidence': confluence['final_confidence'],
-                'reason': f"Liquidez: Order Block {ob_type} (${ob['zone_mid']:.2f}) @ {confluence['session'].upper()}",
-                'sl_pips': 60,
-                'tp_pips': 120,
-                'liquidity_type': 'order_block',
-                'confluence_factors': confluence['confluence_factors'],
-                'session': confluence['session'],
-                'ob_strength': ob['strength']
-            }
-        
-        # PRIORIDAD 6: SWEEP SOLO
-        if sweep:
-            signal_type = 1 if sweep['type'] == 'bearish_sweep' else -1
-            direction = "BUY" if signal_type == 1 else "SELL"
-            
-            return {
-                'signal': signal_type,
-                'confidence': sweep['confidence'],
-                'reason': f"Liquidez: Sweep {direction} - Mecha {sweep['wick_size']:.0f}p @ {sweep['session'].upper()}",
-                'sl_pips': 50,
-                'tp_pips': 110,
-                'liquidity_type': 'sweep_only',
-                'session': sweep['session'],
-                'confluence_factors': ['SWEEP', sweep['session'].upper()]
-            }
+            # 🔧 MEJORA: Solo si hay MÚLTIPLES reacciones
+            if ob['reaction_count'] >= 2:
+                
+                final_confidence = min(0.70, ob_signal['confidence'])
+                direction = "BUY" if ob_signal['signal'] == 1 else "SELL"
+                
+                self.last_signal_time = now
+                
+                return {
+                    'signal': ob_signal['signal'],
+                    'confidence': final_confidence,
+                    'reason': f"Liquidez: OB {direction} - {ob['reaction_count']} reacciones",
+                    'sl_pips': 55,
+                    'tp_pips': 115,
+                    'liquidity_type': 'ob_only',
+                    'confluence_factors': ['order_block', 'reactions'],
+                    'confluence_count': 1,
+                    'session': session,
+                    'ob_strength': ob['strength']
+                }
         
         return None
     

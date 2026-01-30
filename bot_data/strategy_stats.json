@@ -1,45 +1,51 @@
 {
   "stats": {
     "ml": {
-      "operations": 13,
-      "wins": 5,
-      "losses": 8,
-      "profit": -24.76
+      "operations": 0,
+      "wins": 0,
+      "losses": 0,
+      "profit": 0.0,
+      "cooldown_remaining": 0
     },
     "sr": {
       "operations": 0,
       "wins": 0,
       "losses": 0,
-      "profit": 0.0
+      "profit": 0.0,
+      "cooldown_remaining": 0
     },
     "fibo": {
       "operations": 0,
       "wins": 0,
       "losses": 0,
-      "profit": 0.0
+      "profit": 0.0,
+      "cooldown_remaining": 0
     },
     "price_action": {
-      "operations": 9,
-      "wins": 0,
-      "losses": 9,
-      "profit": -52.14
+      "operations": 3,
+      "wins": 2,
+      "losses": 1,
+      "profit": 84.28,
+      "cooldown_remaining": 18.7921726
     },
     "candlestick": {
       "operations": 0,
       "wins": 0,
       "losses": 0,
-      "profit": 0.0
+      "profit": 0.0,
+      "cooldown_remaining": 0
     },
     "liquidity": {
-      "operations": 13,
-      "wins": 7,
-      "losses": 5,
-      "profit": -1.4199999999999964
+      "operations": 0,
+      "wins": 0,
+      "losses": 0,
+      "profit": 0.0,
+      "cooldown_remaining": 0
     }
   },
   "metadata": {
-    "created": "2026-01-29T09:27:07.307081",
-    "last_update": "2026-01-29T10:06:48.789745",
+    "created": "2026-01-29T10:53:25.156316",
+    "last_update": "2026-01-29T12:37:15.308382",
     "total_resets": 0
   }
 }

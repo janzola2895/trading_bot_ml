@@ -40,12 +40,12 @@
     }
   },
   "learning_stats": {
-    "total_operations": 3,
+    "total_operations": 2,
     "autonomy_threshold": 100,
     "autonomy_active": false,
-    "confidence_level": 3.0,
+    "confidence_level": 2.0,
     "decisions_made": [],
     "min_profit_threshold": 5.0
   },
-  "last_update": "2026-01-29T10:06:48.808990"
+  "last_update": "2026-01-29T12:37:15.308382"
 }
