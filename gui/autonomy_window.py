@@ -121,6 +121,17 @@ class MLAutonomyWindow:
         
         # === PANEL DERECHO ===
         
+        # 🆕 NUEVO: Análisis Multi-Timeframe
+        mtf_frame = tk.LabelFrame(right_panel, text="📊 ANÁLISIS MULTI-TIMEFRAME (MTF)",
+                                 font=("Arial", 11, "bold"), bg="#2d2d2d",
+                                 fg="#ffffff", padx=10, pady=8)
+        mtf_frame.pack(fill=tk.X, padx=8, pady=8)
+        
+        self.mtf_text = scrolledtext.ScrolledText(mtf_frame, height=8,
+                                                 bg="#1e1e1e", fg="#ffffff",
+                                                 font=("Consolas", 9), wrap=tk.WORD)
+        self.mtf_text.pack(fill=tk.BOTH, expand=True)
+        
         # Decisiones ML Recientes
         decisions_frame = tk.LabelFrame(right_panel, text="🧠 DECISIONES ML RECIENTES",
                                        font=("Arial", 11, "bold"), bg="#2d2d2d",
@@ -248,6 +259,7 @@ class MLAutonomyWindow:
         learned_params = data.get("learned_params", {})
         initial_params = data.get("initial_params", {})
         recent_decisions = data.get("recent_decisions", [])
+        mtf_analysis = data.get("mtf_analysis", {})  # 🆕 Nuevo
         
         self.update_progress(autonomy_status)
         
@@ -256,3 +268,85 @@ class MLAutonomyWindow:
         self.update_learned_params(params_combined)
         
         self.update_decisions_log(recent_decisions)
+        
+        self.update_mtf_analysis(mtf_analysis)  # 🆕 Nuevo
+    
+    def update_mtf_analysis(self, mtf_data):  # 🆕 Nuevo método
+        """Actualiza el análisis MTF en la GUI"""
+        self.mtf_text.delete(1.0, tk.END)
+        
+        if not mtf_data or not mtf_data.get('enabled', False):
+            self.mtf_text.insert(tk.END, "⚠️ Análisis MTF deshabilitado\n", "warning")
+            return
+        
+        # Timeframes Superiores
+        self.mtf_text.insert(tk.END, "🔴 TIMEFRAMES SUPERIORES (H4/D1/W1):\n", "header")
+        
+        higher_tf = mtf_data.get('higher_timeframes', {})
+        higher_votes = mtf_data.get('higher_votes', {})
+        required_higher = mtf_data.get('required_higher', 2)
+        
+        for tf_name in ['H4', 'D1', 'W1']:
+            if tf_name in higher_tf:
+                tf_info = higher_tf[tf_name]
+                bias = tf_info.get('bias', 'neutral')
+                strength = tf_info.get('strength', 0.0)
+                
+                # Color según bias
+                if bias == 'bullish':
+                    bias_icon = "🟢 BULL"
+                    tag = "bullish"
+                elif bias == 'bearish':
+                    bias_icon = "🔴 BEAR"
+                    tag = "bearish"
+                else:
+                    bias_icon = "🟡 NEUT"
+                    tag = "neutral"
+                
+                self.mtf_text.insert(tk.END, f"  {tf_name}: {bias_icon} (Fuerza:{strength:.2f})\n", tag)
+        
+        bull_count = higher_votes.get('bullish', 0)
+        bear_count = higher_votes.get('bearish', 0)
+        neut_count = higher_votes.get('neutral', 0)
+        
+        votes_text = f"  Votos: {bull_count}B / {bear_count}S / {neut_count}N (Req: {required_higher})"
+        self.mtf_text.insert(tk.END, votes_text + "\n\n", "votes")
+        
+        # Timeframes Inferiores
+        self.mtf_text.insert(tk.END, "🔵 TIMEFRAMES INFERIORES (M30/H1):\n", "header")
+        
+        lower_tf = mtf_data.get('lower_timeframes', {})
+        lower_votes = mtf_data.get('lower_votes', {})
+        required_lower = mtf_data.get('required_lower', 1)
+        
+        for tf_name in ['M30', 'H1']:
+            if tf_name in lower_tf:
+                tf_info = lower_tf[tf_name]
+                bias = tf_info.get('bias', 'neutral')
+                strength = tf_info.get('strength', 0.0)
+                
+                if bias == 'bullish':
+                    bias_icon = "🟢 BULL"
+                    tag = "bullish"
+                elif bias == 'bearish':
+                    bias_icon = "🔴 BEAR"
+                    tag = "bearish"
+                else:
+                    bias_icon = "🟡 NEUT"
+                    tag = "neutral"
+                
+                self.mtf_text.insert(tk.END, f"  {tf_name}: {bias_icon} (Fuerza:{strength:.2f})\n", tag)
+        
+        bull_count_lower = lower_votes.get('bullish', 0)
+        bear_count_lower = lower_votes.get('bearish', 0)
+        neut_count_lower = lower_votes.get('neutral', 0)
+        
+        votes_text_lower = f"  Votos: {bull_count_lower}B / {bear_count_lower}S / {neut_count_lower}N (Req: {required_lower})"
+        self.mtf_text.insert(tk.END, votes_text_lower + "\n", "votes")
+        
+        # Configurar tags de color
+        self.mtf_text.tag_config("header", foreground="#00ff00", font=("Consolas", 9, "bold"))
+        self.mtf_text.tag_config("bullish", foreground="#44ff44")
+        self.mtf_text.tag_config("bearish", foreground="#ff4444")
+        self.mtf_text.tag_config("neutral", foreground="#ffaa00")
+        self.mtf_text.tag_config("votes", foreground="#aaaaaa", font=("Consolas", 8))
