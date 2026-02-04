@@ -38,20 +38,6 @@ from gui.main_window import EnhancedTradingBotGUI
 
 
 class MLTradingBot:
-    """
-    Bot de Trading ML v6.0.1 - COMPLETO CON MEJORAS AVANZADAS
-    
-    🆕 v6.0.1: COOLDOWN GLOBAL CORREGIDO
-    - Registro correcto de operaciones ejecutadas
-    - Cooldown independiente por estrategia (15-60 min)
-    - Visualización de tiempo restante en GUI
-    - SL/TP dinámico por estrategia y ATR
-    - Validación ML de todas las señales
-    - Gestión de correlación y riesgo
-    - Monitoreo de equity en tiempo real
-    - Filtro de noticias económicas
-    - Trailing stop dinámico con ATR
-    """
     
     def __init__(self, gui_queue=None):
         self.gui_queue = gui_queue
@@ -128,10 +114,10 @@ class MLTradingBot:
             logger=self.logger
         )
         
-        self.equity_monitor = EquityMonitor(
-            memory=self.memory,
-            logger=self.logger
-        )
+        #self.equity_monitor = EquityMonitor(
+        #    memory=self.memory,
+        #    logger=self.logger
+        #)
         
         self.news_filter = EconomicNewsFilter(
             data_dir=DATA_DIR,
@@ -255,10 +241,10 @@ class MLTradingBot:
             self.logger.success(f"✅ Conectado - Cuenta: {self.account}")
             self.send_to_gui('status', connected=True)
             self.is_connected = True
-            self.logger.info("🎖️ SISTEMA v1.0.0")
-            self.logger.info(f"💰 Símbolo: {self.symbol} - Spread: {symbol_info.spread} pips")
+            self.logger.info(" ")
             
             self.send_ml_status()
+            self.send_strategy_stats()
             return True
         else:
             error = mt5.last_error()
@@ -321,6 +307,12 @@ class MLTradingBot:
         }
         
         self.send_to_gui('autonomy_data', data=data)
+    
+    def send_mtf_analysis(self):
+        """🆕 Envía análisis MTF a la GUI en lugar de al log"""
+        if self.mtf_enabled and hasattr(self.mtf_analyzer, 'last_analysis'):
+            self.send_to_gui('mtf_analysis', analysis=self.mtf_analyzer.last_analysis)
+    
     
     def update_config(self, max_profit, max_loss, lot_size, max_positions):
         """Actualiza configuración"""
@@ -558,12 +550,13 @@ class MLTradingBot:
                 # Continuar con valores por defecto
         
         # 🎯 PASO 2: AJUSTAR TAMAÑO DE LOTE según equity
-        lot_multiplier = self.equity_monitor.get_lot_multiplier()
-        adjusted_volume = volume * lot_multiplier
+        #lot_multiplier = self.equity_monitor.get_lot_multiplier()
+        #adjusted_volume = volume * lot_multiplier
+        adjusted_volume = volume
         
-        if lot_multiplier != 1.0:
-            mode = self.equity_monitor.determine_trading_mode()
-            self.logger.info(f"📰 Lote ajustado por equity ({mode}): {volume:.2f} → {adjusted_volume:.2f}")
+        #if lot_multiplier != 1.0:
+        #    mode = self.equity_monitor.determine_trading_mode()
+        #    self.logger.info(f"📰 Lote ajustado por equity ({mode}): {volume:.2f} → {adjusted_volume:.2f}")
         
         # Obtener tick actual
         tick = mt5.symbol_info_tick(self.symbol)
@@ -682,16 +675,7 @@ class MLTradingBot:
         return None
     
     def open_trade_from_signal(self, signal_data, features, market_state, df):
-        """
-        🎯 v6.0.1: Abre operación basada en señal CON RE-VALIDACIÓN
-        
-        PROCESO:
-        1. Verificar antigüedad de señal
-        2. RE-VALIDAR condiciones actuales
-        3. Si pasa re-validación → ejecutar
-        4. 🔧 CRÍTICO: REGISTRAR EN COOLDOWN después de ejecutar
-        5. Si falla re-validación → descartar con log claro
-        """
+
         signal = signal_data['signal']
         confidence = signal_data['confidence']
         strategy = signal_data['strategy']
@@ -818,11 +802,7 @@ class MLTradingBot:
             return False
     
     def check_positions(self):
-        """
-        🎖️ v6.0: Verifica y actualiza posiciones abiertas
-        - Actualiza ATR para trailing dinámico
-        - Procesa trailing stop y breakeven
-        """
+
         positions = mt5.positions_get(symbol=self.symbol)
         
         tick = mt5.symbol_info_tick(self.symbol)
@@ -1046,21 +1026,6 @@ class MLTradingBot:
             self.send_strategy_stats()
 
     def run(self, train_first=True):
-        """
-        🎖️ v6.0.1: Loop principal del bot con MEJORAS AVANZADAS
-        
-        PROCESO MEJORADO:
-        1. Verificar filtro de noticias económicas
-        2. Verificar estado de equity (drawdown crítico)
-        3. Recolectar señales de todas las estrategias
-        4. Validar señales con ML
-        5. Ajustar confianza según equity
-        6. 🔧 COOLDOWN GLOBAL: Filtrar señales en cooldown
-        7. Filtrar y priorizar (MTF, límites)
-        8. Verificar correlación
-        9. Ejecutar señales aprobadas
-        10. 🔧 REGISTRAR operaciones en cooldown
-        """
         
         if not self.is_connected:
             if not self.connect():
@@ -1102,8 +1067,10 @@ class MLTradingBot:
         self.trailing_breakeven.update_params(self.ml_optimizer.initial_params)
         
         if self.mtf_enabled:
-            mtf_summary = self.mtf_analyzer.get_detailed_summary()
-            self.logger.info(mtf_summary)
+            mtf_analysis = self.mtf_analyzer.analyze_all_timeframes()
+            if mtf_analysis:
+                self.mtf_analyzer.last_analysis = mtf_analysis
+                self.send_mtf_analysis()
         
         try:
             while True:
@@ -1131,6 +1098,68 @@ class MLTradingBot:
                         self.reset_trading_manual()
                     elif msg_type == 'strategy_config':
                         self.update_strategy_config(msg)
+                    elif msg_type == 'mtf_config':
+                        # 🔧 CORREGIDO: Actualizar configuración MTF CON LOGS DETALLADOS
+                        active_tfs = msg.get('active_timeframes', [])
+                        
+                        self.logger.info("")
+                        self.logger.info("="*80)
+                        self.logger.info("🔧 APLICANDO NUEVA CONFIGURACIÓN MTF")
+                        self.logger.info("="*80)
+                        
+                        # PASO 1: Actualizar configuración (limpia caché)
+                        self.mtf_analyzer.update_active_timeframes(active_tfs)
+                        
+                        # PASO 2: Log de nueva configuración
+                        if len(active_tfs) == 0:
+                            self.logger.warning("⚠️ Sin temporalidades activas - MTF bloqueará todas las señales")
+                        else:
+                            self.logger.info(f"✅ {len(active_tfs)} temporalidad(es) activas: {', '.join(active_tfs)}")
+                            
+                            # Mostrar regla aplicable
+                            if len(active_tfs) == 1:
+                                self.logger.info(f"📋 REGLA: Solo {active_tfs[0]} decide la dirección")
+                            else:
+                                self.logger.info(f"📋 REGLA: TODAS ({', '.join(active_tfs)}) deben coincidir")
+                        
+                        # PASO 3: Forzar análisis inmediato SOLO si MTF está habilitado
+                        if self.mtf_enabled:
+                            self.logger.info("🔄 Ejecutando análisis MTF inmediato...")
+                            
+                            # Forzar análisis SIN usar caché
+                            mtf_analysis = self.mtf_analyzer.analyze_all_timeframes()
+                            
+                            if mtf_analysis:
+                                # Guardar y enviar a GUI
+                                self.mtf_analyzer.last_analysis = mtf_analysis
+                                self.send_mtf_analysis()
+                                
+                                # Log detallado del resultado
+                                if mtf_analysis['approved']:
+                                    direction = mtf_analysis['direction'].upper()
+                                    aligned = ', '.join(mtf_analysis['aligned_timeframes'])
+                                    self.logger.success(f"✅ MTF APROBADO: {direction} ({aligned})")
+                                else:
+                                    # Mostrar por qué no aprobó
+                                    if len(active_tfs) == 0:
+                                        self.logger.warning("⛔ MTF SIN ALINEACIÓN: No hay TFs activas")
+                                    else:
+                                        detail = mtf_analysis.get('timeframes_detail', {})
+                                        biases = []
+                                        for tf in active_tfs:
+                                            if tf in detail:
+                                                bias = detail[tf]['bias'][:4].upper()
+                                                biases.append(f"{tf}:{bias}")
+                                        
+                                        bias_text = " / ".join(biases)
+                                        self.logger.warning(f"⛔ MTF SIN ALINEACIÓN: {bias_text}")
+                            else:
+                                self.logger.error("❌ Error en análisis MTF")
+                        else:
+                            self.logger.warning("⚠️ MTF está deshabilitado - cambios guardados pero no activos")
+                        
+                        self.logger.info("="*80)
+                        self.logger.info("")
                     elif msg_type == 'request_autonomy_data':
                         self.send_autonomy_data()
                     elif msg_type == 'reset_autonomy':
@@ -1160,8 +1189,10 @@ class MLTradingBot:
                         if tf_name in self.mtf_analyzer.timeframes:
                             self.mtf_analyzer.timeframes[tf_name]['last_update'] = None
                     
-                    mtf_summary = self.mtf_analyzer.get_detailed_summary()
-                    self.logger.info(mtf_summary)
+                    mtf_analysis = self.mtf_analyzer.analyze_all_timeframes()
+                    if mtf_analysis:
+                        self.mtf_analyzer.last_analysis = mtf_analysis
+                        self.send_mtf_analysis()
                     
                     last_mtf_update_slow = current_time
                 
@@ -1194,7 +1225,7 @@ class MLTradingBot:
                         self.logger.info(f"📊 Mercado: {market_state['trend']} | RSI:{market_state['rsi']:.0f} | ATR:{market_state['atr']:.2f}")
                     
                     # 🎖️ PASO 2: VERIFICAR EQUITY MONITOR
-                    allow_trade, equity_reason = self.equity_monitor.should_allow_trade()
+                    #allow_trade, equity_reason = self.equity_monitor.should_allow_trade()
                     
                     # PASO 3: RECOLECTAR SEÑALES
                     all_signals = self.signal_aggregator.collect_all_signals(
@@ -1215,18 +1246,18 @@ class MLTradingBot:
                         all_signals = self.ml_validator.batch_validate_signals(all_signals, features)
                     
                     # 🎖️ PASO 5: AJUSTAR CONFIANZA POR EQUITY
-                    confidence_adjustment = self.equity_monitor.get_confidence_adjustment()
+                    #confidence_adjustment = self.equity_monitor.get_confidence_adjustment()
                     
-                    if confidence_adjustment != 0.0:
-                        mode = self.equity_monitor.determine_trading_mode()
-                        self.logger.info(f"💰 Ajustando confianza por equity ({mode}): {confidence_adjustment:+.0%}")
+                    #if confidence_adjustment != 0.0:
+                    #    mode = self.equity_monitor.determine_trading_mode()
+                    #    self.logger.info(f"💰 Ajustando confianza por equity ({mode}): {confidence_adjustment:+.0%}")
                         
-                        for sig in all_signals:
-                            original_conf = sig['confidence']
-                            sig['confidence'] = max(0.25, min(sig['confidence'] + confidence_adjustment, 0.95))
+                    #    for sig in all_signals:
+                    #        original_conf = sig['confidence']
+                    #        sig['confidence'] = max(0.25, min(sig['confidence'] + confidence_adjustment, 0.95))
                             
-                            if abs(sig['confidence'] - original_conf) > 0.01:
-                                self.logger.info(f"   • {sig['strategy'].upper()}: {original_conf:.2f} → {sig['confidence']:.2f}")
+                    #        if abs(sig['confidence'] - original_conf) > 0.01:
+                    #            self.logger.info(f"   • {sig['strategy'].upper()}: {original_conf:.2f} → {sig['confidence']:.2f}")
                     
                     if not self.trading_enabled:
                         if all_signals:
@@ -1331,7 +1362,7 @@ class MLTradingBot:
 
 
 def run_bot_with_ml_gui():
-    """Ejecuta bot v6.0.1 CON COOLDOWN GLOBAL CORREGIDO"""
+    """Ejecuta bot v6.0.1"""
     
     root = tk.Tk()
     gui = EnhancedTradingBotGUI(root)
@@ -1351,7 +1382,7 @@ def run_bot_with_ml_gui():
 
 if __name__ == "__main__":
     print("="*80)
-    print("🤖 BOT DE TRADING XAUUSD - ML v6.0.1 COOLDOWN GLOBAL CORREGIDO")
+    print("🤖 BOT DE TRADING XAUUSD - ML v6.0.1")
     print("🚀 INICIANDO BOT v6.0.1")
     print()
     

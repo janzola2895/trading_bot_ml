@@ -1,8 +1,11 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════╗
-║                    ESTRATEGIA ML + ENSEMBLE v5.2                         ║
+║                    ESTRATEGIA ML + ENSEMBLE v6.0 - MTF                   ║
 ║                                                                          ║
-║  Sistema de múltiples modelos ML con rotación automática cíclica        ║
+║  🆕 v6.0: Sistema ML con análisis multi-timeframe                       ║
+║  - Predice en M30, H1, H4 y genera consenso                             ║
+║  - Mayor confianza cuando TFs coinciden                                 ║
+║  - Rotación automática cíclica de modelos                               ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 """
 
@@ -10,6 +13,7 @@ import os
 import pickle
 import json
 import pandas as pd
+import MetaTrader5 as mt5
 from datetime import datetime
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.neural_network import MLPClassifier
@@ -29,14 +33,12 @@ from config import (
 
 class MLEnsemble:
     """
-    Sistema de múltiples modelos ML
+    Sistema ML con Multi-Timeframe
     
-    ⭐ NUEVO v5.2: ROTACIÓN CÍCLICA AUTOMÁTICA
-    - Rota entre modelos en secuencia: RF → GB → NN → RF...
-    - Contador global de operaciones
-    - Rotación garantizada cada N ops sin importar precisión
-    - Logs detallados de cada rotación
-    - Actualiza precisión en tiempo real
+    🆕 v6.0: Análisis MTF integrado
+    - Predice en M30, H1, H4
+    - Consenso entre timeframes
+    - Boost de confianza por alineación
     """
     
     def __init__(self, data_dir=DATA_DIR, logger=None):
@@ -90,7 +92,22 @@ class MLEnsemble:
         self.active_model = self.model_names[0]
         self.use_ensemble_voting = True
         
-        # ⭐ NUEVO: Control de rotación cíclica automática
+        # 🆕 MTF: Configuración de timeframes
+        self.mtf_timeframes = {
+            'M30': {'tf': mt5.TIMEFRAME_M30, 'weight': 1.0, 'cache_seconds': 60},
+            'H1': {'tf': mt5.TIMEFRAME_H1, 'weight': 1.3, 'cache_seconds': 120},
+            'H4': {'tf': mt5.TIMEFRAME_H4, 'weight': 1.6, 'cache_seconds': 300}
+        }
+        
+        # Cache MTF
+        self.mtf_cache = {}
+        self.last_mtf_update = {}
+        
+        for tf_name in self.mtf_timeframes:
+            self.mtf_cache[tf_name] = None
+            self.last_mtf_update[tf_name] = None
+        
+        # Control de rotación cíclica automática
         self.rotation_config = {
             "enabled": True,
             "rotate_every_n_ops": ROTATE_MODELS_EVERY_N_OPS,
@@ -106,6 +123,205 @@ class MLEnsemble:
         if self.logger:
             self.logger.info(message)
     
+    def get_timeframe_data(self, tf, bars=100, symbol="XAUUSD"):
+        """Obtiene datos de timeframe específico"""
+        try:
+            rates = mt5.copy_rates_from_pos(symbol, tf, 0, bars)
+            if rates is None:
+                return None
+            
+            df = pd.DataFrame(rates)
+            df['time'] = pd.to_datetime(df['time'], unit='s')
+            return df
+        except:
+            return None
+    
+    def calculate_indicators_for_tf(self, df):
+        """Calcula indicadores para un timeframe"""
+        import ta
+        
+        df['ema_21'] = ta.trend.ema_indicator(df['close'], window=21)
+        df['ema_50'] = ta.trend.ema_indicator(df['close'], window=50)
+        df['atr'] = ta.volatility.average_true_range(df['high'], df['low'], df['close'], window=14)
+        df['adx'] = ta.trend.adx(df['high'], df['low'], df['close'], window=14)
+        df['rsi'] = ta.momentum.rsi(df['close'], window=14)
+        
+        bollinger = ta.volatility.BollingerBands(df['close'], window=20, window_dev=2)
+        df['bb_high'] = bollinger.bollinger_hband()
+        df['bb_low'] = bollinger.bollinger_lband()
+        df['bb_mid'] = bollinger.bollinger_mavg()
+        
+        macd = ta.trend.MACD(df['close'])
+        df['macd'] = macd.macd()
+        df['macd_signal'] = macd.macd_signal()
+        df['momentum'] = df['close'].pct_change(periods=10)
+        
+        df['price_to_ema21'] = (df['close'] - df['ema_21']) / df['ema_21']
+        df['price_to_ema50'] = (df['close'] - df['ema_50']) / df['ema_50']
+        df['ema_diff'] = (df['ema_21'] - df['ema_50']) / df['ema_50']
+        df['bb_position'] = (df['close'] - df['bb_low']) / (df['bb_high'] - df['bb_low'])
+        df['volume_change'] = df['tick_volume'].pct_change()
+        
+        df.dropna(inplace=True)
+        return df
+    
+    def prepare_features_from_df(self, df):
+        """Prepara features desde un dataframe"""
+        if len(df) == 0:
+            return None
+        
+        last_row = df.iloc[-1]
+        
+        features = {
+            'ema_21': float(last_row['ema_21']),
+            'ema_50': float(last_row['ema_50']),
+            'atr': float(last_row['atr']),
+            'adx': float(last_row['adx']),
+            'rsi': float(last_row['rsi']),
+            'macd': float(last_row['macd']),
+            'macd_signal': float(last_row['macd_signal']),
+            'momentum': float(last_row['momentum']),
+            'price_to_ema21': float(last_row['price_to_ema21']),
+            'price_to_ema50': float(last_row['price_to_ema50']),
+            'ema_diff': float(last_row['ema_diff']),
+            'bb_position': float(last_row['bb_position']),
+            'volume_change': float(last_row['volume_change'])
+        }
+        
+        return features
+    
+    def predict_on_timeframe(self, tf_name, symbol="XAUUSD"):
+        """
+        🆕 Predice en un timeframe específico
+        
+        Returns:
+            dict: {'signal': int, 'confidence': float, 'timeframe': str}
+        """
+        now = datetime.now()
+        cache_key = tf_name
+        
+        # Verificar cache
+        if cache_key in self.mtf_cache:
+            last_update = self.last_mtf_update.get(cache_key)
+            cache_time = self.mtf_timeframes[tf_name]['cache_seconds']
+            
+            if last_update and (now - last_update).total_seconds() < cache_time:
+                return self.mtf_cache[cache_key]
+        
+        # Obtener datos del timeframe
+        tf_config = self.mtf_timeframes[tf_name]
+        df = self.get_timeframe_data(tf_config['tf'], bars=100, symbol=symbol)
+        
+        if df is None or len(df) < 50:
+            return None
+        
+        # Calcular indicadores
+        df = self.calculate_indicators_for_tf(df)
+        
+        if len(df) == 0:
+            return None
+        
+        # Preparar features
+        features = self.prepare_features_from_df(df)
+        
+        if features is None:
+            return None
+        
+        # Predecir con modelo activo
+        try:
+            X = pd.DataFrame([features])
+            X_scaled = self.scaler.transform(X)
+            
+            model = self.models[self.active_model]["model"]
+            signal = model.predict(X_scaled)[0]
+            probabilities = model.predict_proba(X_scaled)[0]
+            confidence = float(max(probabilities))
+            
+            result = {
+                'signal': int(signal),
+                'confidence': confidence,
+                'timeframe': tf_name,
+                'tf_weight': tf_config['weight']
+            }
+            
+            # Actualizar cache
+            self.mtf_cache[cache_key] = result
+            self.last_mtf_update[cache_key] = now
+            
+            return result
+            
+        except Exception as e:
+            return None
+    
+    def predict_with_mtf(self, symbol="XAUUSD"):
+        """
+        🆕 Predicción con consenso multi-timeframe
+        
+        Returns:
+            tuple: (signal, confidence, mtf_details)
+        """
+        predictions = []
+        
+        # Predecir en cada timeframe
+        for tf_name in ['M30', 'H1', 'H4']:
+            prediction = self.predict_on_timeframe(tf_name, symbol)
+            
+            if prediction:
+                predictions.append(prediction)
+        
+        if not predictions:
+            return 0, 0.0, {}
+        
+        # Analizar consenso
+        buy_votes = sum(1 for p in predictions if p['signal'] == 1)
+        sell_votes = sum(1 for p in predictions if p['signal'] == -1)
+        total_votes = len(predictions)
+        
+        # Determinar señal por mayoría
+        if buy_votes > sell_votes:
+            final_signal = 1
+            aligned_tfs = [p['timeframe'] for p in predictions if p['signal'] == 1]
+        elif sell_votes > buy_votes:
+            final_signal = -1
+            aligned_tfs = [p['timeframe'] for p in predictions if p['signal'] == -1]
+        else:
+            final_signal = 0
+            aligned_tfs = []
+        
+        # Calcular confianza ponderada
+        if final_signal != 0:
+            aligned_predictions = [p for p in predictions if p['signal'] == final_signal]
+            
+            total_weight = sum(p['tf_weight'] for p in aligned_predictions)
+            weighted_confidence = sum(
+                p['confidence'] * p['tf_weight'] for p in aligned_predictions
+            ) / total_weight if total_weight > 0 else 0.0
+            
+            # Boost por alineación
+            alignment_ratio = len(aligned_predictions) / total_votes
+            if alignment_ratio == 1.0:
+                confidence_boost = 0.10  # +10% todas alineadas
+            elif alignment_ratio >= 0.66:
+                confidence_boost = 0.05  # +5% mayoría clara
+            else:
+                confidence_boost = 0.0
+            
+            final_confidence = min(weighted_confidence + confidence_boost, 0.95)
+        else:
+            final_confidence = 0.0
+            aligned_predictions = []
+        
+        mtf_details = {
+            'predictions': predictions,
+            'aligned_timeframes': aligned_tfs,
+            'alignment_ratio': len(aligned_tfs) / total_votes if total_votes > 0 else 0,
+            'buy_votes': buy_votes,
+            'sell_votes': sell_votes,
+            'total_votes': total_votes
+        }
+        
+        return final_signal, final_confidence, mtf_details
+    
     def save_models(self):
         try:
             for name, model_data in self.models.items():
@@ -117,7 +333,6 @@ class MLEnsemble:
             with open(scaler_path, 'wb') as f:
                 pickle.dump(self.scaler, f)
             
-            # Guardar configuración de rotación
             rotation_path = os.path.join(self.models_dir, "rotation_config.json")
             rotation_data = {
                 "rotation_config": self.rotation_config,
@@ -148,7 +363,6 @@ class MLEnsemble:
                 with open(scaler_path, 'rb') as f:
                     self.scaler = pickle.load(f)
             
-            # Cargar configuración de rotación
             rotation_path = os.path.join(self.models_dir, "rotation_config.json")
             if os.path.exists(rotation_path):
                 with open(rotation_path, 'r') as f:
@@ -197,6 +411,7 @@ class MLEnsemble:
         return results
     
     def predict_with_active_model(self, X):
+        """Predicción legacy (sin MTF) para compatibilidad"""
         X_scaled = self.scaler.transform(X)
         model = self.models[self.active_model]["model"]
         
@@ -210,7 +425,6 @@ class MLEnsemble:
             perf = self.models[model_name]["performance"]
             perf["trades"] += 1
             
-            # ✅ Actualizar precisión con validación
             if perf["trades"] > 0:
                 if correct:
                     perf["accuracy"] = ((perf["accuracy"] * (perf["trades"] - 1)) + 100) / perf["trades"]
@@ -219,7 +433,6 @@ class MLEnsemble:
             
             perf["profit"] += profit
             
-            # Actualizar peso
             if perf["trades"] >= 5:
                 if perf["accuracy"] > 60:
                     self.models[model_name]["weight"] = 1.5
@@ -231,12 +444,12 @@ class MLEnsemble:
             self.save_models()
     
     def increment_global_counter(self):
-        """⭐ NUEVO: Incrementa el contador MANUALMENTE"""
+        """Incrementa el contador MANUALMENTE"""
         self.rotation_config["global_operations_count"] += 1
         self.save_models()
     
     def should_rotate_cyclic(self):
-        """⭐ NUEVO: Verifica si debe rotar según contador global"""
+        """Verifica si debe rotar según contador global"""
         if not self.rotation_config["enabled"]:
             return False
         
@@ -246,26 +459,22 @@ class MLEnsemble:
         return ops_count >= rotate_every
     
     def rotate_to_next_model(self):
-        """⭐ NUEVO: Rota al siguiente modelo en secuencia"""
-        # ✅ GUARDAR el contador ANTES de resetear
+        """Rota al siguiente modelo en secuencia"""
         operations_completed = self.rotation_config["global_operations_count"]
         
         old_model = self.active_model
         old_accuracy = self.models[old_model]["performance"]["accuracy"]
         old_trades = self.models[old_model]["performance"]["trades"]
         
-        # Avanzar al siguiente modelo
         self.current_model_index = (self.current_model_index + 1) % len(self.model_names)
         self.active_model = self.model_names[self.current_model_index]
         
         new_accuracy = self.models[self.active_model]["performance"]["accuracy"]
         new_trades = self.models[self.active_model]["performance"]["trades"]
         
-        # ✅ AHORA sí resetear el contador
         self.rotation_config["global_operations_count"] = 0
         self.rotation_config["last_rotation_time"] = datetime.now().isoformat()
         
-        # Crear evento con los valores CORRECTOS
         rotation_event = {
             "timestamp": datetime.now().isoformat(),
             "from_model": old_model,
@@ -281,7 +490,6 @@ class MLEnsemble:
         
         self.rotation_config["rotation_history"].append(rotation_event)
         
-        # Limitar historial a últimos 20
         if len(self.rotation_config["rotation_history"]) > 20:
             self.rotation_config["rotation_history"] = self.rotation_config["rotation_history"][-20:]
         
@@ -300,12 +508,12 @@ class MLEnsemble:
         return comparison
     
     def get_rotation_history(self, limit=10):
-        """⭐ Retorna historial de rotaciones"""
+        """Retorna historial de rotaciones"""
         history = self.rotation_config.get("rotation_history", [])
         return history[-limit:] if len(history) > limit else history
     
     def get_rotation_status(self):
-        """⭐ NUEVO: Retorna estado del sistema de rotación"""
+        """Retorna estado del sistema de rotación"""
         return {
             "enabled": self.rotation_config["enabled"],
             "rotate_every": self.rotation_config["rotate_every_n_ops"],
@@ -317,11 +525,7 @@ class MLEnsemble:
 
 
 class IncrementalLearningSystem:
-    """
-    Sistema de aprendizaje incremental - Aprende con CADA operación
-    
-    🆕 v5.2: Solo usa operaciones rentables >= $10 para re-entrenamiento
-    """
+    """Sistema de aprendizaje incremental"""
     
     def __init__(self, memory, ensemble, retrain_every=RETRAIN_EVERY_N_OPS, logger=None):
         self.memory = memory
@@ -352,7 +556,7 @@ class IncrementalLearningSystem:
             self.logger.info(message)
     
     def should_retrain(self):
-        """⭐ Verifica si es momento de re-entrenar INCREMENTALMENTE"""
+        """Verifica si es momento de re-entrenar"""
         self.operations_since_last_train += 1
         
         if self.operations_since_last_train >= self.retrain_every:
@@ -362,13 +566,8 @@ class IncrementalLearningSystem:
         return False
     
     def incremental_train(self, current_market_df):
-        """
-        ⭐ Re-entrenamiento INCREMENTAL con cada operación
-        
-        🔧 IMPORTANTE: Usa operaciones de TODAS las estrategias rentables >= $10
-        """
+        """Re-entrenamiento INCREMENTAL"""
         try:
-            # Obtener últimas operaciones rentables
             all_trades = self.memory.get_all_trades_for_training(
                 limit=500,
                 min_profit=MIN_PROFIT_FOR_LEARNING
@@ -380,13 +579,11 @@ class IncrementalLearningSystem:
             
             self.send_log(f"📚 Entrenando con {len(all_trades)} operaciones RENTABLES (profit >= ${MIN_PROFIT_FOR_LEARNING})")
             
-            # Contar operaciones por estrategia
             for trade in all_trades:
                 strategy = trade.get("strategy", "unknown")
                 if strategy in self.learning_stats["operations_per_strategy"]:
                     self.learning_stats["operations_per_strategy"][strategy] += 1
             
-            # Preparar datos para entrenamiento
             feature_columns = ['ema_21', 'ema_50', 'atr', 'adx', 'rsi', 'macd',
                              'macd_signal', 'momentum', 'price_to_ema21',
                              'price_to_ema50', 'ema_diff', 'bb_position', 'volume_change']
@@ -394,15 +591,12 @@ class IncrementalLearningSystem:
             X = current_market_df[feature_columns]
             y = current_market_df['target']
             
-            # Dividir datos
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.2, random_state=42
             )
             
-            # ⭐ Re-entrenar TODOS los modelos
             results = self.ensemble.train_all_models(X_train, y_train, X_test, y_test)
             
-            # Actualizar estadísticas
             self.learning_stats["incremental_trains"] += 1
             self.learning_stats["last_incremental_train"] = datetime.now().isoformat()
             

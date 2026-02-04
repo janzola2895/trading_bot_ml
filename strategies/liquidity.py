@@ -585,7 +585,13 @@ class LiquiditySystem:
             fvg = fvg_signal['fvg']
             
             # 🔧 MEJORA: Solo si es RECIENTE y GRANDE
-            age = len(self.cached_fvgs[0]['formation_index']) if self.cached_fvgs else 50
+            # Calcular edad del FVG basado en su índice de formación
+            if self.cached_fvgs:
+                current_index = len(df) - 1
+                formation_index = fvg.get('formation_index', 0)
+                age = current_index - formation_index
+            else:
+                age = 50  # Default si no hay FVGs cacheados
             
             # Solo FVG de hace menos de 15 velas y gap > 50 pips
             if age < 15 and fvg['gap_size_pips'] > 50:

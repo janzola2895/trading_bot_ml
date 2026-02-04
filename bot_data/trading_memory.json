@@ -1,32 +1,32 @@
 {
   "trades": [
     {
-      "id": "trade_1769702475.875953",
-      "timestamp_open": "2026-01-29T11:01:15.875953",
+      "id": "trade_1770206504.973407",
+      "timestamp_open": "2026-02-04T07:01:44.973407",
       "features": {
-        "ema_21": 5432.991330337012,
-        "ema_50": 5422.757953910203,
-        "atr": 61.45645835409082,
-        "adx": 29.732898963434625,
-        "rsi": 22.237224569827703,
-        "macd": -51.52965580237742,
-        "macd_signal": -6.22976825890738,
-        "momentum": -0.059230897527936754,
-        "price_to_ema21": -0.04485030722879828,
-        "price_to_ema50": -0.04304782841024227,
-        "ema_diff": 0.0018871165768021454,
-        "bb_position": -0.08308369694718483,
-        "volume_change": -0.9340437788018433
+        "ema_21": 5045.5108058301,
+        "ema_50": 4995.126579148467,
+        "atr": 26.627934267866465,
+        "adx": 22.43565238353207,
+        "rsi": 54.97667833086371,
+        "macd": 15.627918327016232,
+        "macd_signal": 24.729745098366756,
+        "momentum": -0.007096922505614445,
+        "price_to_ema21": 0.001565588594275145,
+        "price_to_ema50": 0.011668056840607432,
+        "ema_diff": 0.010086676660398626,
+        "bb_position": 0.3575535694589529,
+        "volume_change": -0.9095715587967184
       },
       "signal": 1,
       "confidence": 0.7,
       "market_state": {
         "trend": "uptrend",
-        "volatility": "high",
-        "strength": "strong",
-        "rsi": 22.237224569827703,
-        "adx": 29.732898963434625,
-        "atr": 61.45645835409082
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 54.97667833086371,
+        "adx": 22.43565238353207,
+        "atr": 26.627934267866465
       },
       "strategy": "price_action",
       "status": "closed",
@@ -52,103 +52,60 @@
         "analysis": {
           "approved": true,
           "direction": "buy",
-          "higher_tf_votes": {
-            "bullish": 3,
-            "bearish": 0,
-            "neutral": 0
-          },
-          "lower_tf_votes": {
-            "bullish": 1,
-            "bearish": 0,
-            "neutral": 1
-          },
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
           "timeframes_detail": {
-            "M30": {
-              "bias": "neutral",
-              "strength": 0.13498882830668082,
-              "indicators": {
-                "ema_21": 5432.991791226714,
-                "ema_50": 5423.080920206376,
-                "ema_100": 5347.907501419358,
-                "adx": 29.74651054534258,
-                "rsi": 22.23289430535347,
-                "macd": -51.53333185789779,
-                "ema_score": 0.07310140612809447,
-                "macd_score": -0.3,
-                "total_score": -0.13498882830668082
-              }
-            },
-            "H1": {
-              "bias": "bullish",
-              "strength": 0.3579273064922532,
-              "indicators": {
-                "ema_21": 5421.276334538495,
-                "ema_50": 5340.040318297062,
-                "ema_100": 5227.276437234913,
-                "adx": 44.74091331153164,
-                "rsi": 28.21608736908209,
-                "macd": 4.452760586542354,
-                "ema_score": 0.4,
-                "macd_score": 0,
-                "total_score": 0.3579273064922532
-              }
-            },
-            "H4": {
-              "bias": "bullish",
-              "strength": 0.6863509074524866,
-              "cached": true
-            },
             "D1": {
               "bias": "bullish",
-              "strength": 0.7,
-              "cached": true
-            },
-            "W1": {
-              "bias": "bullish",
-              "strength": 0.7,
+              "strength": 0.2940724945860993,
               "cached": true
             }
           },
-          "required_higher": 2,
-          "required_lower": 1
+          "bias_summary": [
+            "bullish"
+          ]
         },
         "enabled": true
       },
-      "timestamp_close": "2026-01-29T11:02:36.446415",
-      "result": "win",
-      "profit": 53.0,
-      "duration_minutes": 1.3428410333333334,
-      "trailing_triggered": true,
+      "timestamp_close": "2026-02-04T07:04:38.094267",
+      "result": "loss",
+      "profit": -14.1,
+      "duration_minutes": 2.8852980333333336,
+      "trailing_triggered": false,
       "breakeven_triggered": false,
-      "correct_prediction": true
+      "correct_prediction": false
     },
     {
-      "id": "trade_1769703699.26652",
-      "timestamp_open": "2026-01-29T11:21:39.266520",
+      "id": "trade_1770208074.460692",
+      "timestamp_open": "2026-02-04T07:27:54.460692",
       "features": {
-        "ema_21": 5439.237693973376,
-        "ema_50": 5425.452463714124,
-        "atr": 67.34002978266224,
-        "adx": 29.237152221610817,
-        "rsi": 31.824049195114213,
-        "macd": -46.04851620123827,
-        "macd_signal": -5.133540338679549,
-        "momentum": -0.04677449764686259,
-        "price_to_ema21": -0.03331490627338322,
-        "price_to_ema50": -0.030858709911082905,
-        "ema_diff": 0.0025408443538024964,
-        "bb_position": 0.022344992804076105,
-        "volume_change": 0.5446428571428572
+        "ema_21": 5045.101714921009,
+        "ema_50": 4994.9501085602315,
+        "atr": 27.325791410723575,
+        "adx": 22.43565238353207,
+        "rsi": 53.876168977983944,
+        "macd": 15.26894396804164,
+        "macd_signal": 24.657950226571835,
+        "momentum": -0.007981090591862139,
+        "price_to_ema21": 0.0007548480276874297,
+        "price_to_ema50": 0.010802888971261828,
+        "ema_diff": 0.01004046192069649,
+        "bb_position": 0.29935242762960146,
+        "volume_change": -0.0592525068368277
       },
       "signal": 1,
-      "confidence": 0.6499999999999999,
+      "confidence": 0.85,
       "market_state": {
         "trend": "uptrend",
-        "volatility": "high",
-        "strength": "strong",
-        "rsi": 31.824049195114213,
-        "adx": 29.237152221610817,
-        "atr": 67.34002978266224
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 53.876168977983944,
+        "adx": 22.43565238353207,
+        "atr": 27.325791410723575
       },
       "strategy": "price_action",
       "status": "closed",
@@ -174,83 +131,297 @@
         "analysis": {
           "approved": true,
           "direction": "buy",
-          "higher_tf_votes": {
-            "bullish": 3,
-            "bearish": 0,
-            "neutral": 0
-          },
-          "lower_tf_votes": {
-            "bullish": 1,
-            "bearish": 0,
-            "neutral": 1
-          },
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
           "timeframes_detail": {
-            "M30": {
-              "bias": "neutral",
-              "strength": 0.1171991534969828,
-              "cached": true
-            },
-            "H1": {
-              "bias": "bullish",
-              "strength": 0.3579273064922532,
-              "cached": true
-            },
-            "H4": {
-              "bias": "bullish",
-              "strength": 0.3648204006070249,
-              "cached": true
-            },
             "D1": {
               "bias": "bullish",
-              "strength": 0.7,
-              "cached": true
-            },
-            "W1": {
-              "bias": "bullish",
-              "strength": 0.7,
+              "strength": 0.2940724945860993,
               "cached": true
             }
           },
-          "required_higher": 2,
-          "required_lower": 1
+          "bias_summary": [
+            "bullish"
+          ]
         },
         "enabled": true
       },
-      "timestamp_close": "2026-01-29T11:21:48.534832",
+      "timestamp_close": "2026-02-04T07:29:08.693827",
       "result": "loss",
-      "profit": -3.84,
-      "duration_minutes": 0.15445528333333333,
+      "profit": -3.46,
+      "duration_minutes": 1.2371677333333333,
       "trailing_triggered": true,
       "breakeven_triggered": false,
       "correct_prediction": false
     },
     {
-      "id": "trade_1769708162.838738",
-      "timestamp_open": "2026-01-29T12:36:02.838738",
+      "id": "trade_1770208226.592095",
+      "timestamp_open": "2026-02-04T07:30:26.592095",
       "features": {
-        "ema_21": 5414.302313019758,
-        "ema_50": 5415.610784912605,
-        "atr": 68.78144072607034,
-        "adx": 31.499930489240736,
-        "rsi": 43.71006421985256,
-        "macd": -47.58402551002291,
-        "macd_signal": -26.36072798562761,
-        "momentum": -0.03230976611061309,
-        "price_to_ema21": -0.010873480942907016,
-        "price_to_ema50": -0.011112464928288891,
-        "ema_diff": -0.0002416111395028545,
-        "bb_position": 0.31301355033307326,
-        "volume_change": -0.7990084416454509
+        "ema_21": 5045.349740750238,
+        "ema_50": 4997.015168632866,
+        "atr": 25.51109285973549,
+        "adx": 21.85221138905995,
+        "rsi": 53.98671292498051,
+        "macd": 13.772120610130514,
+        "macd_signal": 22.46113280319785,
+        "momentum": -0.006971923503544142,
+        "price_to_ema21": 0.0007690763671785369,
+        "price_to_ema50": 0.010449204095856025,
+        "ema_diff": 0.00967268869239709,
+        "bb_position": 0.29386744768897083,
+        "volume_change": -0.9853854585312386
       },
       "signal": 1,
-      "confidence": 0.65,
+      "confidence": 0.8500000000000001,
       "market_state": {
-        "trend": "downtrend",
-        "volatility": "high",
-        "strength": "strong",
-        "rsi": 43.71006421985256,
-        "adx": 31.499930489240736,
-        "atr": 68.78144072607034
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 53.98671292498051,
+        "adx": 21.85221138905995,
+        "atr": 25.51109285973549
+      },
+      "strategy": "candlestick",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 40,
+        "tp_pips": 100
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T07:32:42.402680",
+      "result": "win",
+      "profit": 8.7,
+      "duration_minutes": 2.263435,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770209288.977168",
+      "timestamp_open": "2026-02-04T07:48:08.977168",
+      "features": {
+        "ema_21": 5045.567013477511,
+        "ema_50": 4997.108894123062,
+        "atr": 26.520378574021212,
+        "adx": 21.3468849475582,
+        "rsi": 54.618756878169954,
+        "macd": 13.962775880786467,
+        "macd_signal": 22.499263857329037,
+        "momentum": -0.00650188409103436,
+        "price_to_ema21": 0.0011996642808073795,
+        "price_to_ema50": 0.010908528717684492,
+        "ema_diff": 0.009697231015205433,
+        "bb_position": 0.3252630263025922,
+        "volume_change": -0.4236390208257216
+      },
+      "signal": 1,
+      "confidence": 0.93,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 54.618756878169954,
+        "adx": 21.3468849475582,
+        "atr": 26.520378574021212
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 95
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T07:51:55.828647",
+      "result": "win",
+      "profit": 0.12,
+      "duration_minutes": 3.7807890666666664,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770209984.818962",
+      "timestamp_open": "2026-02-04T07:59:44.818962",
+      "features": {
+        "ema_21": 5044.69792256842,
+        "ema_50": 4996.733992162278,
+        "atr": 27.210378574021203,
+        "adx": 21.3468849475582,
+        "rsi": 51.860200567089926,
+        "macd": 13.200154798165386,
+        "macd_signal": 22.34673964080482,
+        "momentum": -0.008382041741073154,
+        "price_to_ema21": -0.0005229099162941503,
+        "price_to_ema50": 0.009071126841816969,
+        "ema_diff": 0.009599056199785051,
+        "bb_position": 0.20307055472038385,
+        "volume_change": -0.10138838143953233
+      },
+      "signal": 1,
+      "confidence": 0.7854,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 51.860200567089926,
+        "adx": 21.3468849475582,
+        "atr": 27.210378574021203
+      },
+      "strategy": "fibo",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 40,
+        "tp_pips": 100
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T08:00:09.867873",
+      "result": "loss",
+      "profit": -8.14,
+      "duration_minutes": 0.4174163166666667,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770211372.955428",
+      "timestamp_open": "2026-02-04T08:22:52.955428",
+      "features": {
+        "ema_21": 5044.732904924003,
+        "ema_50": 4998.634936840194,
+        "atr": 26.94820769738909,
+        "adx": 21.032116044104388,
+        "rsi": 52.98882066092505,
+        "macd": 11.777398987234847,
+        "macd_signal": 20.219847234604458,
+        "momentum": -0.007464653537793353,
+        "price_to_ema21": 0.00025315415108504715,
+        "price_to_ema50": 0.009477600136519127,
+        "ema_diff": 0.009222111369659083,
+        "bb_position": 0.2673218312898793,
+        "volume_change": 0.35037230831153154
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 52.98882066092505,
+        "adx": 21.032116044104388,
+        "atr": 26.94820769738909
       },
       "strategy": "price_action",
       "status": "closed",
@@ -276,58 +447,2642 @@
         "analysis": {
           "approved": true,
           "direction": "buy",
-          "higher_tf_votes": {
-            "bullish": 3,
-            "bearish": 0,
-            "neutral": 0
-          },
-          "lower_tf_votes": {
-            "bullish": 1,
-            "bearish": 1,
-            "neutral": 0
-          },
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
           "timeframes_detail": {
-            "M30": {
-              "bias": "bearish",
-              "strength": 0.19059221565320317,
-              "cached": true
-            },
-            "H1": {
-              "bias": "bullish",
-              "strength": 0.35510329023364434,
-              "cached": true
-            },
-            "H4": {
-              "bias": "bullish",
-              "strength": 0.3648204006070249,
-              "cached": true
-            },
             "D1": {
               "bias": "bullish",
-              "strength": 0.7,
-              "cached": true
-            },
-            "W1": {
-              "bias": "bullish",
-              "strength": 0.7,
+              "strength": 0.2940724945860993,
               "cached": true
             }
           },
-          "required_higher": 2,
-          "required_lower": 1
+          "bias_summary": [
+            "bullish"
+          ]
         },
         "enabled": true
       },
-      "timestamp_close": "2026-01-29T12:37:15.308382",
+      "timestamp_close": "2026-02-04T08:23:48.807126",
+      "result": "loss",
+      "profit": -1.74,
+      "duration_minutes": 0.93075915,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770213246.515424",
+      "timestamp_open": "2026-02-04T08:54:06.515424",
+      "features": {
+        "ema_21": 5045.977434353602,
+        "ema_50": 5000.993258470778,
+        "atr": 27.354152503741904,
+        "adx": 20.44990007218394,
+        "rsi": 55.71708097849258,
+        "macd": 11.551495227879968,
+        "macd_signal": 18.522291389567854,
+        "momentum": -0.005441122374107654,
+        "price_to_ema21": 0.001956521957308983,
+        "price_to_ema50": 0.010969169261787216,
+        "ema_diff": 0.008995048294982046,
+        "bb_position": 0.40918504442908094,
+        "volume_change": -0.23644424235534844
+      },
+      "signal": 1,
+      "confidence": 0.65,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 55.71708097849258,
+        "adx": 20.44990007218394,
+        "atr": 27.354152503741904
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T08:55:23.701004",
       "result": "win",
-      "profit": 35.12,
-      "duration_minutes": 1.2076551666666666,
+      "profit": 9.08,
+      "duration_minutes": 1.2863312833333334,
       "trailing_triggered": true,
       "breakeven_triggered": false,
       "correct_prediction": true
+    },
+    {
+      "id": "trade_1770214856.668856",
+      "timestamp_open": "2026-02-04T09:20:56.668856",
+      "features": {
+        "ema_21": 5045.483287299249,
+        "ema_50": 5002.532100704711,
+        "atr": 27.413804561817667,
+        "adx": 19.409704803097366,
+        "rsi": 51.27244790627949,
+        "macd": 9.865491374379417,
+        "macd_signal": 16.766814774208374,
+        "momentum": -0.002879279863629569,
+        "price_to_ema21": -0.0006388460957472296,
+        "price_to_ema50": 0.007941558094088452,
+        "ema_diff": 0.008585889251662624,
+        "bb_position": 0.2444247171012604,
+        "volume_change": -0.26145172656800564
+      },
+      "signal": 1,
+      "confidence": 0.6354,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 51.27244790627949,
+        "adx": 19.409704803097366,
+        "atr": 27.413804561817667
+      },
+      "strategy": "fibo",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 40,
+        "tp_pips": 100
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T09:21:44.436738",
+      "result": "win",
+      "profit": 0.8,
+      "duration_minutes": 0.7960441333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770215945.871256",
+      "timestamp_open": "2026-02-04T09:39:05.871256",
+      "features": {
+        "ema_21": 5038.715385041708,
+        "ema_50": 5001.2699935341325,
+        "atr": 30.48031821737472,
+        "adx": 21.09095764834035,
+        "rsi": 36.54162898009876,
+        "macd": 2.977555984670289,
+        "macd_signal": 13.881715898666865,
+        "momentum": -0.015802184163824173,
+        "price_to_ema21": -0.011633001779722964,
+        "price_to_ema50": -0.0042329235497187,
+        "ema_diff": 0.007487176568348968,
+        "bb_position": -0.24031654689703877,
+        "volume_change": -0.5366880957659055
+      },
+      "signal": 1,
+      "confidence": 0.7125460628528866,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 36.54162898009876,
+        "adx": 21.09095764834035,
+        "atr": 30.48031821737472
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T09:39:24.277705",
+      "result": "win",
+      "profit": 0.04,
+      "duration_minutes": 0.306688,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770216945.175248",
+      "timestamp_open": "2026-02-04T09:55:45.175248",
+      "features": {
+        "ema_21": 5041.490839587163,
+        "ema_50": 5002.4672484360935,
+        "atr": 30.85031821737474,
+        "adx": 21.212420623406377,
+        "rsi": 42.6263570658361,
+        "macd": 5.412997580111551,
+        "macd_signal": 14.368804217755116,
+        "momentum": -0.00976865886965772,
+        "price_to_ema21": -0.006121371746792577,
+        "price_to_ema50": 0.0016317451286579567,
+        "ema_diff": 0.007800868893898074,
+        "bb_position": -0.040527712358213404,
+        "volume_change": 0.21259144313899347
+      },
+      "signal": 1,
+      "confidence": 0.8073,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 42.6263570658361,
+        "adx": 21.212420623406377,
+        "atr": 30.85031821737474
+      },
+      "strategy": "fibo",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 40,
+        "tp_pips": 100
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T09:56:03.211435",
+      "result": "loss",
+      "profit": -6.46,
+      "duration_minutes": 0.3004986666666667,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770216975.614179",
+      "timestamp_open": "2026-02-04T09:56:15.614179",
+      "features": {
+        "ema_21": 5040.558112314436,
+        "ema_50": 5002.064895494917,
+        "atr": 30.85031821737474,
+        "adx": 21.212420623406377,
+        "rsi": 40.36741660304115,
+        "macd": 4.5945360416490075,
+        "macd_signal": 14.205111910062609,
+        "momentum": -0.011796302810638704,
+        "price_to_ema21": -0.007972948911401977,
+        "price_to_ema50": -0.0003388391654902447,
+        "ema_diff": 0.007695465297578795,
+        "bb_position": -0.11912743622295238,
+        "volume_change": 0.233096874307249
+      },
+      "signal": 1,
+      "confidence": 0.8375477922847911,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 40.36741660304115,
+        "adx": 21.212420623406377,
+        "atr": 30.85031821737474
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T09:56:33.831029",
+      "result": "loss",
+      "profit": -3.04,
+      "duration_minutes": 0.3035304166666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770217878.741168",
+      "timestamp_open": "2026-02-04T10:11:18.741168",
+      "features": {
+        "ema_21": 5034.812250904382,
+        "ema_50": 5001.0690803773705,
+        "atr": 31.058151952611915,
+        "adx": 22.6877706179818,
+        "rsi": 39.00659652192295,
+        "macd": -0.6425039236664816,
+        "macd_signal": 11.051153699312588,
+        "momentum": -0.010500748495573475,
+        "price_to_ema21": -0.00880315862749821,
+        "price_to_ema50": -0.0021153637766932075,
+        "ema_diff": 0.006747191447406623,
+        "bb_position": -0.04810188833593288,
+        "volume_change": -0.6610425785913251
+      },
+      "signal": 1,
+      "confidence": 0.9463078869971603,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 39.00659652192295,
+        "adx": 22.6877706179818,
+        "atr": 31.058151952611915
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T10:11:37.384171",
+      "result": "win",
+      "profit": 1.2,
+      "duration_minutes": 0.31063413333333334,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770218782.218561",
+      "timestamp_open": "2026-02-04T10:26:22.218561",
+      "features": {
+        "ema_21": 5033.028614540746,
+        "ema_50": 5000.299668612664,
+        "atr": 32.66529480975477,
+        "adx": 23.04231652985081,
+        "rsi": 34.849059359980075,
+        "macd": -2.2076321287950122,
+        "macd_signal": 10.73812805828688,
+        "momentum": -0.01439094270786856,
+        "price_to_ema21": -0.01235014129686569,
+        "price_to_ema50": -0.005885580977755635,
+        "ema_diff": 0.006545396895614968,
+        "bb_position": -0.15900140124134501,
+        "volume_change": -0.17142857142857137
+      },
+      "signal": 1,
+      "confidence": 0.9399270227533205,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 34.849059359980075,
+        "adx": 23.04231652985081,
+        "atr": 32.66529480975477
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T10:26:40.444334",
+      "result": "loss",
+      "profit": -4.54,
+      "duration_minutes": 0.30367578333333334,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770218993.220859",
+      "timestamp_open": "2026-02-04T10:29:53.220859",
+      "features": {
+        "ema_21": 5032.162250904383,
+        "ema_50": 4999.925943122469,
+        "atr": 32.728866238326226,
+        "adx": 23.06049510569875,
+        "rsi": 33.324042683551355,
+        "macd": -2.9678600490233293,
+        "macd_signal": 10.586082474241218,
+        "momentum": -0.01628052226154708,
+        "price_to_ema21": -0.014073920389123858,
+        "price_to_ema50": -0.007717302928365359,
+        "ema_diff": 0.006447357050609026,
+        "bb_position": -0.20357327813419623,
+        "volume_change": -0.05483485873458016
+      },
+      "signal": 1,
+      "confidence": 0.8427,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "moderate",
+        "rsi": 33.324042683551355,
+        "adx": 23.06049510569875,
+        "atr": 32.728866238326226
+      },
+      "strategy": "fibo",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 40,
+        "tp_pips": 100
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T10:30:21.449553",
+      "result": "loss",
+      "profit": -4.4,
+      "duration_minutes": 0.47037285,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770219685.707877",
+      "timestamp_open": "2026-02-04T10:41:25.707877",
+      "features": {
+        "ema_21": 5021.781798244199,
+        "ema_50": 4996.699141348645,
+        "atr": 35.696091003178594,
+        "adx": 25.789618237650245,
+        "rsi": 27.815368542981375,
+        "macd": -11.378062292048526,
+        "macd_signal": 6.150117698277629,
+        "momentum": -0.02525477612383753,
+        "price_to_ema21": -0.020058975537212448,
+        "price_to_ema50": -0.01513982315297583,
+        "ema_diff": 0.005019845339094096,
+        "bb_position": -0.22285397791653347,
+        "volume_change": -0.5988430583501005
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 27.815368542981375,
+        "adx": 25.789618237650245,
+        "atr": 35.696091003178594
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T10:42:14.915600",
+      "result": "win",
+      "profit": 9.3,
+      "duration_minutes": 0.8200288,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770219776.263098",
+      "timestamp_open": "2026-02-04T10:42:56.263098",
+      "features": {
+        "ema_21": 5023.089980062381,
+        "ema_50": 4997.263455074135,
+        "atr": 35.696091003178594,
+        "adx": 25.789618237650245,
+        "rsi": 29.571842135828433,
+        "macd": -10.230142064128813,
+        "macd_signal": 6.379701743861572,
+        "momentum": -0.022404452763664984,
+        "price_to_ema21": -0.017449414685040732,
+        "price_to_ema50": -0.012371462027154265,
+        "ema_diff": 0.005168133563585143,
+        "bb_position": -0.17357454750347265,
+        "volume_change": -0.53420523138833
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 29.571842135828433,
+        "adx": 25.789618237650245,
+        "atr": 35.696091003178594
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T10:43:26.021203",
+      "result": "win",
+      "profit": 2.14,
+      "duration_minutes": 0.4958630166666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770220589.710122",
+      "timestamp_open": "2026-02-04T10:56:29.710122",
+      "features": {
+        "ema_21": 5023.178161880563,
+        "ema_50": 4997.301494289821,
+        "atr": 35.696091003178594,
+        "adx": 25.789618237650245,
+        "rsi": 29.698257165313734,
+        "macd": -10.152763146748839,
+        "macd_signal": 6.395177527337567,
+        "momentum": -0.022212318388448282,
+        "price_to_ema21": -0.01727355850903738,
+        "price_to_ema50": -0.012184875048943661,
+        "ema_diff": 0.005178128159829831,
+        "bb_position": -0.1699846751489527,
+        "volume_change": -0.02498323272971159
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 29.698257165313734,
+        "adx": 25.789618237650245,
+        "atr": 35.696091003178594
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T10:57:08.819664",
+      "result": "loss",
+      "profit": -21.42,
+      "duration_minutes": 0.6516740999999999,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770221131.679773",
+      "timestamp_open": "2026-02-04T11:05:31.679773",
+      "features": {
+        "ema_21": 5011.759899122736,
+        "ema_50": 4993.346941944537,
+        "atr": 34.864941614166405,
+        "adx": 28.32380220442966,
+        "rsi": 27.011498449020365,
+        "macd": -18.353530150733604,
+        "macd_signal": 1.2127621512284636,
+        "momentum": -0.021835843028752966,
+        "price_to_ema21": -0.019476172260331565,
+        "price_to_ema50": -0.015860492544444823,
+        "ema_diff": 0.0036874980633787463,
+        "bb_position": -0.09829695559232508,
+        "volume_change": -0.8270928462709285
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 27.011498449020365,
+        "adx": 28.32380220442966,
+        "atr": 34.864941614166405
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:06:11.858657",
+      "result": "win",
+      "profit": 10.72,
+      "duration_minutes": 0.6695118999999999,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770221493.082166",
+      "timestamp_open": "2026-02-04T11:11:33.082166",
+      "features": {
+        "ema_21": 5012.375353668191,
+        "ema_50": 4993.612432140616,
+        "atr": 35.05994161416644,
+        "adx": 28.32380220442966,
+        "rsi": 28.352151728533755,
+        "macd": -17.813473170675934,
+        "macd_signal": 1.3207735472399977,
+        "momentum": -0.0204882709475801,
+        "price_to_ema21": -0.01824591081377437,
+        "price_to_ema50": -0.014557083299605365,
+        "ema_diff": 0.003757384415099987,
+        "bb_position": -0.0755015908946688,
+        "volume_change": -0.6366818873668189
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 28.352151728533755,
+        "adx": 28.32380220442966,
+        "atr": 35.05994161416644
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:11:43.279770",
+      "result": "win",
+      "profit": 14.7,
+      "duration_minutes": 0.16986881666666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770222396.153015",
+      "timestamp_open": "2026-02-04T11:26:36.153015",
+      "features": {
+        "ema_21": 5011.238990031828,
+        "ema_50": 4993.122236062185,
+        "atr": 36.674227328452176,
+        "adx": 28.32380220442966,
+        "rsi": 26.359505536062244,
+        "macd": -18.810624167827882,
+        "macd_signal": 1.1213433478096082,
+        "momentum": -0.022976402559789832,
+        "price_to_ema21": -0.02051767840974084,
+        "price_to_ema50": -0.016963781789765514,
+        "ema_diff": 0.003628341769563867,
+        "bb_position": -0.11675224424658703,
+        "volume_change": -0.16689497716894974
+      },
+      "signal": 1,
+      "confidence": 0.8922780454851532,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 26.359505536062244,
+        "adx": 28.32380220442966,
+        "atr": 36.674227328452176
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:27:37.946041",
+      "result": "win",
+      "profit": 16.18,
+      "duration_minutes": 1.029749,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770222848.663085",
+      "timestamp_open": "2026-02-04T11:34:08.663085",
+      "features": {
+        "ema_21": 5004.808420724162,
+        "ema_50": 4991.0931669443535,
+        "atr": 35.200353978385074,
+        "adx": 30.676898379918015,
+        "rsi": 29.94561665625234,
+        "macd": -21.85481604427605,
+        "macd_signal": -3.270694787873443,
+        "momentum": -0.02406344539563232,
+        "price_to_ema21": -0.015740546710629806,
+        "price_to_ema50": -0.013035855025761158,
+        "ema_diff": 0.0027479458549568786,
+        "bb_position": 0.0258084575640316,
+        "volume_change": -0.8802463134013936
+      },
+      "signal": 1,
+      "confidence": 0.8679,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 29.94561665625234,
+        "adx": 30.676898379918015,
+        "atr": 35.200353978385074
+      },
+      "strategy": "fibo",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 40,
+        "tp_pips": 100
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:34:30.248249",
+      "result": "win",
+      "profit": 5.36,
+      "duration_minutes": 0.3596049833333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770223300.844309",
+      "timestamp_open": "2026-02-04T11:41:40.844309",
+      "features": {
+        "ema_21": 5002.583875269616,
+        "ema_50": 4990.133559101216,
+        "atr": 36.47963969267077,
+        "adx": 30.676898379918015,
+        "rsi": 26.608166946936862,
+        "macd": -23.806838836298994,
+        "macd_signal": -3.6610993462780317,
+        "momentum": -0.028911399527289716,
+        "price_to_ema21": -0.02019433912323383,
+        "price_to_ema50": -0.017749737166788078,
+        "ema_diff": 0.00249498656116993,
+        "bb_position": -0.05624509029413262,
+        "volume_change": -0.6729055258467023
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 26.608166946936862,
+        "adx": 30.676898379918015,
+        "atr": 36.47963969267077
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:42:32.545551",
+      "result": "win",
+      "profit": 0.66,
+      "duration_minutes": 0.8615477666666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770224054.139973",
+      "timestamp_open": "2026-02-04T11:54:14.139973",
+      "features": {
+        "ema_21": 5002.652966178707,
+        "ema_50": 4990.163363022784,
+        "atr": 39.655353978385065,
+        "adx": 31.07544794148902,
+        "rsi": 26.692739873141434,
+        "macd": -23.746212055672004,
+        "macd_signal": -3.648973990152634,
+        "momentum": -0.028760829640078533,
+        "price_to_ema21": -0.020055951683441903,
+        "price_to_ema50": -0.017603304066898046,
+        "ema_diff": 0.0025028445458261093,
+        "bb_position": -0.05386604109347118,
+        "volume_change": -0.2721601037109058
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 26.692739873141434,
+        "adx": 31.07544794148902,
+        "atr": 39.655353978385065
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:54:56.148943",
+      "result": "win",
+      "profit": 3.18,
+      "duration_minutes": 0.6999352166666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770224204.699351",
+      "timestamp_open": "2026-02-04T11:56:44.699351",
+      "features": {
+        "ema_21": 5002.881147996889,
+        "ema_50": 4990.261794395334,
+        "atr": 39.655353978385065,
+        "adx": 31.07544794148902,
+        "rsi": 26.975913425465222,
+        "macd": -23.545984135444087,
+        "macd_signal": -3.6089284061070503,
+        "momentum": -0.028263552775736,
+        "price_to_ema21": -0.01959893611227361,
+        "price_to_ema50": -0.017119701914493544,
+        "ema_diff": 0.0025287959072063837,
+        "bb_position": -0.045932612630536246,
+        "volume_change": -0.19137903095122344
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 26.975913425465222,
+        "adx": 31.07544794148902,
+        "atr": 39.655353978385065
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T11:57:07.105435",
+      "result": "loss",
+      "profit": -4.5600000000000005,
+      "duration_minutes": 0.3731730333333333,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770225107.937755",
+      "timestamp_open": "2026-02-04T12:11:47.937755",
+      "features": {
+        "ema_21": 4994.730051886201,
+        "ema_50": 4987.239112569138,
+        "atr": 38.47140324504913,
+        "adx": 33.6305620732923,
+        "rsi": 29.81089158837132,
+        "macd": -27.309971300576763,
+        "macd_signal": -8.353220727316454,
+        "momentum": -0.026520742485690474,
+        "price_to_ema21": -0.016261149460025204,
+        "price_to_ema50": -0.01478355276435846,
+        "ema_diff": 0.0015020212883283912,
+        "bb_position": 0.05794431150947413,
+        "volume_change": -0.5696980493453283
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 29.81089158837132,
+        "adx": 33.6305620732923,
+        "atr": 38.47140324504913
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T12:12:30.788889",
+      "result": "win",
+      "profit": 8.96,
+      "duration_minutes": 0.7138763833333334,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770225348.596356",
+      "timestamp_open": "2026-02-04T12:15:48.596356",
+      "features": {
+        "ema_21": 4995.29096097711,
+        "ema_50": 4987.481073353452,
+        "atr": 39.02068895933488,
+        "adx": 33.6305620732923,
+        "rsi": 31.652421450725072,
+        "macd": -26.817777568383462,
+        "macd_signal": -8.254781980877794,
+        "momentum": -0.025298323681441914,
+        "price_to_ema21": -0.015136447820112598,
+        "price_to_ema50": -0.013594251758807043,
+        "ema_diff": 0.0015658981976661372,
+        "bb_position": 0.07894416263621448,
+        "volume_change": -0.4456221608622072
+      },
+      "signal": 1,
+      "confidence": 0.85,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 31.652421450725072,
+        "adx": 33.6305620732923,
+        "atr": 39.02068895933488
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T12:16:22.277284",
+      "result": "loss",
+      "profit": -0.34,
+      "duration_minutes": 0.5611674,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770226011.282977",
+      "timestamp_open": "2026-02-04T12:26:51.282977",
+      "features": {
+        "ema_21": 4993.145506431656,
+        "ema_50": 4986.555583157374,
+        "atr": 39.20854610219197,
+        "adx": 33.6305620732923,
+        "rsi": 25.94528758587876,
+        "macd": -28.700398651004434,
+        "macd_signal": -8.631306197401987,
+        "momentum": -0.02997402607694699,
+        "price_to_ema21": -0.019439751216267644,
+        "price_to_ema50": -0.01814390347176012,
+        "ema_diff": 0.0013215381167193643,
+        "bb_position": 0.0017307793999314987,
+        "volume_change": -0.10011579228645229
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 25.94528758587876,
+        "adx": 33.6305620732923,
+        "atr": 39.20854610219197
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T12:27:14.707413",
+      "result": "loss",
+      "profit": -2.9,
+      "duration_minutes": 0.3902442166666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770226914.693039",
+      "timestamp_open": "2026-02-04T12:41:54.693039",
+      "features": {
+        "ema_21": 4987.747319878222,
+        "ema_50": 4984.527800505547,
+        "atr": 38.43656195385783,
+        "adx": 35.777181813602645,
+        "rsi": 30.562100615969356,
+        "macd": -29.620428042517233,
+        "macd_signal": -12.554713698247618,
+        "momentum": -0.025157507181057803,
+        "price_to_ema21": -0.014741588769981382,
+        "price_to_ema50": -0.014105207818966507,
+        "ema_diff": 0.0006459025812531798,
+        "bb_position": 0.10752117418821325,
+        "volume_change": -0.6253211659431204
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 30.562100615969356,
+        "adx": 35.777181813602645,
+        "atr": 38.43656195385783
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T12:42:18.278165",
+      "result": "win",
+      "profit": 0.78,
+      "duration_minutes": 0.3928616,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770227818.13474",
+      "timestamp_open": "2026-02-04T12:56:58.134740",
+      "features": {
+        "ema_21": 4986.882774423677,
+        "ema_50": 4984.154859329076,
+        "atr": 39.07156195385785,
+        "adx": 35.777181813602645,
+        "rsi": 29.294506931205603,
+        "macd": -30.379060521149768,
+        "macd_signal": -12.706440193974124,
+        "momentum": -0.027044022661990352,
+        "price_to_ema21": -0.016477783445225134,
+        "price_to_ema50": -0.015939484540769357,
+        "ema_diff": 0.0005473174834234151,
+        "bb_position": 0.07580082901688484,
+        "volume_change": -0.1334278373349872
+      },
+      "signal": 1,
+      "confidence": 0.95,
+      "market_state": {
+        "trend": "uptrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 29.294506931205603,
+        "adx": 35.777181813602645,
+        "atr": 39.07156195385785
+      },
+      "strategy": "ml",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 70,
+        "tp_pips": 140
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T12:57:31.589367",
+      "result": "loss",
+      "profit": -1.72,
+      "duration_minutes": 0.557408,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770228270.123358",
+      "timestamp_open": "2026-02-04T13:04:30.123358",
+      "features": {
+        "ema_21": 4978.516571646416,
+        "ema_50": 4980.630260394018,
+        "atr": 38.25859705494247,
+        "adx": 38.041347784508524,
+        "rsi": 29.384222861731445,
+        "macd": -33.4052932319546,
+        "macd_signal": -16.93108112877106,
+        "momentum": -0.02930178021090002,
+        "price_to_ema21": -0.015590300951985872,
+        "price_to_ema50": -0.016008066494723194,
+        "ema_diff": -0.00042438178244416777,
+        "bb_position": 0.1133007531380754,
+        "volume_change": -0.8416126042632066
+      },
+      "signal": 1,
+      "confidence": 0.8,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 29.384222861731445,
+        "adx": 38.041347784508524,
+        "atr": 38.25859705494247
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T13:04:53.180797",
+      "result": "loss",
+      "profit": -14.28,
+      "duration_minutes": 0.3840988166666667,
+      "trailing_triggered": false,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770229540.84268",
+      "timestamp_open": "2026-02-04T13:25:40.842680",
+      "features": {
+        "ema_21": 4980.2592989191435,
+        "ema_50": 4981.3820250999,
+        "atr": 39.70145419779966,
+        "adx": 38.041347784508524,
+        "rsi": 34.999007505183,
+        "macd": -31.876062462723894,
+        "macd_signal": -16.625234974924915,
+        "momentum": -0.025504868445029083,
+        "price_to_ema21": -0.012085575329824,
+        "price_to_ema50": -0.012308235905410286,
+        "ema_diff": -0.00022538447665709825,
+        "bb_position": 0.17769263387556936,
+        "volume_change": -0.1397590361445783
+      },
+      "signal": 1,
+      "confidence": 0.7,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 34.999007505183,
+        "adx": 38.041347784508524,
+        "atr": 39.70145419779966
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T13:26:04.426231",
+      "result": "win",
+      "profit": 3.62,
+      "duration_minutes": 0.39286750000000004,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770230751.608888",
+      "timestamp_open": "2026-02-04T13:45:51.608888",
+      "features": {
+        "ema_21": 4975.142420677145,
+        "ema_50": 4979.1549686988155,
+        "atr": 39.51946644383683,
+        "adx": 40.143775543689614,
+        "rsi": 35.39406992064866,
+        "macd": -32.03035456202633,
+        "macd_signal": -19.622538700999453,
+        "momentum": -0.026899698454281307,
+        "price_to_ema21": -0.011483574910277452,
+        "price_to_ema50": -0.012280189928451677,
+        "ema_diff": -0.0008058692784006302,
+        "bb_position": 0.19673467607376519,
+        "volume_change": -0.5738869161431304
+      },
+      "signal": 1,
+      "confidence": 0.7,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 35.39406992064866,
+        "adx": 40.143775543689614,
+        "atr": 39.51946644383683
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T13:46:14.838082",
+      "result": "loss",
+      "profit": -8.7,
+      "duration_minutes": 0.38695219999999997,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770232172.729655",
+      "timestamp_open": "2026-02-04T14:09:32.729655",
+      "features": {
+        "ema_21": 4972.559308088567,
+        "ema_50": 4977.904549886402,
+        "atr": 38.82098690944354,
+        "adx": 41.538320483050356,
+        "rsi": 39.9615107319169,
+        "macd": -30.007714582527115,
+        "macd_signal": -21.579981318811093,
+        "momentum": -0.018695265972350494,
+        "price_to_ema21": -0.0069077724287156025,
+        "price_to_ema50": -0.007974148457167061,
+        "ema_diff": -0.0010737935499297965,
+        "bb_position": 0.29675491984569907,
+        "volume_change": -0.6584958932238193
+      },
+      "signal": 1,
+      "confidence": 0.65,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 39.9615107319169,
+        "adx": 41.538320483050356,
+        "atr": 38.82098690944354
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T14:10:46.921636",
+      "result": "loss",
+      "profit": -1.1,
+      "duration_minutes": 1.2363325666666667,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770234286.606873",
+      "timestamp_open": "2026-02-04T14:44:46.606873",
+      "features": {
+        "ema_21": 4969.376726457239,
+        "ema_50": 4976.319429449068,
+        "atr": 37.81984963338031,
+        "adx": 41.87813315605736,
+        "rsi": 40.966296621033024,
+        "macd": -28.67225922522539,
+        "macd_signal": -23.05332486459385,
+        "momentum": -0.008917110583402832,
+        "price_to_ema21": -0.00561775208319559,
+        "price_to_ema50": -0.0070050626659484685,
+        "ema_diff": -0.0013951481793437529,
+        "bb_position": 0.33155743092763396,
+        "volume_change": -0.5770664327998246
+      },
+      "signal": 1,
+      "confidence": 0.65,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 40.966296621033024,
+        "adx": 41.87813315605736,
+        "atr": 37.81984963338031
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T14:47:43.500963",
+      "result": "win",
+      "profit": 11.46,
+      "duration_minutes": 2.9480422166666664,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770237612.065314",
+      "timestamp_open": "2026-02-04T15:40:12.065314",
+      "features": {
+        "ema_21": 4963.662125439833,
+        "ema_50": 4973.220224729985,
+        "atr": 37.564701072411026,
+        "adx": 42.668418565585455,
+        "rsi": 44.600991316923,
+        "macd": -26.000764566705584,
+        "macd_signal": -24.511734237266356,
+        "momentum": 0.006203514308138258,
+        "price_to_ema21": -0.003016346612936915,
+        "price_to_ema50": -0.004932462996109716,
+        "ema_diff": -0.0019219135405712602,
+        "bb_position": 0.40448957657692247,
+        "volume_change": -0.6195272629599785
+      },
+      "signal": 1,
+      "confidence": 0.65,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 44.600991316923,
+        "adx": 42.668418565585455,
+        "atr": 37.564701072411026
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 30,
+        "tp_pips": 80
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T15:40:38.514834",
+      "result": "loss",
+      "profit": -3.7800000000000002,
+      "duration_minutes": 0.4403874,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
+    },
+    {
+      "id": "trade_1770239127.305852",
+      "timestamp_open": "2026-02-04T16:05:27.305852",
+      "features": {
+        "ema_21": 4961.052262747255,
+        "ema_50": 4971.69606434089,
+        "atr": 35.626614192046794,
+        "adx": 42.44310826411776,
+        "rsi": 43.56374631688461,
+        "macd": -24.725749744435234,
+        "macd_signal": -24.682808385270338,
+        "momentum": 0.004010689757409036,
+        "price_to_ema21": -0.0034190856795895553,
+        "price_to_ema50": -0.005552645210734507,
+        "ema_diff": -0.0021408793811788693,
+        "bb_position": 0.40237516001824314,
+        "volume_change": -0.8731679819616686
+      },
+      "signal": 1,
+      "confidence": 0.7,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 43.56374631688461,
+        "adx": 42.44310826411776,
+        "atr": 35.626614192046794
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T16:08:19.010623",
+      "result": "win",
+      "profit": 6.8,
+      "duration_minutes": 2.86151095,
+      "trailing_triggered": true,
+      "breakeven_triggered": true,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770240341.754969",
+      "timestamp_open": "2026-02-04T16:25:41.754969",
+      "features": {
+        "ema_21": 4961.904990019982,
+        "ema_50": 4972.063907478146,
+        "atr": 36.47447133490393,
+        "adx": 42.0204833499808,
+        "rsi": 46.006353731751396,
+        "macd": -23.977487636173464,
+        "macd_signal": -24.533155963617986,
+        "momentum": 0.005915513551054685,
+        "price_to_ema21": -0.0016999499258746134,
+        "price_to_ema50": -0.0037396758819168777,
+        "ema_diff": -0.0020431992925281444,
+        "bb_position": 0.442604220797889,
+        "volume_change": -0.6574971815107102
+      },
+      "signal": 1,
+      "confidence": 0.78,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 46.006353731751396,
+        "adx": 42.0204833499808,
+        "atr": 36.47447133490393
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 95
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T16:31:07.732517",
+      "result": "win",
+      "profit": 6.52,
+      "duration_minutes": 5.432596983333334,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770241556.790985",
+      "timestamp_open": "2026-02-04T16:45:56.790985",
+      "features": {
+        "ema_21": 4962.1737927548675,
+        "ema_50": 4971.803700398579,
+        "atr": 35.18313580795501,
+        "adx": 41.1019734740126,
+        "rsi": 47.574239978838605,
+        "macd": -20.642085553855395,
+        "macd_signal": -23.685006434366613,
+        "momentum": 0.011289608951760677,
+        "price_to_ema21": -0.0004622556263983453,
+        "price_to_ema50": -0.0023982645166829818,
+        "ema_diff": -0.0019369042351651362,
+        "bb_position": 0.48977394779120026,
+        "volume_change": -0.42890510948905114
+      },
+      "signal": 1,
+      "confidence": 0.7,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 47.574239978838605,
+        "adx": 41.1019734740126,
+        "atr": 35.18313580795501
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T16:54:27.671939",
+      "result": "win",
+      "profit": 14.76,
+      "duration_minutes": 8.5143042,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": true
+    },
+    {
+      "id": "trade_1770246073.160595",
+      "timestamp_open": "2026-02-04T18:01:13.160595",
+      "features": {
+        "ema_21": 4964.614439447752,
+        "ema_50": 4972.473419358591,
+        "atr": 34.11215048183441,
+        "adx": 39.52692065749608,
+        "rsi": 53.42773059047395,
+        "macd": -15.866686961399864,
+        "macd_signal": -22.05687439504281,
+        "momentum": 0.013594084895416136,
+        "price_to_ema21": 0.003991359408456326,
+        "price_to_ema50": 0.0024045539579679942,
+        "ema_diff": -0.00158049711844459,
+        "bb_position": 0.6312202245450508,
+        "volume_change": -0.9896062992125985
+      },
+      "signal": 1,
+      "confidence": 0.7,
+      "market_state": {
+        "trend": "downtrend",
+        "volatility": "normal",
+        "strength": "strong",
+        "rsi": 53.42773059047395,
+        "adx": 39.52692065749608,
+        "atr": 34.11215048183441
+      },
+      "strategy": "price_action",
+      "status": "closed",
+      "trailing_params": {
+        "enabled": true,
+        "activation_pips": 30,
+        "distance_pips": 20,
+        "mode": "manual"
+      },
+      "breakeven_params": {
+        "enabled": true,
+        "activation_pips": 40,
+        "safety_pips": 5,
+        "mode": "manual"
+      },
+      "lot_params": {
+        "lot_size": 0.02,
+        "sl_pips": 35,
+        "tp_pips": 90
+      },
+      "htf_bias": {
+        "status": "approved",
+        "analysis": {
+          "approved": true,
+          "direction": "buy",
+          "active_timeframes": [
+            "D1"
+          ],
+          "aligned_timeframes": [
+            "D1"
+          ],
+          "timeframes_detail": {
+            "D1": {
+              "bias": "bullish",
+              "strength": 0.2940724945860993,
+              "cached": true
+            }
+          },
+          "bias_summary": [
+            "bullish"
+          ]
+        },
+        "enabled": true
+      },
+      "timestamp_close": "2026-02-04T18:01:37.419625",
+      "result": "loss",
+      "profit": -32.3,
+      "duration_minutes": 0.40388455,
+      "trailing_triggered": true,
+      "breakeven_triggered": false,
+      "correct_prediction": false
     }
   ],
   "metadata": {
-    "created": "2026-01-29T10:53:25.156316"
+    "created": "2026-02-04T06:50:35.832854"
   }
 }
