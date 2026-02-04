@@ -30,6 +30,16 @@ class BotLogger:
             message: Mensaje a loggear
             level: Nivel (INFO, WARNING, ERROR, DEBUG)
         """
+        # 🆕 FILTRO: No loggear mensajes de MTF detallados
+        if any(filter_text in message for filter_text in [
+            "TIMEFRAMES SUPERIORES",
+            "TIMEFRAMES INFERIORES",
+            "ANÁLISIS MULTI-TIMEFRAME",
+            "Votos:",
+            "Req:"
+        ]):
+            return
+        
         timestamp = datetime.now().strftime("%H:%M:%S")
         formatted_message = f"[{timestamp}] {message}"
         
