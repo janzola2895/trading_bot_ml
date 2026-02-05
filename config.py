@@ -405,7 +405,8 @@ GB_LEARNING_RATE = 0.1
 # Neural Network
 NN_HIDDEN_LAYERS = (100, 50, 25)
 NN_ACTIVATION = 'relu'
-NN_MAX_ITER = 500
+NN_MAX_ITER = 2000
+NN_LEARNING_RATE_INIT = 0.001
 
 # ============================================================================
 # CONFIGURACIÓN DE INDICADORES TÉCNICOS

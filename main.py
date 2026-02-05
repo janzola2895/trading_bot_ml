@@ -23,6 +23,9 @@ from core.ml_validator import MLSignalValidator
 from core.correlation_manager import CorrelationManager
 from core.equity_monitor import EquityMonitor
 from core.news_filter import EconomicNewsFilter
+from core.market_regime_detector import MarketRegimeDetector, RegimeAdaptiveTrading
+from core.volatility_features import VolatilityFeatures
+
 
 from strategies.ml_strategy import MLEnsemble, IncrementalLearningSystem
 from strategies.support_resistance import SupportResistanceSystem
@@ -104,25 +107,40 @@ class MLTradingBot:
             logger=self.logger
         )
         
-        self.ml_validator = MLSignalValidator(
+        from core.calibrated_ml_validator import CalibratedMLValidator
+        self.ml_validator = CalibratedMLValidator(
             ml_ensemble=self.ensemble,
-            logger=self.logger,
-            enabled=True
-        )
+            data_dir=DATA_DIR,
+            logger=self.logger
+)
         
         self.correlation_manager = CorrelationManager(
             logger=self.logger
         )
         
-        #self.equity_monitor = EquityMonitor(
-        #    memory=self.memory,
-        #    logger=self.logger
-        #)
-        
         self.news_filter = EconomicNewsFilter(
             data_dir=DATA_DIR,
             logger=self.logger
         )
+
+        self.regime_detector = MarketRegimeDetector(data_dir=DATA_DIR)
+        self.regime_adaptive = RegimeAdaptiveTrading()
+        self.vol_calculator = VolatilityFeatures(window=14)
+
+        self.logger.info("🎯 Calibrando probabilidades ML...")
+        from core.calibrated_ml_validator import prepare_calibration_data_from_memory
+        predictions_df, outcomes = prepare_calibration_data_from_memory(self.memory)
+
+        if predictions_df is not None and outcomes is not None:
+            calibrated = self.ml_validator.calibrate_probabilities(
+                predictions_df, 
+                outcomes, 
+                verbose=True
+            )
+            if calibrated:
+                self.logger.success("✅ ML Validator calibrado")
+        else:
+            self.logger.warning("⚠️ Datos insuficientes para calibración ML")
         
         # Control de estrategias
         self.strategies_enabled = {
@@ -440,7 +458,7 @@ class MLTradingBot:
         df['macd'] = macd.macd()
         df['macd_signal'] = macd.macd_signal()
         df['momentum'] = df['close'].pct_change(periods=10)
-        
+        df = self.vol_calculator.calculate_all_features(df)
         return df
     
     def create_features(self, df):
@@ -1054,6 +1072,11 @@ class MLTradingBot:
                 for name, metrics in results.items():
                     if "error" not in metrics:
                         self.logger.success(f"✅ {name}: {metrics['test_accuracy']:.2%}")
+
+        self.logger.info("🎯 Entrenando detector de régimen de mercado...")
+        regime_trained = self.regime_detector.train(historical_data, verbose=True)
+        if regime_trained:
+            self.logger.success("✅ Detector de régimen entrenado")
         
         self.logger.info(f"🎯 {self.symbol} | TF: M30+MTF | Lote: {self.lot_size} | Max: {self.max_total_positions}")
         self.logger.info(f"🎖️ v6.0.1: COOLDOWN GLOBAL + MEJORAS AVANZADAS ACTIVAS")
@@ -1214,6 +1237,25 @@ class MLTradingBot:
                     df = self.create_features(df)
                     features = self.prepare_features_for_prediction(df)
                     market_state = self.get_market_state(df)
+
+                    regime_info = self.regime_detector.predict_current_regime(df)
+                    market_state['regime'] = regime_info['regime_name']
+                    market_state['regime_confidence'] = regime_info['confidence']
+
+                    # Adaptar parámetros según régimen
+                    base_params = {
+                        'sl_pips': 70,
+                        'tp_pips': 140,
+                        'lot_size': self.lot_size,
+                        'confidence_threshold': 0.70
+                    }
+                    adapted_params = self.regime_adaptive.get_adapted_parameters(
+                        regime_info['regime_name'], 
+                        base_params
+                    )
+
+                    self.logger.info(f"🎯 Régimen: {regime_info['regime_name']} "
+                                    f"(conf: {regime_info['confidence']:.1%})")
                     
                     # Guardar market_state para trailing dinámico
                     self.market_state = market_state

@@ -1,11 +1,13 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════╗
-║                    ESTRATEGIA ML + ENSEMBLE v6.0 - MTF                   ║
+║                    ESTRATEGIA ML + ENSEMBLE v6.1 - MTF + VOLATILITY      ║
 ║                                                                          ║
-║  🆕 v6.0: Sistema ML con análisis multi-timeframe                       ║
+║  🆕 v6.1: Sistema ML con volatilidad avanzada y regímenes de mercado    ║
 ║  - Predice en M30, H1, H4 y genera consenso                             ║
 ║  - Mayor confianza cuando TFs coinciden                                 ║
 ║  - Rotación automática cíclica de modelos                               ║
+║  - Features de volatilidad avanzadas (Parkinson, Garman-Klass)          ║
+║  - Detección de regímenes de mercado con HMM                            ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 """
 
@@ -30,15 +32,21 @@ from config import (
     NN_HIDDEN_LAYERS, NN_ACTIVATION, NN_MAX_ITER
 )
 
+# 🆕 v6.1: Importar calculadores de volatilidad y régimen
+from core.volatility_features import VolatilityFeatures
+from core.market_regime_detector import MarketRegimeDetector
+
 
 class MLEnsemble:
     """
-    Sistema ML con Multi-Timeframe
+    Sistema ML con Multi-Timeframe + Volatilidad Avanzada
     
-    🆕 v6.0: Análisis MTF integrado
+    🆕 v6.1: Features de volatilidad y detección de regímenes
     - Predice en M30, H1, H4
     - Consenso entre timeframes
     - Boost de confianza por alineación
+    - Volatilidad Parkinson y Garman-Klass
+    - Detección de regímenes de mercado
     """
     
     def __init__(self, data_dir=DATA_DIR, logger=None):
@@ -82,6 +90,9 @@ class MLEnsemble:
                     hidden_layer_sizes=NN_HIDDEN_LAYERS,
                     activation=NN_ACTIVATION,
                     max_iter=NN_MAX_ITER,
+                    learning_rate_init=0.001,  # AGREGAR ESTO
+                    early_stopping=True,        # AGREGAR ESTO
+                    n_iter_no_change=50,        # AGREGAR ESTO
                     random_state=42
                 ),
                 "performance": {"accuracy": 0, "trades": 0, "profit": 0},
@@ -115,6 +126,10 @@ class MLEnsemble:
             "last_rotation_time": None,
             "rotation_history": []
         }
+        
+        # 🆕 v6.1: Inicializar calculadores de volatilidad y régimen
+        self.vol_features_calculator = VolatilityFeatures(window=14)
+        self.regime_detector = MarketRegimeDetector(data_dir=data_dir)
         
         self.load_models()
     
@@ -166,9 +181,16 @@ class MLEnsemble:
         return df
     
     def prepare_features_from_df(self, df):
-        """Prepara features desde un dataframe"""
+        """
+        Prepara features desde un dataframe
+        
+        🆕 v6.1: Calcula features de volatilidad avanzadas primero
+        """
         if len(df) == 0:
             return None
+        
+        # 🆕 v6.1: Calcular features de volatilidad PRIMERO
+        df = self.vol_features_calculator.calculate_all_features(df)
         
         last_row = df.iloc[-1]
         
@@ -185,7 +207,13 @@ class MLEnsemble:
             'price_to_ema50': float(last_row['price_to_ema50']),
             'ema_diff': float(last_row['ema_diff']),
             'bb_position': float(last_row['bb_position']),
-            'volume_change': float(last_row['volume_change'])
+            'volume_change': float(last_row['volume_change']),
+            # 🆕 v6.1: Agregar 5 features de volatilidad
+            'parkinson_vol': float(last_row.get('parkinson_vol', 0.0)),
+            'garman_klass_vol': float(last_row.get('garman_klass_vol', 0.0)),
+            'volatility_regime': float(last_row.get('volatility_regime', 1)),
+            'vol_ratio_gk_park': float(last_row.get('vol_ratio_gk_park', 1.0)),
+            'parkinson_vol_change': float(last_row.get('parkinson_vol_change', 0.0))
         }
         
         return features
@@ -221,7 +249,7 @@ class MLEnsemble:
         if len(df) == 0:
             return None
         
-        # Preparar features
+        # Preparar features (ahora incluye volatilidad)
         features = self.prepare_features_from_df(df)
         
         if features is None:
@@ -584,9 +612,15 @@ class IncrementalLearningSystem:
                 if strategy in self.learning_stats["operations_per_strategy"]:
                     self.learning_stats["operations_per_strategy"][strategy] += 1
             
-            feature_columns = ['ema_21', 'ema_50', 'atr', 'adx', 'rsi', 'macd',
-                             'macd_signal', 'momentum', 'price_to_ema21',
-                             'price_to_ema50', 'ema_diff', 'bb_position', 'volume_change']
+            # 🆕 v6.1: Lista de features actualizada con volatilidad
+            feature_columns = [
+                'ema_21', 'ema_50', 'atr', 'adx', 'rsi', 'macd',
+                'macd_signal', 'momentum', 'price_to_ema21',
+                'price_to_ema50', 'ema_diff', 'bb_position', 'volume_change',
+                # 🆕 v6.1: Features de volatilidad
+                'parkinson_vol', 'garman_klass_vol', 'volatility_regime',
+                'vol_ratio_gk_park', 'parkinson_vol_change'
+            ]
             
             X = current_market_df[feature_columns]
             y = current_market_df['target']
