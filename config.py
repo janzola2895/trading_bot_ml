@@ -3,6 +3,7 @@
 ║                    CONFIGURACIÓN GLOBAL DEL BOT v6.0                     ║
 ║                                                                          ║
 ║  🆕 v6.0: SL/TP Dinámico + Validación ML + Correlación + Equity         ║
+║  🆕 MTF SIMPLIFICADO: W1 (dirección) + H1/H4 (confirmación)             ║
 ║  Configuraciones centralizadas para el bot de trading                   ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 """
@@ -130,7 +131,7 @@ CORRELATION_COOLDOWN_MINUTES = 30  # Esperar 30 min antes de otra operación sim
 # ============================================================================
 
 # Activar monitoreo de equity
-USE_EQUITY_MONITORING = False
+USE_EQUITY_MONITORING = True
 
 # Umbrales de drawdown
 DRAWDOWN_WARNING_THRESHOLD = 50.0   # Advertencia al 15%
@@ -252,43 +253,36 @@ LIQ_MIN_WICK_SIZE_PIPS = 1000
 LIQ_MIN_DISTANCE_FROM_SWEEP_PIPS = 100
 
 # ============================================================================
-# CONFIGURACIÓN MULTI-TIMEFRAME (MTF)
+# 🆕 CONFIGURACIÓN MULTI-TIMEFRAME (MTF) SIMPLIFICADO
 # ============================================================================
 
 MTF_ENABLED_DEFAULT = True
 
-# Timeframes y sus configuraciones
+# 🆕 SISTEMA SIMPLIFICADO: Solo 3 timeframes
+# - W1: Define la DIRECCIÓN PRINCIPAL del mercado
+# - H1 y H4: Proveen CONFIRMACIÓN de la dirección
 MTF_TIMEFRAMES = {
-    'M30': {
-        'tf': mt5.TIMEFRAME_M30,
-        'priority': 'lower',
-        'update_interval': 60,
-    },
     'H1': {
         'tf': mt5.TIMEFRAME_H1,
-        'priority': 'lower',
+        'priority': 'confirmation',  # Timeframe de confirmación
         'update_interval': 60,
     },
     'H4': {
         'tf': mt5.TIMEFRAME_H4,
-        'priority': 'higher',
-        'update_interval': 300,
-    },
-    'D1': {
-        'tf': mt5.TIMEFRAME_D1,
-        'priority': 'higher',
+        'priority': 'confirmation',  # Timeframe de confirmación
         'update_interval': 300,
     },
     'W1': {
         'tf': mt5.TIMEFRAME_W1,
-        'priority': 'higher',
+        'priority': 'master',  # Timeframe MAESTRO (define dirección)
         'update_interval': 300,
     }
 }
 
-# Requisitos de aprobación MTF
-MTF_REQUIRED_HIGHER_TF = 2
-MTF_REQUIRED_LOWER_TF = 1
+# 🆕 NUEVA LÓGICA MTF SIMPLIFICADA
+# Regla: W1 define dirección + necesita 1 de 2 confirmaciones (H1 o H4)
+MTF_REQUIRES_W1_DIRECTION = True  # W1 es obligatorio para definir dirección
+MTF_REQUIRES_CONFIRMATION = True  # Necesita al menos 1 confirmación (H1 o H4)
 
 # ============================================================================
 # CONFIGURACIÓN DE TRAILING STOP Y BREAKEVEN
@@ -491,44 +485,6 @@ STRATEGY_RISK_PROFILES = {
         'zone_buffer_pips': 10,
         'risk_reward': 2.4,
         'description': 'Liquidez usa zona + buffer'
-    }
-}
-
-# ============================================================================
-# 🆕 v6.0 - AJUSTES DINÁMICOS POR VOLATILIDAD
-# ============================================================================
-
-VOLATILITY_ADJUSTMENTS = {
-    'low': {
-        'sl_multiplier': 1.5,  # Menos espacio en baja volatilidad
-        'tp_multiplier': 3.0
-    },
-    'normal': {
-        'sl_multiplier': 2.0,
-        'tp_multiplier': 4.0
-    },
-    'high': {
-        'sl_multiplier': 2.5,  # Más espacio en alta volatilidad
-        'tp_multiplier': 5.0
-    }
-}
-
-# ============================================================================
-# 🆕 v6.0 - AJUSTES POR TENDENCIA
-# ============================================================================
-
-TREND_ADJUSTMENTS = {
-    'uptrend': {
-        'buy_tp_bonus': 1.2,    # TP más amplio en BUY con tendencia alcista
-        'sell_sl_tighter': 0.9  # SL más ajustado en SELL contra tendencia
-    },
-    'downtrend': {
-        'sell_tp_bonus': 1.2,   # TP más amplio en SELL con tendencia bajista
-        'buy_sl_tighter': 0.9   # SL más ajustado en BUY contra tendencia
-    },
-    'sideways': {
-        'tp_reduction': 0.85,   # TP más conservador en rango
-        'sl_reduction': 0.95
     }
 }
 

@@ -1,21 +1,22 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════╗
-║         ESTRATEGIA LIQUIDITY SYSTEM v5.3 BALANCED - SMC BALANCEADA      ║
+║         ESTRATEGIA LIQUIDITY SYSTEM v6.1 OPTIMIZADO - SMC BALANCED      ║
 ║                                                                          ║
-║  🆕 v5.3 BALANCED: Versión equilibrada entre calidad y frecuencia       ║
+║  🔧 v6.1 OPTIMIZADO: Balance entre operatividad y calidad               ║
 ║                                                                          ║
-║  DIFERENCIAS vs v5.3 STRICT:                                            ║
-║  ✅ FVG gap mínimo: 50 → 30 pips (más señales)                          ║
-║  ✅ OB impulso mínimo: 800 → 600 pips (más señales)                     ║
-║  ✅ OB reacciones: 2 → 1 (menos restrictivo)                            ║
-║  ✅ Sweep wick mínimo: 1000 → 700 pips (más señales)                    ║
-║  ✅ Opera en TODAS las sesiones (no bloquea Asia para OB/FVG)           ║
-║  ✅ Confianza ajustada según sesión (no bloquea señales)                ║
+║  CAMBIOS PRINCIPALES:                                                   ║
+║  ✅ FVG gap mínimo: 40 → 25 pips (-37%)                                 ║
+║  ✅ OB impulso mínimo: 700 → 500 pips (-29%)                            ║
+║  ✅ OB reacciones: 2 → 1 (-50%)                                         ║
+║  ✅ Sweep wick mínimo: 800 → 600 pips (-25%)                            ║
+║  ✅ Cooldown interno: 15 → 10 min (-33%)                                ║
+║  ✅ Acepta FVG recientes (<15 velas, gap >35 pips)                      ║
+║  ✅ Acepta OB con 1 reacción + impulso fuerte                           ║
 ║                                                                          ║
 ║  📊 EXPECTATIVAS AJUSTADAS:                                             ║
-║  • Win Rate esperado: 55-70% (vs 60-80% strict)                         ║
-║  • Trades por día: 3-8 (vs 1-3 strict)                                  ║
-║  • Risk/Reward: 1.8-2.2 (vs 2.0-2.5 strict)                             ║
+║  • Win Rate esperado: 60-72% (antes 65-80%)                             ║
+║  • Trades por semana: 4-8 (antes 0-2)                                   ║
+║  • Incremento operatividad: +300%                                       ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 """
 
@@ -29,13 +30,13 @@ from config import (
 
 class LiquiditySystem:
     """
-    Sistema Balanceado de Liquidez - v5.4 OPTIMIZADO
+    Sistema Optimizado de Liquidez - v6.1 BALANCED
     
-    🔧 CAMBIOS:
-    - Cache más inteligente (respeta edad de zonas)
-    - Accepta posiciones estratégicas en zonas (no TODO)
-    - Confianza más realista según contexto
-    - Cooldown interno entre señales
+    🔧 OPTIMIZACIONES:
+    - Parámetros más permisivos pero manteniendo calidad
+    - Cooldown reducido (15 → 10 min)
+    - Acepta FVG recientes sin confluencia
+    - Acepta OB con 1 reacción si es fuerte
     - Prioriza confluencia (máxima calidad)
     """
     
@@ -47,20 +48,20 @@ class LiquiditySystem:
         self.sweep_tolerance_pips = LIQ_SWEEP_TOLERANCE_PIPS
         
         # 🔧 PARÁMETROS OPTIMIZADOS (BALANCED)
-        self.min_wick_size_pips = 800  # Aumentado de 700 (más selectivo)
-        self.min_distance_from_sweep_pips = 100  # Aumentado de 80
+        self.min_wick_size_pips = 600  # Antes: 800 (-25%)
+        self.min_distance_from_sweep_pips = 80  # Antes: 100 (-20%)
         
-        # FVG más restrictivo
-        self.fvg_min_gap_pips = 40  # Aumentado de 30
-        self.fvg_max_age_bars = 20  # Reducido de 25
+        # FVG más permisivo
+        self.fvg_min_gap_pips = 25  # Antes: 40 (-37%)
+        self.fvg_max_age_bars = 25  # Antes: 20 (+25% edad permitida)
         
-        # Order Blocks más selectivo
-        self.ob_min_impulse_pips = 700  # Aumentado de 600
-        self.ob_min_reaction_touches = 2  # Aumentado de 1 (necesita confirmación)
+        # Order Blocks más permisivo
+        self.ob_min_impulse_pips = 500  # Antes: 700 (-29%)
+        self.ob_min_reaction_touches = 1  # Antes: 2 (-50%)
         
-        # 🔧 NUEVO: Cooldown interno
+        # 🔧 Cooldown reducido
         self.last_signal_time = None
-        self.min_signal_interval_minutes = 15  # Mínimo 15 min entre señales
+        self.min_signal_interval_minutes = 10  # Antes: 15 (-33%)
         
         self.cached_order_blocks = []
         self.cached_fvgs = []
@@ -76,7 +77,7 @@ class LiquiditySystem:
     
     def get_trading_session(self):
         """
-        Identifica sesión actual (solo para ajustar confianza, no bloquear)
+        Identifica sesión actual (para ajustar confianza, no bloquear)
         """
         now_utc = datetime.utcnow()
         current_time = now_utc.time()
@@ -93,17 +94,17 @@ class LiquiditySystem:
         if london_ny_start <= current_time <= london_ny_end:
             return 'london_ny_overlap', 1.0
         elif london_start <= current_time <= london_end:
-            return 'london_only', 0.9  # Aumentado de 0.8
+            return 'london_only', 0.9
         elif ny_start <= current_time <= ny_end:
-            return 'ny_only', 0.9  # Aumentado de 0.8
+            return 'ny_only', 0.9
         elif asian_start <= current_time <= asian_end:
-            return 'asian', 0.6  # Aumentado de 0.3 (más permisivo)
+            return 'asian', 0.7  # Mejorado de 0.6
         else:
-            return 'off_hours', 0.5  # Aumentado de 0.1
+            return 'off_hours', 0.6  # Mejorado de 0.5
     
     def detect_fair_value_gap(self, df):
         """
-        🆕 BALANCEADO: FVG con gap mínimo de 30 pips
+        🔧 OPTIMIZADO: FVG con gap mínimo de 25 pips
         """
         if len(df) < 10:
             return []
@@ -120,12 +121,12 @@ class LiquiditySystem:
             if candle_3['low'] > candle_1['high']:
                 gap_size_pips = (candle_3['low'] - candle_1['high']) / 0.01
                 
-                # 🆕 Gap mínimo reducido a 30 pips
+                # 🔧 Gap mínimo reducido a 25 pips
                 if gap_size_pips >= self.fvg_min_gap_pips:
                     impulse_pips = (candle_2['close'] - candle_2['open']) / 0.01
                     
-                    # 🆕 Impulso mínimo reducido a 20 pips
-                    if impulse_pips > 20:
+                    # 🔧 Impulso mínimo reducido a 15 pips
+                    if impulse_pips > 15:
                         fvgs.append({
                             'type': 'bullish_fvg',
                             'gap_high': float(candle_3['low']),
@@ -145,7 +146,7 @@ class LiquiditySystem:
                 if gap_size_pips >= self.fvg_min_gap_pips:
                     impulse_pips = abs((candle_2['close'] - candle_2['open']) / 0.01)
                     
-                    if impulse_pips > 20:
+                    if impulse_pips > 15:
                         fvgs.append({
                             'type': 'bearish_fvg',
                             'gap_high': float(candle_1['low']),
@@ -162,7 +163,7 @@ class LiquiditySystem:
     
     def check_fvg_interaction(self, fvgs, current_price):
         """
-        🆕 BALANCEADO: Acepta todo el rango del gap (no solo 50%)
+        Verifica interacción con FVG (acepta todo el rango)
         """
         for fvg in fvgs:
             if fvg['filled']:
@@ -170,14 +171,13 @@ class LiquiditySystem:
             
             gap_range = fvg['gap_high'] - fvg['gap_low']
             
-            # 🆕 Acepta TODO el gap (antes solo 50%)
+            # Acepta TODO el gap
             if fvg['gap_low'] <= current_price <= fvg['gap_high']:
                 position_in_gap = (current_price - fvg['gap_low']) / gap_range if gap_range > 0 else 0.5
                 
                 if fvg['type'] == 'bullish_fvg':
-                    # 🆕 Acepta todo el gap (antes < 0.5)
                     confidence = 0.65 + (fvg['gap_size_pips'] / 1000) * 0.08
-                    confidence = min(confidence, 0.80)
+                    confidence = min(confidence, 0.78)
                     
                     return {
                         'signal': 1,
@@ -187,9 +187,8 @@ class LiquiditySystem:
                     }
                 
                 elif fvg['type'] == 'bearish_fvg':
-                    # 🆕 Acepta todo el gap (antes > 0.5)
                     confidence = 0.65 + (fvg['gap_size_pips'] / 1000) * 0.08
-                    confidence = min(confidence, 0.80)
+                    confidence = min(confidence, 0.78)
                     
                     return {
                         'signal': -1,
@@ -202,7 +201,7 @@ class LiquiditySystem:
     
     def detect_liquidity_sweep_enhanced(self, df, current_price):
         """
-        🆕 BALANCEADO: Sweep con mecha mínima de 700 pips
+        🔧 OPTIMIZADO: Sweep con mecha mínima de 600 pips
         """
         if len(df) < self.lookback_bars:
             return None
@@ -226,18 +225,18 @@ class LiquiditySystem:
             
             lower_wick_size_pips = (min(candle_open, candle_close) - candle_low) / 0.1
             
-            # 🆕 Mecha mínima reducida a 700 pips
+            # 🔧 Mecha mínima reducida a 600 pips
             if lower_wick_size_pips >= self.min_wick_size_pips:
                 
                 distance_from_sweep = (current_price - candle_low) / 0.1
                 
-                # 🆕 Distancia mínima reducida a 80 pips
+                # 🔧 Distancia mínima reducida a 80 pips
                 if distance_from_sweep >= self.min_distance_from_sweep_pips:
                     
-                    base_confidence = 0.68 + (lower_wick_size_pips - 700) * 0.00008
-                    base_confidence = min(base_confidence, 0.82)
+                    base_confidence = 0.68 + (lower_wick_size_pips - 600) * 0.00008
+                    base_confidence = min(base_confidence, 0.80)
                     
-                    # 🆕 Ajuste de sesión menos agresivo
+                    # Ajuste de sesión
                     session_confidence = base_confidence * (0.85 + session_priority * 0.15)
                     
                     return {
@@ -262,8 +261,8 @@ class LiquiditySystem:
                 
                 if distance_from_sweep >= self.min_distance_from_sweep_pips:
                     
-                    base_confidence = 0.68 + (upper_wick_size_pips - 700) * 0.00008
-                    base_confidence = min(base_confidence, 0.82)
+                    base_confidence = 0.68 + (upper_wick_size_pips - 600) * 0.00008
+                    base_confidence = min(base_confidence, 0.80)
                     
                     session_confidence = base_confidence * (0.85 + session_priority * 0.15)
                     
@@ -282,7 +281,7 @@ class LiquiditySystem:
     
     def find_order_blocks_enhanced(self, df):
         """
-        🆕 BALANCEADO: OB con impulso mínimo de 600 pips y solo 1 reacción
+        🔧 OPTIMIZADO: OB con impulso mínimo de 500 pips y solo 1 reacción
         """
         if len(df) < 50:
             return []
@@ -302,7 +301,7 @@ class LiquiditySystem:
                 total_move = next_candles.iloc[-1]['close'] - current['low']
                 move_pips = total_move / 0.01
                 
-                # 🆕 Impulso mínimo reducido a 600 pips
+                # 🔧 Impulso mínimo reducido a 500 pips
                 if bullish_impulse >= 2 and move_pips > self.ob_min_impulse_pips:
                     
                     ob_zone_high = current['high']
@@ -316,7 +315,7 @@ class LiquiditySystem:
                         if ob_zone_low <= future['low'] <= ob_zone_high:
                             reaction_count += 1
                     
-                    # 🆕 Solo requiere 1 reacción (antes 2)
+                    # 🔧 Solo requiere 1 reacción
                     if reaction_count >= self.ob_min_reaction_touches:
                         order_blocks.append({
                             'type': 'bullish_ob',
@@ -364,23 +363,22 @@ class LiquiditySystem:
                             'age_bars': len(recent) - i
                         })
         
+        # 🔧 Ordenar y tomar top 10 (antes 8)
         order_blocks.sort(key=lambda x: (x['reaction_count'], x['strength'], -x['age_bars']), reverse=True)
-        
-        return order_blocks[:8]  # 🆕 Aumentado de 5 a 8
+        return order_blocks[:10]
     
     def check_order_block_touch_enhanced(self, order_blocks, current_price):
         """
-        🆕 BALANCEADO: Acepta todo el rango del OB
+        Verifica toque en Order Block (acepta todo el rango)
         """
         for ob in order_blocks:
             zone_range = ob['zone_high'] - ob['zone_low']
             
-            # 🆕 Acepta TODO el rango del OB
+            # Acepta TODO el rango del OB
             if ob['zone_low'] <= current_price <= ob['zone_high']:
                 position = (current_price - ob['zone_low']) / zone_range if zone_range > 0 else 0.5
                 
                 if ob['type'] == 'bullish_ob':
-                    # 🆕 Todo el OB es válido (antes < 0.6)
                     base_confidence = 0.62
                     
                     strength_bonus = min((ob['strength'] / 2000) * 0.08, 0.08)
@@ -388,7 +386,7 @@ class LiquiditySystem:
                     age_bonus = max(0, (20 - ob['age_bars']) / 20 * 0.04)
                     
                     confidence = base_confidence + strength_bonus + reaction_bonus + age_bonus
-                    confidence = min(confidence, 0.82)
+                    confidence = min(confidence, 0.80)
                     
                     return {
                         'signal': 1,
@@ -398,14 +396,13 @@ class LiquiditySystem:
                     }
                 
                 elif ob['type'] == 'bearish_ob':
-                    # 🆕 Todo el OB es válido (antes > 0.4)
                     base_confidence = 0.62
                     strength_bonus = min((ob['strength'] / 2000) * 0.08, 0.08)
                     reaction_bonus = min((ob['reaction_count'] / 5) * 0.06, 0.06)
                     age_bonus = max(0, (20 - ob['age_bars']) / 20 * 0.04)
                     
                     confidence = base_confidence + strength_bonus + reaction_bonus + age_bonus
-                    confidence = min(confidence, 0.82)
+                    confidence = min(confidence, 0.80)
                     
                     return {
                         'signal': -1,
@@ -425,11 +422,11 @@ class LiquiditySystem:
         
         if fvg_signal:
             confluence_factors.append('FVG')
-            base_confidence += 0.04  # Reducido de 0.05
+            base_confidence += 0.04
         
         if ob_signal:
             confluence_factors.append('OB')
-            base_confidence += 0.04  # Reducido de 0.05
+            base_confidence += 0.04
         
         if sweep_data:
             confluence_factors.append('SWEEP')
@@ -438,12 +435,12 @@ class LiquiditySystem:
         session, session_priority = self.get_trading_session()
         if session == 'london_ny_overlap':
             confluence_factors.append('LONDON_NY')
-            base_confidence += 0.05  # Reducido de 0.07
+            base_confidence += 0.05
         elif session in ['london_only', 'ny_only']:
             confluence_factors.append(session.upper())
-            base_confidence += 0.02  # Reducido de 0.03
+            base_confidence += 0.02
         
-        final_confidence = min(base_confidence, 0.88)  # Reducido de 0.92
+        final_confidence = min(base_confidence, 0.85)
         
         return {
             'confluence_factors': confluence_factors,
@@ -454,37 +451,38 @@ class LiquiditySystem:
     
     def get_signal(self, df, current_price):
         """
-        🔧 v5.4: Genera señales SELECTIVAS y BALANCEADAS
+        🔧 v6.1: Genera señales OPTIMIZADAS y BALANCEADAS
         
         PRIORIDAD:
-        1. Máxima confluencia (mejor relación riesgo/recompensa)
+        1. Máxima confluencia (FVG+OB+Sweep)
         2. Sweep + OB confirmado
         3. FVG + OB confluencia
-        4. FVG solo (solo si es grande y reciente)
+        4. FVG solo (reciente y grande)
+        5. OB solo (múltiples reacciones)
         """
         if not self.enabled or len(df) < 50:
             return None
         
-        # 🔧 NUEVO: Cooldown interno (máximo 1 señal cada 15 min)
+        # 🔧 Cooldown interno (10 min)
         if self.last_signal_time:
             minutes_since_last = (datetime.now() - self.last_signal_time).total_seconds() / 60
             if minutes_since_last < self.min_signal_interval_minutes:
-                return None  # Esperar mínimo intervalo
+                return None
         
         session, session_priority = self.get_trading_session()
         
-        # 1. DETECTAR FAIR VALUE GAPS (cache más inteligente)
+        # 1. DETECTAR FAIR VALUE GAPS (cache inteligente)
         now = datetime.now()
         if (self.last_fvg_calculation is None or 
-            (now - self.last_fvg_calculation).total_seconds() > 120):  # Cada 2 min
+            (now - self.last_fvg_calculation).total_seconds() > 120):
             self.cached_fvgs = self.detect_fair_value_gap(df)
             self.last_fvg_calculation = now
         
         fvg_signal = self.check_fvg_interaction(self.cached_fvgs, current_price)
         
-        # 2. DETECTAR ORDER BLOCKS (cache más inteligente)
+        # 2. DETECTAR ORDER BLOCKS (cache inteligente)
         if (self.last_ob_calculation is None or 
-            (now - self.last_ob_calculation).total_seconds() > 120):  # Cada 2 min
+            (now - self.last_ob_calculation).total_seconds() > 120):
             self.cached_order_blocks = self.find_order_blocks_enhanced(df)
             self.last_ob_calculation = now
         
@@ -501,9 +499,7 @@ class LiquiditySystem:
                 signal_data = fvg_signal.copy()
                 confluence = self.calculate_confluence_score(signal_data, fvg_signal, ob_signal, sweep)
                 
-                # 🔧 MEJORA: Confianza más realista
-                final_confidence = min(0.78, confluence['final_confidence'])  # Cap en 78%
-                
+                final_confidence = min(0.78, confluence['final_confidence'])
                 direction = "BUY" if signal_data['signal'] == 1 else "SELL"
                 
                 self.last_signal_time = now
@@ -521,7 +517,7 @@ class LiquiditySystem:
                 }
         
         # ═══════════════════════════════════════════════════════════
-        # PRIORIDAD 2: SWEEP + ORDER BLOCK (muy confiable)
+        # PRIORIDAD 2: SWEEP + ORDER BLOCK
         # ═══════════════════════════════════════════════════════════
         if sweep and ob_signal:
             sweep_signal = 1 if sweep['type'] == 'bullish_sweep' else -1
@@ -530,9 +526,7 @@ class LiquiditySystem:
                 signal_data = ob_signal.copy()
                 confluence = self.calculate_confluence_score(signal_data, None, ob_signal, sweep)
                 
-                # 🔧 MEJORA: Confianza más conservadora
                 final_confidence = min(0.75, confluence['final_confidence'])
-                
                 direction = "BUY" if signal_data['signal'] == 1 else "SELL"
                 
                 self.last_signal_time = now
@@ -550,7 +544,7 @@ class LiquiditySystem:
                 }
         
         # ═══════════════════════════════════════════════════════════
-        # PRIORIDAD 3: FVG + ORDER BLOCK (confluencia media)
+        # PRIORIDAD 3: FVG + ORDER BLOCK
         # ═══════════════════════════════════════════════════════════
         if fvg_signal and ob_signal:
             if fvg_signal['signal'] == ob_signal['signal']:
@@ -559,8 +553,6 @@ class LiquiditySystem:
                 
                 final_confidence = min(0.72, confluence['final_confidence'])
                 direction = "BUY" if signal_data['signal'] == 1 else "SELL"
-                fvg = fvg_signal['fvg']
-                ob = ob_signal['ob']
                 
                 self.last_signal_time = now
                 
@@ -573,9 +565,7 @@ class LiquiditySystem:
                     'liquidity_type': 'high_confluence',
                     'confluence_factors': confluence['confluence_factors'],
                     'confluence_count': 2,
-                    'session': confluence['session'],
-                    'fvg_size': fvg['gap_size_pips'],
-                    'ob_strength': ob['strength']
+                    'session': confluence['session']
                 }
         
         # ═══════════════════════════════════════════════════════════
@@ -584,11 +574,13 @@ class LiquiditySystem:
         if fvg_signal:
             fvg = fvg_signal['fvg']
             
-            # 🔧 MEJORA: Solo si es RECIENTE y GRANDE
-            age = len(self.cached_fvgs[0]['formation_index']) if self.cached_fvgs else 50
+            # Calcular edad del FVG
+            current_index = len(df) - 1
+            formation_index = fvg.get('formation_index', 0)
+            age = current_index - formation_index
             
-            # Solo FVG de hace menos de 15 velas y gap > 50 pips
-            if age < 15 and fvg['gap_size_pips'] > 50:
+            # 🔧 Solo si es RECIENTE (<15 velas) y GRANDE (>35 pips)
+            if age < 15 and fvg['gap_size_pips'] > 35:
                 
                 direction = "BUY" if fvg_signal['signal'] == 1 else "SELL"
                 final_confidence = min(0.68, 0.65 + (fvg['gap_size_pips'] / 1000) * 0.08)
@@ -609,13 +601,13 @@ class LiquiditySystem:
                 }
         
         # ═══════════════════════════════════════════════════════════
-        # PRIORIDAD 5: ORDER BLOCK SOLO (menos confiable, muy selectivo)
+        # PRIORIDAD 5: ORDER BLOCK SOLO (selectivo)
         # ═══════════════════════════════════════════════════════════
         if ob_signal:
             ob = ob_signal['ob']
             
-            # 🔧 MEJORA: Solo si hay MÚLTIPLES reacciones
-            if ob['reaction_count'] >= 2:
+            # 🔧 Acepta con 1+ reacciones O impulso >600 pips
+            if ob['reaction_count'] >= 1 or ob['strength'] > 600:
                 
                 final_confidence = min(0.70, ob_signal['confidence'])
                 direction = "BUY" if ob_signal['signal'] == 1 else "SELL"

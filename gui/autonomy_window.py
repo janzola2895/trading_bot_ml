@@ -10,6 +10,8 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 from datetime import datetime
 
+from gui.ml_dashboard import MLDashboardPanel  # 🆕 NUEVO IMPORT
+
 
 class MLAutonomyWindow:
     """
@@ -21,7 +23,7 @@ class MLAutonomyWindow:
     def __init__(self, parent, bot_queue):
         self.window = tk.Toplevel(parent)
         self.window.title("🤖 Panel de Autonomía ML v5.2")
-        self.window.geometry("1200x800")
+        self.window.geometry("1400x850")  # 🆕 AUMENTADO ANCHO para acomodar panel ML
         self.window.configure(bg="#1e1e1e")
         
         self.bot_queue = bot_queue
@@ -47,14 +49,80 @@ class MLAutonomyWindow:
         main_container = tk.Frame(self.window, bg="#1e1e1e")
         main_container.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
         
-        # IZQUIERDA: Progreso y Estado
-        left_panel = tk.Frame(main_container, bg="#2d2d2d", width=400)
+        # 🆕 PANEL IZQUIERDO CON ML DASHBOARD + PROGRESO
+        left_panel = tk.Frame(main_container, bg="#2d2d2d", width=450)
         left_panel.pack(side=tk.LEFT, fill=tk.BOTH, expand=False, padx=5)
         left_panel.pack_propagate(False)
         
-        # DERECHA: Decisiones
+        # Crear panel ML dashboard en la parte superior
+        self.ml_dashboard = MLDashboardPanel(left_panel)
+        
+        # Progreso de Autonomía (debajo del dashboard)
+        progress_frame = tk.LabelFrame(left_panel, text="📊 PROGRESO DE AUTONOMÍA",
+                                      font=("Arial", 11, "bold"), bg="#2d2d2d",
+                                      fg="#ffffff", padx=10, pady=8)
+        progress_frame.pack(fill=tk.X, padx=8, pady=8)
+        
+        # 🆕 MODIFICADO: Texto cambiado a "Ops ganadoras"
+        self.progress_label = tk.Label(progress_frame, text="Ops ganadoras: 0/100",
+                                      font=("Arial", 10), bg="#2d2d2d", fg="#ffffff")
+        self.progress_label.pack(pady=5)
+        
+        self.progress_bar = ttk.Progressbar(progress_frame, mode='determinate',
+                                           length=350, maximum=100)
+        self.progress_bar.pack(pady=5)
+        
+        self.confidence_label = tk.Label(progress_frame, text="Confianza: 0%",
+                                        font=("Arial", 9), bg="#2d2d2d", fg="#aaaaaa")
+        self.confidence_label.pack(pady=2)
+        
+        self.eta_label = tk.Label(progress_frame, text="ETA: Calculando...",
+                                 font=("Arial", 9), bg="#2d2d2d", fg="#aaaaaa")
+        self.eta_label.pack(pady=2)
+        
+        # 🆕 NUEVO: Mostrar threshold actual
+        self.threshold_label = tk.Label(progress_frame, text="Profit mínimo: $5.00",
+                                       font=("Arial", 9), bg="#2d2d2d", fg="#aaaaaa")
+        self.threshold_label.pack(pady=2)
+        
+        # Fases del Aprendizaje
+        phases_frame = tk.LabelFrame(left_panel, text="🔄 FASES DE APRENDIZAJE",
+                                    font=("Arial", 11, "bold"), bg="#2d2d2d",
+                                    fg="#ffffff", padx=10, pady=8)
+        phases_frame.pack(fill=tk.X, padx=8, pady=8)
+        
+        # 🆕 MODIFICADO: Texto cambiado a "ops ganadoras"
+        self.phase1_label = tk.Label(phases_frame, text="🟢 FASE 1: Recopilando datos (0-50 ops ganadoras)",
+                                     font=("Arial", 9), bg="#2d2d2d", fg="#44ff44", anchor='w')
+        self.phase1_label.pack(fill=tk.X, pady=2)
+        
+        self.phase2_label = tk.Label(phases_frame, text="⚪ FASE 2: Aprendiendo patrones (50-100 ops ganadoras)",
+                                     font=("Arial", 9), bg="#2d2d2d", fg="#666666", anchor='w')
+        self.phase2_label.pack(fill=tk.X, pady=2)
+        
+        self.phase3_label = tk.Label(phases_frame, text="⚪ FASE 3: AUTÓNOMO (100+ ops ganadoras)",
+                                     font=("Arial", 9), bg="#2d2d2d", fg="#666666", anchor='w')
+        self.phase3_label.pack(fill=tk.X, pady=2)
+        
+        # Parámetros Aprendidos
+        params_frame = tk.LabelFrame(left_panel, text="⚙️ PARÁMETROS APRENDIDOS",
+                                    font=("Arial", 11, "bold"), bg="#2d2d2d",
+                                    fg="#ffffff", padx=10, pady=8)
+        params_frame.pack(fill=tk.BOTH, expand=True, padx=8, pady=8)
+        
+        params_scroll = tk.Frame(params_frame, bg="#2d2d2d")
+        params_scroll.pack(fill=tk.BOTH, expand=True)
+        
+        self.params_text = scrolledtext.ScrolledText(params_scroll, height=12,
+                                                     bg="#1e1e1e", fg="#00ff00",
+                                                     font=("Consolas", 9), wrap=tk.WORD)
+        self.params_text.pack(fill=tk.BOTH, expand=True)
+        
+        # DERECHA: Decisiones y Parámetros
         right_panel = tk.Frame(main_container, bg="#2d2d2d")
         right_panel.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True, padx=5)
+        
+        # === PANEL ML (YA INSERTADO ARRIBA) ===
         
         # === PANEL IZQUIERDO ===
         
@@ -256,3 +324,8 @@ class MLAutonomyWindow:
         self.update_learned_params(params_combined)
         
         self.update_decisions_log(recent_decisions)
+
+    def update_ml_status(self, ml_data):
+        """🆕 NUEVO: Actualiza el panel ML con datos de estado"""
+        if hasattr(self, 'ml_dashboard'):
+            self.ml_dashboard.update_ml_status(ml_data)

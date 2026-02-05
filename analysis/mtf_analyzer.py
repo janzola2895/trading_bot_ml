@@ -1,8 +1,13 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════╗
-║              SISTEMA MULTI-TIMEFRAME (MTF) v5.2                          ║
+║          SISTEMA MULTI-TIMEFRAME (MTF) v7.1 IMPROVED                    ║
 ║                                                                          ║
-║  Sistema de análisis en múltiples timeframes con prioridades            ║
+║  🆕 MEJORAS v7.1:                                                        ║
+║  ✅ Umbral reducido: 0.15 → 0.05 (detecta tendencias reales)            ║
+║  ✅ ADX optimizado: No elimina señales, solo modula                     ║
+║  ✅ RSI agregado: 20% de peso adicional                                 ║
+║  ✅ EMA más sensible: Detecta movimientos sutiles                       ║
+║  ✅ MACD mejorado: Ponderación por diferencia de líneas                 ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 """
 
@@ -10,40 +15,103 @@ import MetaTrader5 as mt5
 import pandas as pd
 import ta
 from datetime import datetime
-from config import (
-    MTF_TIMEFRAMES, MTF_REQUIRED_HIGHER_TF, MTF_REQUIRED_LOWER_TF
-)
 
 
 class MultiTimeframeAnalyzer:
     """
-    Sistema de Análisis Multi-Timeframe con Ponderación
+    Sistema MTF MEJORADO v7.1 - 6 Temporalidades
     
-    CARACTERÍSTICAS:
-    - Analiza M30, H1, H4, D1, W1
-    - Ponderación: M30/H1 (lower), H4/D1/W1 (higher)
-    - Requiere 2 de 3 superiores + 1 de 2 inferiores para aprobar
-    - Actualización inteligente: M30/H1 cada 1min, H4/D1/W1 cada 5min
-    - Bloqueo total de operaciones sin alineación suficiente
+    🆕 CORRECCIONES IMPLEMENTADAS:
+    
+    1. UMBRAL REALISTA:
+       - Antes: total_score > 0.15 (demasiado alto)
+       - Ahora: total_score > 0.05 (captura tendencias reales)
+    
+    2. ADX OPTIMIZADO:
+       - Antes: ADX bajo eliminaba señales (ADX=10 → score × 0.2)
+       - Ahora: ADX solo modula (ADX=10 → score × 0.5 mínimo)
+    
+    3. RSI AGREGADO:
+       - Nuevo indicador con 20% de peso
+       - RSI > 60 = bullish | RSI < 40 = bearish
+    
+    4. EMA MÁS SENSIBLE:
+       - Multiplicador aumentado: × 200 (antes × 100)
+       - Detecta separaciones sutiles entre medias
+    
+    5. MACD MEJORADO:
+       - Ponderación por diferencia entre MACD y señal
+       - No solo evalúa cruce, sino magnitud
+    
+    EJEMPLOS:
+    - Activas: [W1, H4, H1] → Las 3 deben ser bullish para BUY
+    - Activas: [H1, M30] → Las 2 deben coincidir
+    - Activas: [W1] → Solo W1 decide
+    - Activas: [] → TODO bloqueado
     """
     
     def __init__(self, symbol="XAUUSD", logger=None):
         self.symbol = symbol
         self.logger = logger
         
-        # Configuración de timeframes y ponderación
-        self.timeframes = {}
-        for name, config in MTF_TIMEFRAMES.items():
-            self.timeframes[name] = {
-                **config,
+        # ✅ COMPATIBILIDAD: Usar 'timeframes' en lugar de 'available_timeframes'
+        # para que main.py funcione correctamente
+        self.timeframes = {
+            'M15': {
+                'tf': mt5.TIMEFRAME_M15,
+                'update_interval': 30,  # Actualizar cada 30s
                 'last_update': None,
                 'bias': 'neutral',
                 'strength': 0.0,
-                'indicators': {}
+                'indicators': {},
+                'active': False  # Por defecto inactivo
+            },
+            'M30': {
+                'tf': mt5.TIMEFRAME_M30,
+                'update_interval': 60,  # Actualizar cada 60s
+                'last_update': None,
+                'bias': 'neutral',
+                'strength': 0.0,
+                'indicators': {},
+                'active': False
+            },
+            'H1': {
+                'tf': mt5.TIMEFRAME_H1,
+                'update_interval': 120,  # Actualizar cada 2min
+                'last_update': None,
+                'bias': 'neutral',
+                'strength': 0.0,
+                'indicators': {},
+                'active': False  # ✅ Activo por defecto
+            },
+            'H4': {
+                'tf': mt5.TIMEFRAME_H4,
+                'update_interval': 300,  # Actualizar cada 5min
+                'last_update': None,
+                'bias': 'neutral',
+                'strength': 0.0,
+                'indicators': {},
+                'active': False  # ✅ Activo por defecto
+            },
+            'D1': {
+                'tf': mt5.TIMEFRAME_D1,
+                'update_interval': 600,  # Actualizar cada 10min
+                'last_update': None,
+                'bias': 'neutral',
+                'strength': 0.0,
+                'indicators': {},
+                'active': True
+            },
+            'W1': {
+                'tf': mt5.TIMEFRAME_W1,
+                'update_interval': 600,  # Actualizar cada 10min
+                'last_update': None,
+                'bias': 'neutral',
+                'strength': 0.0,
+                'indicators': {},
+                'active': False  # ✅ Activo por defecto
             }
-        
-        self.required_higher_tf = MTF_REQUIRED_HIGHER_TF
-        self.required_lower_tf = MTF_REQUIRED_LOWER_TF
+        }
         
         # Estadísticas
         self.stats = {
@@ -59,6 +127,35 @@ class MultiTimeframeAnalyzer:
         if self.logger:
             self.logger.info(message)
     
+    def update_active_timeframes(self, active_tf_list):
+        """
+        🔧 CORREGIDO: Actualiza qué temporalidades están activas Y LIMPIA CACHÉ
+        
+        Args:
+            active_tf_list: Lista de nombres de TFs activos ['H1', 'H4', 'W1']
+        """
+        # Desactivar todas primero Y LIMPIAR CACHÉ COMPLETAMENTE
+        for tf_name in self.timeframes:
+            self.timeframes[tf_name]['active'] = False
+            # 🔧 CRÍTICO: LIMPIAR CACHÉ COMPLETAMENTE (no solo last_update)
+            self.timeframes[tf_name]['last_update'] = None
+            self.timeframes[tf_name]['bias'] = 'neutral'
+            self.timeframes[tf_name]['strength'] = 0.0
+            self.timeframes[tf_name]['indicators'] = {}
+        
+        # Activar solo las seleccionadas
+        for tf_name in active_tf_list:
+            if tf_name in self.timeframes:
+                self.timeframes[tf_name]['active'] = True
+        
+        active_count = len(active_tf_list)
+        self.send_log(f"📊 MTF Config actualizado: {active_count} temporalidad(es) activas: {', '.join(active_tf_list)}")
+        self.send_log(f"🔧 Caché MTF limpiado - Forzando re-análisis inmediato...")
+        
+    def get_active_timeframes(self):
+        """Retorna lista de temporalidades activas"""
+        return [tf_name for tf_name, config in self.timeframes.items() if config['active']]
+    
     def get_timeframe_data(self, tf, bars=100):
         """Obtiene datos de un timeframe específico"""
         try:
@@ -70,7 +167,7 @@ class MultiTimeframeAnalyzer:
             df['time'] = pd.to_datetime(df['time'], unit='s')
             return df
         except Exception as e:
-            self.send_log(f"⚠️ Error obteniendo datos {tf}: {e}")
+            self.send_log(f"⚠️ Error obteniendo datos: {e}")
             return None
     
     def calculate_timeframe_indicators(self, df):
@@ -91,7 +188,14 @@ class MultiTimeframeAnalyzer:
     
     def analyze_single_timeframe(self, tf_name):
         """
-        Analiza un timeframe individual
+        🆕 ANÁLISIS MEJORADO v7.1
+        
+        Analiza un timeframe individual con lógica optimizada:
+        - Umbral reducido: 0.05 (antes 0.15)
+        - ADX modulador: No elimina señales
+        - RSI agregado: 20% de peso
+        - EMA más sensible: × 200
+        - MACD ponderado: Por diferencia de líneas
         
         Returns:
             dict: {'bias': 'bullish'|'bearish'|'neutral', 'strength': 0.0-1.0}
@@ -117,44 +221,71 @@ class MultiTimeframeAnalyzer:
         df = self.calculate_timeframe_indicators(df)
         last_row = df.iloc[-1]
         
-        # === ANÁLISIS DE TENDENCIA ===
+        # === ANÁLISIS DE TENDENCIA MEJORADO v7.1 ===
         
-        # 1. EMAs (peso: 40%)
-        ema_bullish = last_row['ema_21'] > last_row['ema_50'] > last_row['ema_100']
-        ema_bearish = last_row['ema_21'] < last_row['ema_50'] < last_row['ema_100']
+        # 1. EMAs (peso: 50% - aumentado y más sensible)
+        ema_21 = last_row['ema_21']
+        ema_50 = last_row['ema_50']
+        ema_100 = last_row['ema_100']
+        
+        ema_bullish = ema_21 > ema_50 > ema_100
+        ema_bearish = ema_21 < ema_50 < ema_100
         
         ema_score = 0
         if ema_bullish:
-            ema_diff_pct = (last_row['ema_21'] - last_row['ema_50']) / last_row['ema_50']
-            ema_score = min(0.40, ema_diff_pct * 100 * 0.40)
+            ema_diff_pct = (ema_21 - ema_50) / ema_50
+            # ✅ MEJORADO: × 200 en lugar de × 100 (más sensible)
+            ema_score = min(0.50, ema_diff_pct * 200)
         elif ema_bearish:
-            ema_diff_pct = (last_row['ema_50'] - last_row['ema_21']) / last_row['ema_50']
-            ema_score = -min(0.40, ema_diff_pct * 100 * 0.40)
+            ema_diff_pct = (ema_50 - ema_21) / ema_50
+            ema_score = -min(0.50, ema_diff_pct * 200)
         
-        # 2. MACD (peso: 30%)
-        macd_bullish = last_row['macd'] > last_row['macd_signal'] and last_row['macd'] > 0
-        macd_bearish = last_row['macd'] < last_row['macd_signal'] and last_row['macd'] < 0
+        # 2. MACD (peso: 30% - mejorado con ponderación por diferencia)
+        macd = last_row['macd']
+        macd_signal = last_row['macd_signal']
+        
+        macd_bullish = macd > macd_signal and macd > 0
+        macd_bearish = macd < macd_signal and macd < 0
         
         macd_score = 0
         if macd_bullish:
-            macd_score = 0.30
+            # ✅ MEJORADO: Ponderar por diferencia entre líneas
+            macd_diff = abs(macd - macd_signal)
+            macd_score = min(0.30, macd_diff * 0.5)
         elif macd_bearish:
-            macd_score = -0.30
+            macd_diff = abs(macd - macd_signal)
+            macd_score = -min(0.30, macd_diff * 0.5)
         
-        # 3. ADX (fuerza de tendencia, peso: 30%)
-        adx_strength = min(last_row['adx'] / 50, 1.0)
+        # 3. RSI (peso: 20% - NUEVO INDICADOR)
+        rsi = last_row['rsi']
+        rsi_score = 0
+        
+        if rsi > 60:
+            # RSI alcista: cuanto más alto, más bullish
+            rsi_score = min(0.20, (rsi - 50) / 100)
+        elif rsi < 40:
+            # RSI bajista: cuanto más bajo, más bearish
+            rsi_score = -min(0.20, (50 - rsi) / 100)
+        
+        # 4. ADX (modulador de fuerza - OPTIMIZADO)
+        adx = last_row['adx']
+        
+        # ✅ MEJORADO: ADX solo modula, NO elimina señales
+        if adx < 15:
+            adx_multiplier = 0.5  # Reduce a 50% pero NO elimina
+        elif adx < 25:
+            adx_multiplier = 0.8  # Reduce a 80%
+        else:
+            adx_multiplier = 1.0  # Fuerza completa
         
         # Calcular score total
-        total_score = ema_score + macd_score
+        total_score = (ema_score + macd_score + rsi_score) * adx_multiplier
         
-        # Aplicar fuerza de tendencia
-        total_score *= adx_strength
-        
-        # Determinar bias
-        if total_score > 0.15:
+        # ✅ UMBRAL CORREGIDO: 0.05 en lugar de 0.15
+        if total_score > 0.05:
             bias = "bullish"
             strength = min(abs(total_score), 1.0)
-        elif total_score < -0.15:
+        elif total_score < -0.05:
             bias = "bearish"
             strength = min(abs(total_score), 1.0)
         else:
@@ -166,15 +297,18 @@ class MultiTimeframeAnalyzer:
         tf_config['strength'] = strength
         tf_config['last_update'] = now
         tf_config['indicators'] = {
-            'ema_21': float(last_row['ema_21']),
-            'ema_50': float(last_row['ema_50']),
-            'ema_100': float(last_row['ema_100']),
-            'adx': float(last_row['adx']),
-            'rsi': float(last_row['rsi']),
-            'macd': float(last_row['macd']),
-            'ema_score': ema_score,
-            'macd_score': macd_score,
-            'total_score': total_score
+            'ema_21': float(ema_21),
+            'ema_50': float(ema_50),
+            'ema_100': float(ema_100),
+            'adx': float(adx),
+            'rsi': float(rsi),
+            'macd': float(macd),
+            'macd_signal': float(macd_signal),
+            'ema_score': float(ema_score),
+            'macd_score': float(macd_score),
+            'rsi_score': float(rsi_score),
+            'adx_multiplier': float(adx_multiplier),
+            'total_score': float(total_score)
         }
         
         return {
@@ -185,67 +319,74 @@ class MultiTimeframeAnalyzer:
     
     def analyze_all_timeframes(self):
         """
-        🆕 OPCIÓN C: Sistema con timeframes prioritarios
+        🆕 LÓGICA CONFIGURABLE v7.0 + MEJORAS v7.1
         
-        REGLA: 2 de 3 superiores (H4/D1/W1) + 1 de 2 inferiores (M30/H1)
+        REGLA: TODAS las temporalidades ACTIVAS deben coincidir
+        - Si todas son bullish → BUY aprobado
+        - Si todas son bearish → SELL aprobado
+        - Si hay mezcla o neutral → BLOQUEADO
         """
         self.stats['total_analysis'] += 1
         
+        # Obtener temporalidades activas
+        active_tfs = self.get_active_timeframes()
+        
+        # Si no hay ninguna activa, bloquear todo
+        if len(active_tfs) == 0:
+            self.stats['operations_blocked'] += 1
+            return {
+                'approved': False,
+                'direction': None,
+                'active_timeframes': [],
+                'reason': 'No hay temporalidades activas',
+                'timeframes_detail': {}
+            }
+        
+        # Analizar solo las activas
         results = {}
+        biases = []
         
-        # Separar timeframes
-        higher_tfs = ['H4', 'D1', 'W1']
-        lower_tfs = ['M30', 'H1']
-        
-        # Contadores de votos
-        higher_votes = {'bullish': 0, 'bearish': 0, 'neutral': 0}
-        lower_votes = {'bullish': 0, 'bearish': 0, 'neutral': 0}
-        
-        # Analizar cada timeframe
-        for tf_name in ['M30', 'H1', 'H4', 'D1', 'W1']:
+        for tf_name in active_tfs:
             analysis = self.analyze_single_timeframe(tf_name)
             results[tf_name] = analysis
-            
-            bias = analysis['bias']
-            priority = self.timeframes[tf_name]['priority']
-            
-            # Contar votos según prioridad
-            if priority == 'higher':
-                higher_votes[bias] += 1
-            else:
-                lower_votes[bias] += 1
+            biases.append(analysis['bias'])
         
-        # 🆕 LÓGICA DE APROBACIÓN - OPCIÓN C
+        # 🆕 VERIFICAR UNANIMIDAD
+        
+        # Verificar si TODAS son bullish
+        all_bullish = all(bias == 'bullish' for bias in biases)
+        
+        # Verificar si TODAS son bearish
+        all_bearish = all(bias == 'bearish' for bias in biases)
+        
         approved = False
         direction = None
         
-        # Verificar BUY: 2+ superiores bullish Y 1+ inferiores bullish
-        if (higher_votes['bullish'] >= self.required_higher_tf and 
-            lower_votes['bullish'] >= self.required_lower_tf):
+        if all_bullish:
+            # ✅ TODAS BULLISH → APROBAR BUY
             approved = True
             direction = 'buy'
             self.stats['operations_approved'] += 1
             self.stats['bullish_approvals'] += 1
         
-        # Verificar SELL: 2+ superiores bearish Y 1+ inferiores bearish
-        elif (higher_votes['bearish'] >= self.required_higher_tf and 
-            lower_votes['bearish'] >= self.required_lower_tf):
+        elif all_bearish:
+            # ✅ TODAS BEARISH → APROBAR SELL
             approved = True
             direction = 'sell'
             self.stats['operations_approved'] += 1
             self.stats['bearish_approvals'] += 1
         
         else:
+            # ❌ HAY MEZCLA O NEUTRALES → BLOQUEAR
             self.stats['operations_blocked'] += 1
         
         return {
             'approved': approved,
             'direction': direction,
-            'higher_tf_votes': higher_votes,
-            'lower_tf_votes': lower_votes,
+            'active_timeframes': active_tfs,
+            'aligned_timeframes': active_tfs if approved else [],
             'timeframes_detail': results,
-            'required_higher': self.required_higher_tf,
-            'required_lower': self.required_lower_tf
+            'bias_summary': biases
         }
     
     def check_signal_alignment(self, signal_type):
@@ -261,93 +402,56 @@ class MultiTimeframeAnalyzer:
         mtf_analysis = self.analyze_all_timeframes()
         
         if not mtf_analysis['approved']:
+            active_tfs = mtf_analysis['active_timeframes']
+            bias_summary = mtf_analysis.get('bias_summary', [])
+            
+            if len(active_tfs) == 0:
+                return {
+                    'allowed': False,
+                    'reason': "MTF: Sin temporalidades activas",
+                    'mtf_analysis': mtf_analysis
+                }
+            
+            # Mostrar qué bias tiene cada TF
+            tf_bias_pairs = [f"{tf}:{bias[:4].upper()}" for tf, bias in zip(active_tfs, bias_summary)]
+            bias_text = " / ".join(tf_bias_pairs)
+            
             return {
                 'allowed': False,
-                'reason': f"MTF: Sin alineación suficiente",
+                'reason': f"MTF: Sin alineación ({bias_text})",
                 'mtf_analysis': mtf_analysis
             }
         
         # Verificar dirección
         if signal_type == 1 and mtf_analysis['direction'] == 'buy':
+            active_tfs = mtf_analysis['active_timeframes']
+            tfs_text = '+'.join(active_tfs)
+            
             return {
                 'allowed': True,
-                'reason': f"MTF: ✅ BUY Aprobado",
+                'reason': f"MTF: ✅ BUY Aprobado ({tfs_text})",
                 'mtf_analysis': mtf_analysis
             }
+        
         elif signal_type == -1 and mtf_analysis['direction'] == 'sell':
+            active_tfs = mtf_analysis['active_timeframes']
+            tfs_text = '+'.join(active_tfs)
+            
             return {
                 'allowed': True,
-                'reason': f"MTF: ✅ SELL Aprobado",
+                'reason': f"MTF: ✅ SELL Aprobado ({tfs_text})",
                 'mtf_analysis': mtf_analysis
             }
+        
         else:
             direction_name = "BUY" if signal_type == 1 else "SELL"
             mtf_direction = mtf_analysis['direction'].upper()
+            
             return {
                 'allowed': False,
-                'reason': f"MTF: ⛔ {direction_name} bloqueado (MTF indica {mtf_direction})",
+                'reason': f"MTF: ⛔ {direction_name} bloqueado (MTF aprueba {mtf_direction})",
                 'mtf_analysis': mtf_analysis
             }
-    
-    def get_detailed_summary(self):
-        """🆕 OPCIÓN C: Retorna resumen detallado de análisis MTF"""
-        mtf_analysis = self.analyze_all_timeframes()
-        
-        summary_lines = []
-        summary_lines.append("📊 ANÁLISIS MULTI-TIMEFRAME (OPCIÓN C - PRIORITARIO):")
-        summary_lines.append("")
-        
-        # Timeframes SUPERIORES (Prioritarios)
-        summary_lines.append("   🔴 TIMEFRAMES SUPERIORES (Prioritarios H4/D1/W1):")
-        for tf_name in ['H4', 'D1', 'W1']:
-            tf_data = mtf_analysis['timeframes_detail'][tf_name]
-            bias = tf_data['bias']
-            strength = tf_data['strength']
-            
-            emoji = {"bullish": "🟢", "bearish": "🔴", "neutral": "🟡"}.get(bias, "⚪")
-            direction = bias.upper()[:4]
-            
-            summary_lines.append(f"      {tf_name}: {emoji} {direction} (Fuerza:{strength:.2f})")
-        
-        higher_votes = mtf_analysis['higher_tf_votes']
-        summary_lines.append(f"      Votos: {higher_votes['bullish']}B / {higher_votes['bearish']}S / {higher_votes['neutral']}N (Req: {self.required_higher_tf})")
-        summary_lines.append("")
-        
-        # Timeframes INFERIORES (Confirmación)
-        summary_lines.append("   🔵 TIMEFRAMES INFERIORES (Confirmación M30/H1):")
-        for tf_name in ['M30', 'H1']:
-            tf_data = mtf_analysis['timeframes_detail'][tf_name]
-            bias = tf_data['bias']
-            strength = tf_data['strength']
-            
-            emoji = {"bullish": "🟢", "bearish": "🔴", "neutral": "🟡"}.get(bias, "⚪")
-            direction = bias.upper()[:4]
-            
-            summary_lines.append(f"      {tf_name}: {emoji} {direction} (Fuerza:{strength:.2f})")
-        
-        lower_votes = mtf_analysis['lower_tf_votes']
-        summary_lines.append(f"      Votos: {lower_votes['bullish']}B / {lower_votes['bearish']}S / {lower_votes['neutral']}N (Req: {self.required_lower_tf})")
-        summary_lines.append("")
-        
-        summary_lines.append(f"   ────────────────────────────")
-        
-        if mtf_analysis['approved']:
-            direction_emoji = "🟢" if mtf_analysis['direction'] == 'buy' else "🔴"
-            direction_text = mtf_analysis['direction'].upper()
-            
-            # Convertir 'buy'/'sell' a 'bullish'/'bearish' para acceder al diccionario
-            if mtf_analysis['direction'] == 'buy':
-                bias_key = 'bullish'
-            else:
-                bias_key = 'bearish'
-            
-            summary_lines.append(f"   {direction_emoji} RESULTADO: {direction_text} APROBADO ✅")
-            summary_lines.append(f"   📋 Regla cumplida: {higher_votes[bias_key]}/{self.required_higher_tf} superiores + {lower_votes[bias_key]}/{self.required_lower_tf} inferiores")
-        else:
-            summary_lines.append(f"   ⛔ RESULTADO: SIN ALINEACIÓN SUFICIENTE")
-            summary_lines.append(f"   ⚠️ No se cumple la regla: {self.required_higher_tf} superiores + {self.required_lower_tf} inferiores")
-        
-        return "\n".join(summary_lines)
     
     def get_stats(self):
         """Retorna estadísticas del sistema MTF"""
@@ -356,5 +460,6 @@ class MultiTimeframeAnalyzer:
         
         return {
             **self.stats,
-            'approval_rate': approval_rate
+            'approval_rate': approval_rate,
+            'active_timeframes': self.get_active_timeframes()
         }
