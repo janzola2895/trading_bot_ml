@@ -2,10 +2,59 @@
   "rotation_config": {
     "enabled": true,
     "rotate_every_n_ops": 10,
-    "global_operations_count": 3,
-    "last_rotation_time": null,
-    "rotation_history": []
+    "global_operations_count": 5,
+    "last_rotation_time": "2026-02-05T08:11:30.534755",
+    "rotation_history": [
+      {
+        "timestamp": "2026-02-04T09:56:03.214400",
+        "from_model": "random_forest",
+        "to_model": "gradient_boost",
+        "old_accuracy": 100.0,
+        "old_trades": 1,
+        "new_accuracy": 0,
+        "new_trades": 0,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      },
+      {
+        "timestamp": "2026-02-04T11:27:37.953075",
+        "from_model": "gradient_boost",
+        "to_model": "neural_net",
+        "old_accuracy": 57.142857142857146,
+        "old_trades": 7,
+        "new_accuracy": 0,
+        "new_trades": 0,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      },
+      {
+        "timestamp": "2026-02-04T13:04:53.193994",
+        "from_model": "neural_net",
+        "to_model": "random_forest",
+        "old_accuracy": 50.0,
+        "old_trades": 6,
+        "new_accuracy": 100.0,
+        "new_trades": 1,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      },
+      {
+        "timestamp": "2026-02-05T08:11:30.534755",
+        "from_model": "random_forest",
+        "to_model": "gradient_boost",
+        "old_accuracy": 100.0,
+        "old_trades": 1,
+        "new_accuracy": 57.142857142857146,
+        "new_trades": 7,
+        "operations_completed": 10,
+        "rotation_type": "cyclic",
+        "reason": "Rotaci\u00f3n autom\u00e1tica cada 10 ops"
+      }
+    ]
   },
-  "current_model_index": 0,
-  "active_model": "random_forest"
+  "current_model_index": 1,
+  "active_model": "gradient_boost"
 }

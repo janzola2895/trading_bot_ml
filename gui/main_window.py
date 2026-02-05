@@ -10,18 +10,18 @@ import tkinter as tk
 from tkinter import ttk, scrolledtext, messagebox
 import queue
 
-from gui.ml_dashboard import MLDashboardPanel
+from gui.mtf_panel import MTFDashboardPanel
 from gui.strategies_panel import StrategiesControlPanel
 from gui.autonomy_window import MLAutonomyWindow
 from gui.charts_window import ChartsWindow
 
 
 class EnhancedTradingBotGUI:
-    """GUI Principal del Bot v5.2.7 - CON COOLDOWN EN TABLA"""
+    """GUI Principal del Bot v5.2.7"""
     
     def __init__(self, root):
         self.root = root
-        self.root.title("🤖 Bot XAUUSD ML v5.2 - 6 ESTRATEGIAS + MTF + VALIDACIÓN COMPLETA")
+        self.root.title("🤖 Bot XAUUSD ML v5.2")
         self.root.geometry("1700x950")
         self.root.configure(bg="#1e1e1e")
         
@@ -59,7 +59,7 @@ class EnhancedTradingBotGUI:
         header_frame.pack(fill=tk.X, padx=10, pady=8)
         header_frame.pack_propagate(False)
         
-        title = tk.Label(header_frame, text="🤖 BOT XAUUSD ML v5.2 - VALIDACIÓN + 6 ESTRATEGIAS + MTF (M30/H1/H4/D1/W1)",
+        title = tk.Label(header_frame, text="🤖 BOT XAUUSD ML v5.2",
                 font=("Arial", 16, "bold"), bg="#2d2d2d", fg="#00ff00")
         title.pack(side=tk.TOP, pady=3)
         
@@ -162,8 +162,8 @@ class EnhancedTradingBotGUI:
         # Panel de Estrategias
         self.strategies_panel = StrategiesControlPanel(left_panel, self.message_queue)
         
-        # Panel ML
-        self.ml_dashboard = MLDashboardPanel(left_panel)
+        # Panel MTF
+        self.mtf_dashboard = MTFDashboardPanel(left_panel, self.message_queue)  # ← Agregar message_queue
         
         # 🆕 BOTONES DE VENTANAS ADICIONALES
         windows_btn_frame = tk.Frame(left_panel, bg="#2d2d2d")
@@ -554,8 +554,14 @@ class EnhancedTradingBotGUI:
                     self.log_message(msg['message'])
                 elif msg_type == 'daily_balance':
                     self.update_daily_balance(msg['balance'])
+                elif msg_type == 'mtf_analysis':
+                    # 🆕 Actualizar panel MTF
+                    if hasattr(self, 'mtf_dashboard'):
+                        self.mtf_dashboard.update_mtf_data(msg['analysis'])
                 elif msg_type == 'ml_status':
-                    self.ml_dashboard.update_ml_status(msg['data'])
+                    # 🆕 Enviar al panel de autonomía si está abierto
+                    if self.autonomy_window and tk.Toplevel.winfo_exists(self.autonomy_window.window):
+                        self.autonomy_window.update_ml_status(msg['data'])
                 elif msg_type == 'profit_charts':
                     self.update_profit_charts(msg['hourly'], msg['daily'])
                 elif msg_type == 'signal_stats':
@@ -563,7 +569,6 @@ class EnhancedTradingBotGUI:
                 elif msg_type == 'autonomy_data':
                     if self.autonomy_window and tk.Toplevel.winfo_exists(self.autonomy_window.window):
                         self.autonomy_window.update_all_data(msg['data'])
-                # ✅ CRÍTICO: Procesamiento correcto de strategy_stats
                 elif msg_type == 'strategy_stats':
                     self.update_strategy_stats(msg['stats'])
                         
