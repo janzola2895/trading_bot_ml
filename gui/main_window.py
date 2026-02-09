@@ -1,8 +1,10 @@
 """
 ╔══════════════════════════════════════════════════════════════════════════╗
 ║               VENTANA PRINCIPAL GUI v5.2.7 + COOLDOWN                    ║
+║                 + VISUALIZACIÓN GRÁFICA S/R                              ║
 ║                                                                          ║
 ║  🆕 v5.2.7: Columna de Cooldown en tabla de estadísticas                ║
+║  🆕 NUEVO: Botón para ver estrategia gráficamente                       ║
 ╚══════════════════════════════════════════════════════════════════════════╝
 """
 
@@ -14,10 +16,11 @@ from gui.mtf_panel import MTFDashboardPanel
 from gui.strategies_panel import StrategiesControlPanel
 from gui.autonomy_window import MLAutonomyWindow
 from gui.charts_window import ChartsWindow
+from gui.strategy_chart_window import StrategyChartWindow
 
 
 class EnhancedTradingBotGUI:
-    """GUI Principal del Bot v5.2.7"""
+    """GUI Principal del Bot v5.2.7 + Visualización Gráfica"""
     
     def __init__(self, root):
         self.root = root
@@ -36,7 +39,7 @@ class EnhancedTradingBotGUI:
         
         self.current_price = 0.0
         
-        # 🆕 Datos de estadísticas por estrategia (AHORA CON COOLDOWN)
+        # Datos de estadísticas por estrategia (AHORA CON COOLDOWN)
         self.strategy_stats = {
             'ML MODELS': {'operations': 0, 'wins': 0, 'losses': 0, 'profit': 0.0, 'cooldown_remaining': 0},
             'PRICE ACTION': {'operations': 0, 'wins': 0, 'losses': 0, 'profit': 0.0, 'cooldown_remaining': 0},
@@ -49,6 +52,7 @@ class EnhancedTradingBotGUI:
         # Referencias a ventanas adicionales
         self.autonomy_window = None
         self.charts_window = None
+        self.strategy_chart_window = None
         
         self.setup_ui()
         self.update_gui()
@@ -62,11 +66,6 @@ class EnhancedTradingBotGUI:
         title = tk.Label(header_frame, text="🤖 BOT XAUUSD ML v5.2",
                 font=("Arial", 16, "bold"), bg="#2d2d2d", fg="#00ff00")
         title.pack(side=tk.TOP, pady=3)
-        
-        subtitle = tk.Label(header_frame,
-                   text="🆕 v5.2: Multi-Timeframe (2/3 superiores + 1/2 inferiores) | Validación exhaustiva | Solución 10027/10016",
-                   font=("Arial", 9), bg="#2d2d2d", fg="#aaaaaa")
-        subtitle.pack(side=tk.TOP)
         
         self.status_label = tk.Label(header_frame, text="🔴 Desconectado",
                                      font=("Arial", 10), bg="#2d2d2d", fg="#ff4444")
@@ -163,9 +162,9 @@ class EnhancedTradingBotGUI:
         self.strategies_panel = StrategiesControlPanel(left_panel, self.message_queue)
         
         # Panel MTF
-        self.mtf_dashboard = MTFDashboardPanel(left_panel, self.message_queue)  # ← Agregar message_queue
+        self.mtf_dashboard = MTFDashboardPanel(left_panel, self.message_queue)
         
-        # 🆕 BOTONES DE VENTANAS ADICIONALES
+        # BOTONES DE VENTANAS ADICIONALES
         windows_btn_frame = tk.Frame(left_panel, bg="#2d2d2d")
         windows_btn_frame.pack(fill=tk.X, padx=8, pady=8)
         
@@ -176,12 +175,19 @@ class EnhancedTradingBotGUI:
                                 command=self.open_autonomy_window, cursor="hand2")
         autonomy_btn.pack(fill=tk.X, pady=2)
         
-        # 🆕 NUEVO: Botón Gráficas
+        # Botón Gráficas
         charts_btn = tk.Button(windows_btn_frame,
                               text="📊 GRÁFICAS DE PROFIT",
                               font=("Arial", 9, "bold"), bg="#00ff88", fg="#000000",
                               command=self.open_charts_window, cursor="hand2")
         charts_btn.pack(fill=tk.X, pady=2)
+        
+        # 🆕 NUEVO: Botón Visualización Gráfica S/R
+        strategy_chart_btn = tk.Button(windows_btn_frame,
+                                      text="📈 VER ESTRATEGIA GRÁFICAMENTE",
+                                      font=("Arial", 9, "bold"), bg="#FFD700", fg="#000000",
+                                      command=self.open_strategy_chart_window, cursor="hand2")
+        strategy_chart_btn.pack(fill=tk.X, pady=2)
 
     def setup_right_panel(self, right_panel):
         """Configura panel derecho con tabla de operaciones, estadísticas y log"""
@@ -241,7 +247,7 @@ class EnhancedTradingBotGUI:
         pos_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.positions_tree.configure(yscrollcommand=pos_scrollbar.set)
         
-        # 🆕 TABLA DE ESTADÍSTICAS POR ESTRATEGIA (CON COOLDOWN)
+        # TABLA DE ESTADÍSTICAS POR ESTRATEGIA (CON COOLDOWN)
         stats_frame = tk.LabelFrame(right_panel, text="📊 ESTADÍSTICAS POR ESTRATEGIA",
                                    font=("Arial", 10, "bold"), bg="#2d2d2d",
                                    fg="#ffffff", padx=10, pady=8)
@@ -255,7 +261,6 @@ class EnhancedTradingBotGUI:
                        fieldbackground="#1e1e1e", font=("Consolas", 9), rowheight=25)
         style.configure("Stats.Treeview.Heading", font=("Arial", 9, "bold"))
         
-        # 🆕 NUEVA COLUMNA: COOLDOWN
         self.stats_tree = ttk.Treeview(stats_container,
                                       columns=("Estrategia", "N° Operaciones", "Ganadas", 
                                               "Perdidas", "Profit Total", "Cooldown"),
@@ -277,7 +282,7 @@ class EnhancedTradingBotGUI:
         
         self.stats_tree.pack(fill=tk.BOTH, expand=True)
         
-        # 🆕 BOTÓN RESET STATS
+        # BOTÓN RESET STATS
         stats_button_frame = tk.Frame(stats_frame, bg="#2d2d2d")
         stats_button_frame.pack(fill=tk.X, padx=8, pady=5)
         
@@ -312,7 +317,7 @@ class EnhancedTradingBotGUI:
         self.log_text.pack(fill=tk.BOTH, expand=True)
     
     def open_charts_window(self):
-        """🆕 CORREGIDO: Abre ventana de gráficas de profit"""
+        """Abre ventana de gráficas de profit"""
         if self.charts_window is None or not tk.Toplevel.winfo_exists(self.charts_window.window):
             self.charts_window = ChartsWindow(self.root, self.message_queue)
         else:
@@ -325,8 +330,15 @@ class EnhancedTradingBotGUI:
         else:
             self.autonomy_window.window.lift()
     
+    def open_strategy_chart_window(self):
+        """🆕 Abre ventana de visualización gráfica de estrategia S/R"""
+        if self.strategy_chart_window is None or not tk.Toplevel.winfo_exists(self.strategy_chart_window.window):
+            self.strategy_chart_window = StrategyChartWindow(self.root)
+        else:
+            self.strategy_chart_window.window.lift()
+    
     def update_strategy_stats_table(self):
-        """🆕 v5.2.7: Actualiza la tabla de estadísticas CON COOLDOWN"""
+        """Actualiza la tabla de estadísticas CON COOLDOWN"""
         # Limpiar tabla
         for item in self.stats_tree.get_children():
             self.stats_tree.delete(item)
@@ -358,7 +370,7 @@ class EnhancedTradingBotGUI:
                 profit_text = "$0.00"
                 tag = 'profit_neutral'
             
-            # 🆕 FORMATEAR COOLDOWN
+            # FORMATEAR COOLDOWN
             cooldown_remaining = stats.get('cooldown_remaining', 0)
             
             if cooldown_remaining > 0:
@@ -399,7 +411,7 @@ class EnhancedTradingBotGUI:
         self.stats_tree.tag_configure('profit_neutral', background='#2d2d2d')
         self.stats_tree.tag_configure('best_strategy', background='#2a5a2a', foreground='#FFD700')
         
-        # 🆕 Colores para cooldown
+        # Colores para cooldown
         self.stats_tree.tag_configure('cooldown_active', background='#4a2a1a', foreground='#ff8844')
         self.stats_tree.tag_configure('cooldown_ready', background='#1a4a2a', foreground='#44ff88')
 
@@ -421,7 +433,7 @@ class EnhancedTradingBotGUI:
         self.log_message("🔄 Reseteo de trading solicitado")
     
     def reset_strategy_stats(self):
-        """🆕 NUEVO: Resetea estadísticas de estrategias"""
+        """Resetea estadísticas de estrategias"""
         response = messagebox.askyesno(
             "Confirmar Reset",
             "¿Resetear las estadísticas de todas las estrategias?\n\nSe perderán todos los datos de:\n• Operaciones\n• Ganancias/Pérdidas\n• Profit acumulado"
@@ -506,12 +518,12 @@ class EnhancedTradingBotGUI:
             self.log_text.delete("1.0", "2.0")
     
     def update_profit_charts(self, hourly_data, daily_data):
-        """🆕 CORREGIDO: Actualiza datos de gráficas en la ventana de gráficas"""
+        """Actualiza datos de gráficas en la ventana de gráficas"""
         if self.charts_window and tk.Toplevel.winfo_exists(self.charts_window.window):
             self.charts_window.update_charts(hourly_data, daily_data)
     
     def update_strategy_stats(self, stats_data):
-        """✅ v5.2.7: Actualiza estadísticas por estrategia CON COOLDOWN"""
+        """Actualiza estadísticas por estrategia CON COOLDOWN"""
         # Mapeo de nombres internos a nombres mostrados
         strategy_mapping = {
             'ml': 'ML MODELS',
@@ -540,7 +552,7 @@ class EnhancedTradingBotGUI:
         self.update_strategy_stats_table()
     
     def update_gui(self):
-        """✅ CORREGIDO: Loop principal de actualización GUI"""
+        """Loop principal de actualización GUI"""
         try:
             while True:
                 msg = self.message_queue.get_nowait()
@@ -555,11 +567,9 @@ class EnhancedTradingBotGUI:
                 elif msg_type == 'daily_balance':
                     self.update_daily_balance(msg['balance'])
                 elif msg_type == 'mtf_analysis':
-                    # 🆕 Actualizar panel MTF
                     if hasattr(self, 'mtf_dashboard'):
                         self.mtf_dashboard.update_mtf_data(msg['analysis'])
                 elif msg_type == 'ml_status':
-                    # 🆕 Enviar al panel de autonomía si está abierto
                     if self.autonomy_window and tk.Toplevel.winfo_exists(self.autonomy_window.window):
                         self.autonomy_window.update_ml_status(msg['data'])
                 elif msg_type == 'profit_charts':

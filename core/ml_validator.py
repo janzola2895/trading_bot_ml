@@ -7,7 +7,7 @@
 ║  - Penalización cuando ML contradice (-30%)                             ║
 ║  - Mejora win rate esperado: +10-15%                                    ║
 ╚══════════════════════════════════════════════════════════════════════════╝
-"""
+""" 
 
 import pandas as pd
 
@@ -27,7 +27,7 @@ class MLSignalValidator:
         
         # Configuración de ajustes
         self.confidence_boost = 0.15  # +15% si ML confirma
-        self.confidence_penalty = 0.30  # -30% si ML contradice
+        self.confidence_penalty = 0.10  # -30% si ML contradice
         self.min_ml_confidence = 0.60  # Confianza mínima para considerar ML
         
         # Estadísticas

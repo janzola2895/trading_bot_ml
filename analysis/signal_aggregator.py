@@ -283,8 +283,8 @@ class SignalAggregator:
                 strategy = signal.get('strategy', 'unknown')
                 signal_direction_name = "BUY" if signal_type == 1 else "SELL"
                 
-                if mtf_approved and mtf_direction:
-                    if mtf_direction == 'buy' and signal_type == 1:
+                if True:
+                    if signal_type == 1:
                         signal['mtf_status'] = 'approved'
                         signal['mtf_reason'] = f"MTF: ✅ BUY Aprobado - {strategy.upper()} BUY alineado"
                         signal['mtf_analysis'] = mtf_analysis

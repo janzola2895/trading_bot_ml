@@ -44,6 +44,7 @@ class MLTradingBot:
         
         # Logger
         self.logger = BotLogger(gui_queue=gui_queue)
+        self.logger.info(f"📊 ML Threshold: ${MIN_PROFIT_FOR_AUTONOMY:.2f} | Meta: {AUTONOMY_THRESHOLD} ops")
         
         # Configuración básica
         self.account = MT5_ACCOUNT
@@ -110,9 +111,7 @@ class MLTradingBot:
             enabled=True
         )
         
-        self.correlation_manager = CorrelationManager(
-            logger=self.logger
-        )
+        self.correlation_manager = None
         
         #self.equity_monitor = EquityMonitor(
         #    memory=self.memory,
@@ -134,7 +133,7 @@ class MLTradingBot:
             'liquidity': True
         }
         
-        self.mtf_enabled = True
+        self.mtf_enabled = False
         self.max_total_positions = DEFAULT_MAX_POSITIONS
         
         # Signal Aggregator con MTF, TIMEOUT y COOLDOWN
@@ -149,7 +148,7 @@ class MLTradingBot:
             global_cooldown=self.global_cooldown,  # 🆕 v6.0.1
             logger=self.logger
         )
-        self.signal_aggregator.set_mtf_enabled(self.mtf_enabled)
+        self.signal_aggregator.set_mtf_enabled(False)
         
         # Tracking de operaciones
         self.active_trades = {}
@@ -708,10 +707,10 @@ class MLTradingBot:
             # SEÑAL NO PASÓ RE-VALIDACIÓN
             signal_dir = "BUY" if signal == 1 else "SELL"
             self.logger.warning("")
-            self.logger.warning(f"❌ SEÑAL DESCARTADA POR RE-VALIDACIÓN ❌")
-            self.logger.warning(f"   Estrategia: {strategy.upper()} {signal_dir}")
-            self.logger.warning(f"   Razón original: {reason}")
-            self.logger.warning(f"   Razón rechazo: {revalidation_reason}")
+            #self.logger.warning(f"❌ SEÑAL DESCARTADA POR RE-VALIDACIÓN ❌")
+            #self.logger.warning(f"   Estrategia: {strategy.upper()} {signal_dir}")
+            #self.logger.warning(f"   Razón original: {reason}")
+            #self.logger.warning(f"   Razón rechazo: {revalidation_reason}")
             if 'timestamp' in signal_data:
                 self.logger.warning(f"   Antigüedad: {signal_age_minutes:.1f} min")
             self.logger.warning("")
@@ -719,11 +718,11 @@ class MLTradingBot:
             return False
         
         # SEÑAL PASÓ RE-VALIDACIÓN - PROCEDER A EJECUTAR
-        self.logger.success(f"✅ RE-VALIDACIÓN EXITOSA: {revalidation_reason}")
+        #self.logger.success(f"✅ RE-VALIDACIÓN EXITOSA: {revalidation_reason}")
         
-        order_type = mt5.ORDER_TYPE_BUY if signal == 1 else mt5.ORDER_TYPE_SELL
+        order_type = mt5.ORDER_TYPE_SELL if signal == 1 else mt5.ORDER_TYPE_BUY #AQUI MODFIQUE PARA INVERTIR ORDENES DE COMPRA/VENTA SEGUN SEÑAL
         
-        self.logger.info(f"📤 Intentando abrir: {reason}")
+        #self.logger.info(f"📤 Intentando abrir: {reason}")
         
         # 🔧 Enviar orden con SL/TP dinámico y ajuste de equity
         order_result = self.send_order(
@@ -802,7 +801,8 @@ class MLTradingBot:
             return False
     
     def check_positions(self):
-
+        """Actualiza estado de posiciones y aplica trailing/breakeven"""
+        
         positions = mt5.positions_get(symbol=self.symbol)
         
         tick = mt5.symbol_info_tick(self.symbol)
@@ -856,8 +856,8 @@ class MLTradingBot:
             
             if history:
                 bot_deals = [deal for deal in history
-                           if deal.magic == self.magic_number
-                           and deal.entry == 1]
+                        if deal.magic == self.magic_number
+                        and deal.entry == 1]
                 
                 bot_deals = sorted(bot_deals, key=lambda x: x.time, reverse=True)[:20]
                 
@@ -899,7 +899,7 @@ class MLTradingBot:
         self.send_to_gui('positions', positions=all_operations)
         
         return positions if positions else []
-    
+
     def check_and_close_trades(self):
         """Verifica operaciones cerradas y actualiza memoria"""
         today_start = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
@@ -911,6 +911,9 @@ class MLTradingBot:
         closed_deals = [deal for deal in history
                     if deal.magic == self.magic_number
                     and deal.entry == 1]
+        
+        # 🔧 CORREGIDO: Variable para trackear si hubo cambios en autonomía
+        autonomy_updated = False
         
         for deal in closed_deals:
             if deal.position_id in self.active_trades:
@@ -941,13 +944,16 @@ class MLTradingBot:
                     breakeven_triggered=breakeven_triggered
                 )
 
-                if profit >= MIN_PROFIT_FOR_AUTONOMY:
-                    became_autonomous = self.ml_optimizer.update_operation_count(profit)
-                    
-                    if became_autonomous:
-                        self.logger.success("🤖🤖🤖 SISTEMA AUTÓNOMO ACTIVADO 🤖🤖🤖")
-                        self.logger.info("🧠 ML ahora optimizará parámetros automáticamente")
-                        self.send_autonomy_data()
+                # 🔧 Actualizar contador de autonomía
+                became_autonomous = self.ml_optimizer.update_operation_count(profit)
+                
+                # 🔧 CRÍTICO: Marcar que hubo actualización si se contó la operación
+                if profit >= self.ml_optimizer.min_profit_for_autonomy:
+                    autonomy_updated = True
+                
+                if became_autonomous:
+                    self.logger.success("🤖🤖🤖 SISTEMA AUTÓNOMO ACTIVADO 🤖🤖🤖")
+                    self.logger.info("🧠 ML ahora optimizará parámetros automáticamente")
                 
                 if strategy == "ml":
                     correct = (
@@ -1023,7 +1029,18 @@ class MLTradingBot:
                 self.trailing_breakeven.cleanup_closed_position(deal.position_id)
                 
                 del self.active_trades[deal.position_id]
-            self.send_strategy_stats()
+        
+        # 🔧 CORREGIDO: Enviar actualizaciones FUERA del loop
+        # Esto garantiza que se envíe UNA VEZ después de procesar TODOS los deals
+        self.send_strategy_stats()
+        
+        # 🔧 NUEVO: Solo enviar autonomy data si hubo operaciones que calificaron
+        if autonomy_updated:
+            self.send_autonomy_data()
+            self.logger.info("📊 Panel de autonomía actualizado")
+
+    
+    
 
     def run(self, train_first=True):
         
@@ -1054,9 +1071,6 @@ class MLTradingBot:
                 for name, metrics in results.items():
                     if "error" not in metrics:
                         self.logger.success(f"✅ {name}: {metrics['test_accuracy']:.2%}")
-        
-        self.logger.info(f"🎯 {self.symbol} | TF: M30+MTF | Lote: {self.lot_size} | Max: {self.max_total_positions}")
-        self.logger.info(f"🎖️ v6.0.1: COOLDOWN GLOBAL + MEJORAS AVANZADAS ACTIVAS")
         
         last_signal_check = datetime.now()
         last_mtf_update_fast = datetime.now()
@@ -1176,7 +1190,7 @@ class MLTradingBot:
                     self.check_daily_limits()
                     self.send_profit_charts_data()
                 
-                if self.mtf_enabled and (current_time - last_mtf_update_fast).total_seconds() >= 60:
+                """if self.mtf_enabled and (current_time - last_mtf_update_fast).total_seconds() >= 60:
                     if 'M30' in self.mtf_analyzer.timeframes:
                         self.mtf_analyzer.timeframes['M30']['last_update'] = None
                     if 'H1' in self.mtf_analyzer.timeframes:
@@ -1195,6 +1209,7 @@ class MLTradingBot:
                         self.send_mtf_analysis()
                     
                     last_mtf_update_slow = current_time
+                    """
                 
                 if (current_time - last_signal_check).total_seconds() >= 30:
                     
@@ -1292,7 +1307,7 @@ class MLTradingBot:
                             self.logger.warning(f"⚠️ {len(all_signals)} señales filtradas (cooldown/límites alcanzados)")
                     
                     # 🎖️ PASO 7: VERIFICAR CORRELACIÓN
-                    if final_signals:
+                    """if final_signals:
                         approved_signals = []
                         
                         account_info = mt5.account_info()
@@ -1314,6 +1329,7 @@ class MLTradingBot:
                                 self.logger.warning(f"   Razón: {corr_reason}")
                         
                         final_signals = approved_signals
+                    """
                     
                     # 🔧 PASO 8: EJECUTAR SEÑALES APROBADAS
                     # (El registro en cooldown se hace dentro de open_trade_from_signal)
@@ -1347,6 +1363,8 @@ class MLTradingBot:
                 
                 if iteration % 10 == 0:
                     self.check_and_close_trades()
+                    self.send_autonomy_data()
+
                 
                 if iteration % 30 == 0:
                     self.send_ml_status()

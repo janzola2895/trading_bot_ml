@@ -24,7 +24,7 @@ class CorrelationManager:
         self.logger = logger
         
         # Configuración
-        self.max_same_direction_trades = 4  # Max 4 BUY o 4 SELL simultáneos
+        self.max_same_direction_trades = 999  # Max 4 BUY o 4 SELL simultáneos
         self.min_sl_distance_pips = 30  # SL deben estar a >30 pips de distancia
         self.max_total_risk_pct = 6.0  # Máximo 6% de riesgo total acumulado
         
@@ -61,7 +61,7 @@ class CorrelationManager:
         new_sl_pips = new_signal.get('sl_pips', 70)
         
         # 1. VERIFICAR LÍMITE DE DIRECCIÓN
-        same_direction_count = sum(
+        """same_direction_count = sum(
             1 for pos in active_positions 
             if (pos.type == 0 and new_direction == 1) or (pos.type == 1 and new_direction == -1)
         )
@@ -73,6 +73,7 @@ class CorrelationManager:
             self.send_log(f"🚫 CORRELACIÓN: Ya hay {same_direction_count} {dir_name} activas (máx: {self.max_same_direction_trades})")
             
             return False, f"Demasiadas operaciones {dir_name} ({same_direction_count}/{self.max_same_direction_trades})"
+        """
         
         # 2. VERIFICAR DISTANCIA ENTRE SL
         # Obtener precio de mercado actual

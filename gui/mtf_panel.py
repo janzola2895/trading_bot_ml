@@ -24,10 +24,10 @@ class MTFDashboardPanel:
         # Variables de checkboxes
         self.tf_vars = {
             'M15': tk.BooleanVar(value=False),
-            'M30': tk.BooleanVar(value=False),
+            'M30': tk.BooleanVar(value=True),
             'H1': tk.BooleanVar(value=False),   
             'H4': tk.BooleanVar(value=False),   
-            'D1': tk.BooleanVar(value=True),    # ✅ Activo por defecto
+            'D1': tk.BooleanVar(value=False),   
             'W1': tk.BooleanVar(value=False)    
         }
         

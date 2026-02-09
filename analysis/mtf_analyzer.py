@@ -73,7 +73,7 @@ class MultiTimeframeAnalyzer:
                 'bias': 'neutral',
                 'strength': 0.0,
                 'indicators': {},
-                'active': False
+                'active': True  # ✅ Activo por defecto
             },
             'H1': {
                 'tf': mt5.TIMEFRAME_H1,
@@ -82,7 +82,7 @@ class MultiTimeframeAnalyzer:
                 'bias': 'neutral',
                 'strength': 0.0,
                 'indicators': {},
-                'active': False  # ✅ Activo por defecto
+                'active': False  
             },
             'H4': {
                 'tf': mt5.TIMEFRAME_H4,
@@ -91,7 +91,7 @@ class MultiTimeframeAnalyzer:
                 'bias': 'neutral',
                 'strength': 0.0,
                 'indicators': {},
-                'active': False  # ✅ Activo por defecto
+                'active': False  
             },
             'D1': {
                 'tf': mt5.TIMEFRAME_D1,
@@ -100,7 +100,7 @@ class MultiTimeframeAnalyzer:
                 'bias': 'neutral',
                 'strength': 0.0,
                 'indicators': {},
-                'active': True
+                'active': False
             },
             'W1': {
                 'tf': mt5.TIMEFRAME_W1,

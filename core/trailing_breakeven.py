@@ -101,13 +101,17 @@ class TrailingStopBreakevenSystem:
             self.breakeven_safety_pips = breakeven.get('safety_pips', 5)
     
     def check_and_apply_trailing_stop(self, position, current_price):
-        """Aplica trailing stop si se cumplen condiciones"""
+        """
+        Aplica trailing stop que PROTEGE el profit máximo alcanzado
+        
+        🔧 CORREGIDO: Ahora cierra en profit máximo si el precio retrocede
+        """
         if not self.trailing_enabled:
             return False
         
         ticket = position.ticket
         
-        # Calcular profit en pips
+        # Calcular profit actual en pips
         if position.type == 0:  # BUY
             profit_pips = (current_price - position.price_open) / 0.01
         else:  # SELL
@@ -116,31 +120,45 @@ class TrailingStopBreakevenSystem:
         # Activar trailing si se alcanza umbral
         if profit_pips >= self.trailing_activation_pips:
             
+            # Inicializar tracking si es primera vez
             if ticket not in self.positions_with_trailing:
                 self.positions_with_trailing[ticket] = {
                     'activated': True,
                     'highest_profit': profit_pips,
+                    'highest_profit_price': current_price,  # 🆕 Guardar precio del profit máximo
                     'activation_time': datetime.now()
                 }
+                self.send_log(f"🎯 Trailing activado en ticket {ticket} @ {profit_pips:.1f} pips")
             
-            # Actualizar profit máximo
+            # Obtener datos de trailing
             trailing_data = self.positions_with_trailing[ticket]
+            
+            # 🔧 ACTUALIZAR PROFIT MÁXIMO si el precio mejoró
             if profit_pips > trailing_data['highest_profit']:
                 trailing_data['highest_profit'] = profit_pips
+                trailing_data['highest_profit_price'] = current_price
             
-            # Calcular nuevo SL
+            # 🔧 CALCULAR NUEVO SL BASADO EN EL PROFIT MÁXIMO ALCANZADO
             if position.type == 0:  # BUY
-                new_sl = current_price - (self.trailing_distance_pips * 0.01)
+                # El nuevo SL debe estar trailing_distance_pips DEBAJO del precio más alto alcanzado
+                highest_price = trailing_data['highest_profit_price']
+                new_sl = highest_price - (self.trailing_distance_pips * 0.01)
                 
-                # Solo mover SL hacia arriba
+                # Solo mover SL si es mejor que el actual (hacia arriba para BUY)
                 if new_sl > position.sl:
+                    profit_protected = (new_sl - position.price_open) / 0.01
+                    self.send_log(f"📈 Trailing BUY: Protegiendo {profit_protected:.1f} pips (máx: {trailing_data['highest_profit']:.1f})")
                     return self.modify_position_sl_validated(position, new_sl, position.tp, current_price)
             
             else:  # SELL
-                new_sl = current_price + (self.trailing_distance_pips * 0.01)
+                # El nuevo SL debe estar trailing_distance_pips ARRIBA del precio más bajo alcanzado
+                highest_price = trailing_data['highest_profit_price']
+                new_sl = highest_price + (self.trailing_distance_pips * 0.01)
                 
-                # Solo mover SL hacia abajo
+                # Solo mover SL si es mejor que el actual (hacia abajo para SELL)
                 if new_sl < position.sl:
+                    profit_protected = (position.price_open - new_sl) / 0.01
+                    self.send_log(f"📉 Trailing SELL: Protegiendo {profit_protected:.1f} pips (máx: {trailing_data['highest_profit']:.1f})")
                     return self.modify_position_sl_validated(position, new_sl, position.tp, current_price)
         
         return False

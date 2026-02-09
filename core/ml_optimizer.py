@@ -107,8 +107,9 @@ class MLParameterOptimizer:
             return False
         
         self.learning_stats["total_operations"] += 1
-        
         ops = self.learning_stats["total_operations"]
+        print(f"✅ Operación #{ops} CONTADA para autonomía (profit: ${profit:.2f})")
+
         threshold = self.learning_stats["autonomy_threshold"]
         self.learning_stats["confidence_level"] = min(100, (ops / threshold) * 100)
         

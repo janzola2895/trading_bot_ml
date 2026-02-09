@@ -256,7 +256,7 @@ LIQ_MIN_DISTANCE_FROM_SWEEP_PIPS = 100
 # 🆕 CONFIGURACIÓN MULTI-TIMEFRAME (MTF) SIMPLIFICADO
 # ============================================================================
 
-MTF_ENABLED_DEFAULT = True
+MTF_ENABLED_DEFAULT = False
 
 # 🆕 SISTEMA SIMPLIFICADO: Solo 3 timeframes
 # - W1: Define la DIRECCIÓN PRINCIPAL del mercado
@@ -448,8 +448,8 @@ STRATEGY_RISK_PROFILES = {
     },
     'sr': {
         'sl_type': 'dynamic',  # Dinámico según distancia a niveles
-        'sl_pips': 35,
-        'tp_pips': 90,
+        'sl_pips': 40,
+        'tp_pips': 100,
         'max_sl_pips': 80,
         'risk_reward': 2.5,
         'description': 'S/R ajusta según fuerza del nivel'
@@ -465,17 +465,17 @@ STRATEGY_RISK_PROFILES = {
         'sl_type': 'pattern_based',  # Basado en tamaño del patrón
         'sl_multiplier': 1.2,  # SL = tamaño_patrón * 1.2
         'tp_multiplier': 3.0,  # TP = tamaño_patrón * 3.0
-        'min_sl_pips': 25,
+        'min_sl_pips': 60,
         'max_sl_pips': 70,
         'risk_reward': 2.5,
         'description': 'PA ajusta según tamaño de vela'
     },
     'candlestick': {
         'sl_type': 'tight',  # Tight para reversiones
-        'sl_pips': 30,
-        'tp_pips': 80,
+        'sl_pips': 50,
+        'tp_pips': 100,
         'use_pattern_size': True,
-        'risk_reward': 2.6,
+        'risk_reward': 2.4,
         'description': 'Candlestick usa SL/TP tight'
     },
     'liquidity': {
